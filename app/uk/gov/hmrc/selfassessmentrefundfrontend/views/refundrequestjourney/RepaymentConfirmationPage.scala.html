@@ -49,7 +49,18 @@
             <dd class="govuk-summary-list__value">
                 @model.bankAccountName
             </dd>
-        </div>}
+        </div>
+        @if(model.clientSaUtr.sautr.isDefined) {
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                @messages("repaymentConfirmation.UTR")
+                </dt>
+                <dd class="govuk-summary-list__value">
+                @model.clientSaUtr.sautr.getOrElse("unreachableScenario")
+                </dd>
+            </div>
+        }
+        }
         <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
             @messages("repaymentConfirmation.amountRepaid")
