@@ -21,9 +21,12 @@
 
 @this(layout: Layout)
 
-@(pageTitle: String, heading: String, message: String)(implicit request: RequestHeader, messages: Messages)
+@(serviceName: String)(implicit request: RequestHeader, messages: Messages)
 
-@layout(pageTitle = Some(PageTitle.errorPageTitle(pageTitle))) {
-    <h1 class="govuk-heading-l">@{Text(heading).asHtml}</h1>
-    <p class="govuk-body">@{Text(message).asHtml}</p>
+@layout(pageTitle = Some(PageTitle.apply(messages("errorTemplate.title"), if(serviceName.nonEmpty) messages(s"service.name.$serviceName") else "")), serviceName = if(serviceName.nonEmpty) Some(messages(s"service.name.$serviceName")) else None, hasBackLink = false) {
+    <h1 class="govuk-heading-l">@messages("errorTemplate.heading")</h1>
+    <p class="govuk-body">@messages("errorTemplate.para1")</p>
+    <p class="govuk-body">
+     <a id="contact-hmrc" class="govuk-link" href="@messages("errorTemplate.para2a.link")">@messages("errorTemplate.para2a")</a> @messages("errorTemplate.para2b")
+    </p>
 }

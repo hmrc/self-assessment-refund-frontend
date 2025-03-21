@@ -28,6 +28,10 @@ import scala.concurrent.{ExecutionContext, Future}
 @Singleton
 class ErrorHandler @Inject() (errorTemplate: ErrorTemplate, val messagesApi: MessagesApi, implicit val ec: ExecutionContext) extends FrontendErrorHandler {
 
-  override def standardErrorTemplate(pageTitle: String, heading: String, message: String)(implicit request: RequestHeader): Future[Html] =
-    Future.successful(errorTemplate(pageTitle, heading, message))
+  override def standardErrorTemplate(pageTitle: String, heading: String, message: String)(implicit request: RequestHeader): Future[Html] = {
+    val pathParts: Array[String] = request.path.split("/")
+    val serviceName = if (pathParts.contains("track-a-self-assessment-refund") || request.headers.get("Referer").exists(_.contains("ViewHistory"))) "track" else "refund"
+
+    Future.successful(errorTemplate(serviceName))
+  }
 }
