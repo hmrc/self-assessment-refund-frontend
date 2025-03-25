@@ -203,4 +203,4 @@ errorTemplate.heading = Mae’n ddrwg gennym, mae problem gyda’r gwasanaeth
 errorTemplate.para1 = Rhowch gynnig arall arni yn nes ymlaen.
 errorTemplate.para2a = Cysylltwch â CThEF
 errorTemplate.para2a.link = https://www.gov.uk/government/organisations/hm-revenue-customs/contact/welsh-language-helplines
-errorTemplate.para2b = i chi siarad â rhywun am eich ad-daliad Hunanasesiad.
+errorTemplate.para2b = os oes angen i chi siarad â rhywun am eich ad-daliad Hunanasesiad.

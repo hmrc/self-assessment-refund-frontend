@@ -24,8 +24,8 @@ import uk.gov.hmrc.selfassessmentrefundfrontend.testdata.TdAll
 class ErrorHandlerSpec extends ItSpec with PageContentTesting {
   val errorHandler: ErrorHandler = fakeApplication().injector.instanceOf[ErrorHandler]
 
-  "should display error page in english" in {
-    val result = await(errorHandler.standardErrorTemplate("", "", "")(TdAll.request))
+  "should display internal server error page in english" in {
+    val result = await(errorHandler.internalServerErrorTemplate(TdAll.request))
 
     val doc = Jsoup.parse(result.body)
 
@@ -38,8 +38,8 @@ class ErrorHandlerSpec extends ItSpec with PageContentTesting {
     doc.checkHasHyperlink("Contact HMRC", "https://www.gov.uk/government/organisations/hm-revenue-customs/contact/self-assessment")
   }
 
-  "should display error page in welsh" in {
-    val result = await(errorHandler.standardErrorTemplate("", "", "")(TdAll.welshRequest))
+  "should display internal server error page in welsh" in {
+    val result = await(errorHandler.internalServerErrorTemplate(TdAll.welshRequest))
 
     val doc = Jsoup.parse(result.body)
 
@@ -47,7 +47,7 @@ class ErrorHandlerSpec extends ItSpec with PageContentTesting {
     doc.checkPageHeading("Mae’n ddrwg gennym, mae problem gyda’r gwasanaeth")
     doc.checkHasParagraphs(List(
       "Rhowch gynnig arall arni yn nes ymlaen.",
-      "Cysylltwch â CThEF i chi siarad â rhywun am eich ad-daliad Hunanasesiad." //this needs updating when we get new welsh version
+      "Cysylltwch â CThEF os oes angen i chi siarad â rhywun am eich ad-daliad Hunanasesiad."
     ))
     doc.checkHasHyperlink("Cysylltwch â CThEF", "https://www.gov.uk/government/organisations/hm-revenue-customs/contact/welsh-language-helplines")
   }

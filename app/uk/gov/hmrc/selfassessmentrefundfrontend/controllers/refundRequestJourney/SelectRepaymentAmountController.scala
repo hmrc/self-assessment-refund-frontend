@@ -203,6 +203,6 @@ class SelectRepaymentAmountController @Inject() (
 
   private def logAndReturnErrorPage(method: String, message: String = "Not enough data in mongo to proceed.")(implicit request: BarsVerifiedRequest[_]): Future[Result] = {
     logger.error(s"[SelectRepaymentAmountController][$method] $message ${request.journey.toLogMessage}")
-    errorHandler.standardErrorTemplate("", "", "").map(InternalServerError(_))
+    errorHandler.internalServerErrorTemplate.map(InternalServerError(_))
   }
 }
