@@ -57,7 +57,7 @@ class SelectRepaymentAmountController @Inject() (
     journey.amount match {
       case Some(amount) =>
         amount match {
-          case Amount(fullFromVC, repayment, partialRepaymentSelected, tc @ Some(totalCreditAvailableForRepayment), Some(unallocatedCredit), suggestedRepaymentSelected) =>
+          case Amount(fullFromVC, repayment, partialRepaymentSelected, tc @ Some(totalCreditAvailableForRepayment), Some(unallocatedCredit), suggestedRepaymentSelected) if totalCreditAvailableForRepayment > 0 =>
             val model = SelectAmountPageModel(repayment, partialRepaymentSelected, totalCreditAvailableForRepayment, suggestedAmount = suggestedAmount(unallocatedCredit, totalCreditAvailableForRepayment), suggestedRepaymentSelected, request.isAgent)
 
               def isAmountMatching: Boolean = (tc, fullFromVC) match {
@@ -78,7 +78,7 @@ class SelectRepaymentAmountController @Inject() (
                 maybeArn                         = request.agentReferenceNumber,
                 failureReason                    = Some("totalCreditAvailableForRepayment does not match the value sent from view and change")
               )
-              logAndReturnErrorPage(method = "selectAmount", s"[SelectRepaymentAmountController][selectAmount] Amounts from V&C and API#1553 are not the same, '${fullFromVC.map(_.toString()).getOrElse("missing")}' does not match '${totalCreditAvailableForRepayment.toString}'")
+              logAndReturnErrorPage(method = "selectAmount", s"[SelectRepaymentAmountController][selectAmount] Amounts from V&C and HIP-API#5277 are not the same, '${fullFromVC.map(_.toString()).getOrElse("missing")}' does not match '${totalCreditAvailableForRepayment.toString}'")
             }
           case _ =>
             auditService.auditRefundAmount(

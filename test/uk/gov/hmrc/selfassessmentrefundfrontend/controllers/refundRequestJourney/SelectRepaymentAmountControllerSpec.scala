@@ -164,7 +164,7 @@ class SelectRepaymentAmountControllerSpec
           )
         }
 
-        "display 'there is a problem' page if amount from V&C is not matching the amount from API#1553" in {
+        "display 'there is a problem' page if amount from V&C is not matching the amount from HIP-API#5277" in {
           val amount = Amount(Some(BigDecimal(123)), None, None, totalCreditAvailableForRepayment = Some(BigDecimal(122)), unallocatedCredit = Some(BigDecimal(45)))
 
           stubBackendJourneyId()
