@@ -64,8 +64,8 @@ trait PageContentTesting {
   implicit class DocumentTestingSyntax(doc: Document) {
 
     def checkHasLanguageToggle(): Unit = {
-      doc.select(".hmrc-language-select__list").text should include regex "English"
-      doc.select(".hmrc-language-select__list").text should include regex "Cymraeg"
+      doc.select(".hmrc-service-navigation-language-select__list-item").text should include regex "ENG"
+      doc.select(".hmrc-service-navigation-language-select__list-item").text should include regex "CYM"
       ()
     }
 
@@ -87,7 +87,7 @@ trait PageContentTesting {
     }
 
     def checkServiceHeadingLink(url: String): Unit = {
-      doc.select("a").select(".govuk-header__service-name").attr("href") should endWith(url)
+      doc.select("a").select(".govuk-service-navigation__link").attr("href") should endWith(url)
       ()
     }
 
