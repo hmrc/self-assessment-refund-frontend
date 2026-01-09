@@ -25,9 +25,7 @@
 @this(
         layout: TestonlyLayout,
         forms: FormComponents,
-        govukTable: uk.gov.hmrc.govukfrontend.views.html.components.GovukTable,
         govukSelect: uk.gov.hmrc.govukfrontend.views.html.components.GovukSelect,
-        govukRadios: uk.gov.hmrc.govukfrontend.views.html.components.GovukRadios,
         govukErrorSummary: uk.gov.hmrc.govukfrontend.views.html.components.GovukErrorSummary
 )
 
@@ -49,15 +47,31 @@
         </i>
     </p>
 
-    <h2 class="govuk-heading-m" id="start-journey">
-        Start Journey
-    </h2>
-
     @if(model.form.errors.nonEmpty) {
         @govukErrorSummary(model.errorSummary)
     }
 
+    <form method="POST" action="@model.selectPreset.url">
+        <h2 class="govuk-heading-m" id="presets">
+            Presets
+        </h2>
+
+        <div class="govuk-form-group">
+            @govukSelect(model.makePresetSelect[StartRefund])
+        </div>
+
+        @forms.button(Button(
+        id = Some("selectJourneyPresetSubmit"),
+        inputType = Some("submit"),
+        content = Text("Select journey preset")
+        ))
+    </form>
+
     <form method="POST" action="@model.submitStartJourney.url">
+        <h2 class="govuk-heading-m" id="start-journey">
+            Manual Input
+        </h2>
+
         @govukSelect(Select(
             label = Label(content = Text("Journey type")),
             items = StartJourneyType.values.map(journeyType =>
@@ -103,38 +117,6 @@
             classes = "govuk-!-width-one-quarter" + model.hideInputsClass
         ).withFormField(model.form("returnUrl")))
 
-        @govukRadios(model.makeStubPrimerRadios)
-
         @forms.continue(model.journeyType.label)
-    </form>
-
-    <form method="POST" action="@model.selectPreset.url">
-        <h2 class="govuk-heading-m" id="presets">
-            Presets
-        </h2>
-
-        <div class="govuk-radios govuk-radios--small">
-            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-                <h3 class="govuk-fieldset__heading">
-                    Start Refund
-                </h3>
-            </legend>
-            @govukTable(model.makePresetTable[StartRefund])
-        </div>
-
-        <div class="govuk-radios govuk-radios--small">
-            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-                <h3 class="govuk-fieldset__heading">
-                    View History
-                </h3>
-            </legend>
-            @govukTable(model.makePresetTable[ViewHistory])
-        </div>
-
-        @forms.button(Button(
-          id = Some("selectJourneyPresetSubmit"),
-          inputType = Some("submit"),
-          content = Text("Select journey preset")
-        ))
     </form>
 }

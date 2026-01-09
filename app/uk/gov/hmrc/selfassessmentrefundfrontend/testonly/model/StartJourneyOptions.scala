@@ -32,7 +32,6 @@ final case class StartJourneyOptions(
   nino:              String,
   fullAmount:        Option[BigDecimal] = None,
   lastPaymentMethod: Option[String] = None,
-  primeStubs:        PrimeStubsOption = PrimeStubsOption.IfNotExists,
   returnUrl:         Option[String] = None
 ) {
 
@@ -58,14 +57,13 @@ object StartJourneyOptions {
 
   def unapply(
     startJourneyOptions: StartJourneyOptions
-  ): Option[(StartJourneyType, String, Option[BigDecimal], Option[String], PrimeStubsOption, Option[String])] =
+  ): Option[(StartJourneyType, String, Option[BigDecimal], Option[String], Option[String])] =
     Some(
       (
         startJourneyOptions.`type`,
         startJourneyOptions.nino,
         startJourneyOptions.fullAmount,
         startJourneyOptions.lastPaymentMethod,
-        startJourneyOptions.primeStubs,
         startJourneyOptions.returnUrl
       )
     )
@@ -94,19 +92,11 @@ object StartJourneyOptions {
           v
         }
 
-        val primeStubs = PrimeStubsOption.queryBindable
-          .bind("primeStubs", params)
-          .collect { case Right(value) =>
-            value
-          }
-          .getOrElse(PrimeStubsOption.IfNotExists)
-
         val details = StartJourneyOptions(
           journeyType,
           nino,
           fullAmount,
           lastPaymentMethod,
-          primeStubs,
           returnUrl
         )
 
@@ -119,7 +109,6 @@ object StartJourneyOptions {
           "nino"              -> value.nino,
           "fullAmount"        -> value.fullAmount.map(_.toString).getOrElse(""),
           "lastPaymentMethod" -> value.lastPaymentMethod.getOrElse("BACS"),
-          "primeStubs"        -> value.primeStubs.entryName,
           "returnUrl"         -> value.returnUrl.getOrElse("")
         )
 
@@ -135,7 +124,6 @@ object StartJourneyOptions {
         "fullAmount"        -> mandatoryIf(isEqual("type", "StartRefund"), bigDecimal(10, 2)),
         //        "fullAmount" -> optional(bigDecimal(10, 2)),
         "lastPaymentMethod" -> optional(text),
-        "primeStubs"        -> PrimeStubsOption.formField,
         "returnUrl"         -> optional(text)
       )(StartJourneyOptions.apply)(StartJourneyOptions.unapply)
     )
