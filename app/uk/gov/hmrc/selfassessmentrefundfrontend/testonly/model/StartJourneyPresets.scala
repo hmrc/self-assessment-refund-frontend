@@ -49,20 +49,19 @@ object StartJourneyPresets {
     Preset(StartRefund("AB200111D", 123.45, BACS, defaultReturnUrl), "Happy path, with last payment by BACS"),
     Preset(
       StartRefund("AB200131C", 345.67, CARD, defaultReturnUrl),
-      "HIP#5277 - unallocatedCredit > totalCreditAvailableForRepayment (absolute values)"
+      "HIP#5277, unallocatedCredit > totalCreditAvailableForRepayment (abs values)"
     ),
     Preset(
       StartRefund("AB200141C", 345.67, CARD, defaultReturnUrl),
-      "HIP#5277 - unallocatedCredit = totalCreditAvailableForRepayment"
+      "HIP#5277, unallocatedCredit = totalCreditAvailableForRepayment"
     ),
-    Preset(StartRefund("AB500111C", 987.65, CARD, defaultReturnUrl), "HIP#5277 - Get Financial Details returns error"),
-    Preset(StartRefund("AB200111B", 987.65, CARD, defaultReturnUrl), "API 1770 Send Repayment Request returns error"),
-    Preset(StartRefund("AB200400D", 987.65, CARD, defaultReturnUrl), "NRS Submission returns 400"),
-    Preset(StartRefund("AB200500D", 987.65, CARD, defaultReturnUrl), "NRS Submission returns 500"),
+    Preset(StartRefund("AB510111C", 987.65, CARD, defaultReturnUrl), "HIP#5277, Get Financial Details returns error"),
+    Preset(StartRefund("AB200112D", 987.65, CARD, defaultReturnUrl), "API 1770, Send Repayment Request returns error"),
 
     // Successful ViewHistory presets
     Preset(ViewHistory("AB111111A"), "No payments, you have not yet requested a refund"),
     Preset(ViewHistory("AB111111C"), "4 payments (round numbers)"),
-    Preset(ViewHistory("AB111111D"), "4 payments (pounds and pence)")
+    Preset(ViewHistory("AB111111D"), "4 payments (pounds and pence)"),
+    Preset(ViewHistory("AS111118A"), "API 1771, Get Repayment Status returns error")
   )
 }

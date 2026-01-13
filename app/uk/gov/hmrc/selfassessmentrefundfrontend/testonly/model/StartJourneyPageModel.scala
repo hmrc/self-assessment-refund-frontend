@@ -19,14 +19,10 @@ package uk.gov.hmrc.selfassessmentrefundfrontend.testonly.model
 import play.api.data.Form
 import play.api.i18n.Messages
 import play.api.mvc.Call
-import play.twirl.api.Html
 import uk.gov.hmrc.govukfrontend.views.Aliases._
 import uk.gov.hmrc.govukfrontend.views.html.components.implicits._
-import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
-import uk.gov.hmrc.govukfrontend.views.viewmodels.table.TableRow
 import uk.gov.hmrc.selfassessmentrefundfrontend.model.start.StartRequest
 import uk.gov.hmrc.selfassessmentrefundfrontend.model.start.StartRequest.{StartRefund, ViewHistory}
-import uk.gov.hmrc.selfassessmentrefundfrontend.util.AmountFormatter
 
 import scala.reflect.ClassTag
 
@@ -54,109 +50,47 @@ final case class StartJourneyPageModel(
       title = Text("Issues")
     )
 
-  def makePresetTable[T <: StartRequest: ClassTag]: Table = {
-    val baseHeader = Seq(
-      HeadCell(),
-      HeadCell(content = Text("NINO"))
-    )
+  def makePresetSelect[T <: StartRequest: ClassTag]: Select = {
 
     val typedPresets: List[(Preset, Int)] =
-      presets.zipWithIndex
-        .collect { case (Preset(v: T, desc), idx) => Preset(v, desc) -> idx }
-
-    val header =
-      typedPresets.headOption.map(t => t._1.startRequest -> t._2) match {
-        case Some((_: StartRefund, _)) =>
-          baseHeader ++ Seq(
-            HeadCell(content = Text("Full amount")),
-            HeadCell(content = Text("Last payment type")),
-            HeadCell(content = Text("Description"))
-          )
-        case Some((_: ViewHistory, _)) =>
-          baseHeader ++ Seq(
-            HeadCell(content = Text("Description"))
-          )
-
-        case None =>
-          throw new IndexOutOfBoundsException()
+      presets.zipWithIndex.collect {
+        case (p @ Preset(_: StartRefund, _), idx) => p -> idx
+        case (p @ Preset(_: ViewHistory, _), idx) => p -> idx
       }
 
-    val rows: List[Seq[TableRow]] = typedPresets.map {
-      case (Preset(req: StartRefund, description: String), idx) => makeStartRefundRow(req, description, idx)
-      case (Preset(req: ViewHistory, description: String), idx) => makeViewHistoryRow(req, description, idx)
-    }
+    val selectItems: Seq[SelectItem] =
+      typedPresets.map {
+        case (Preset(sr: StartRefund, description), idx) =>
+          makeSelectItem(Left(sr), description, idx)
 
-    Table(
-      rows = rows,
-      head = Option(header)
+        case (Preset(vh: ViewHistory, description), idx) =>
+          makeSelectItem(Right(vh), description, idx)
+      }
+
+    Select(
+      id = "presets",
+      name = "index",
+      items = selectItems,
+      label = Label(content = HtmlContent("Presets"))
     )
   }
 
-  def makeStartRefundRow(req: StartRefund, description: String, n: Int): Seq[TableRow] = {
-    val option      = makeRadioOption(n.toString, "Start refund")
-    val paymentType = if (req.lastPaymentViaCard.getOrElse(false)) {
-      "CARD"
-    } else {
-      "BACS"
-    }
-
-    Seq(
-      TableRow(content = HtmlContent(option)),
-      TableRow(content = Text(req.nino)),
-      TableRow(content = Text(AmountFormatter.formatAmount(req.fullAmount))),
-      TableRow(content = Text(paymentType)),
-      TableRow(content = Text(description))
-    )
-
-  }
-
-  def makeViewHistoryRow(req: ViewHistory, description: String, n: Int): Seq[TableRow] = {
-    val option = makeRadioOption(n.toString, "View history")
-
-    Seq(
-      TableRow(content = HtmlContent(option)),
-      TableRow(content = Text(req.nino)),
-      TableRow(content = Text(description))
-    )
-
-  }
-
-  def makeRadioOption(value: String, label: String): Html = Html {
-    s"""<div class="govuk-radios__item">
-       |    <input class="govuk-radios__input" id="$value" name="index" type="radio" value="$value">
-       |        <label class="govuk-label govuk-radios__label" for="$value">
-       |          $label
-       |        </label>
-       |    </div>""".stripMargin
-  }
-
-  def makeLastPaymentItems: Seq[SelectItem] = Seq()
-
-  def makeStubPrimerRadios(implicit messages: Messages): Radios = Radios(
-    fieldset = Some(
-      Fieldset(
-        legend = Some(
-          Legend(
-            content = Text("Prime stubs for this tax account")
-          )
+  def makeSelectItem(
+    req:         Either[StartRefund, ViewHistory],
+    description: String,
+    n:           Int
+  ): SelectItem =
+    req.fold(
+      sr => {
+        val paymentType =
+          if (sr.lastPaymentViaCard.getOrElse(false)) "CARD" else "BACS"
+        SelectItem(
+          text = s"Start Refund: ${sr.nino} - £${sr.fullAmount} - $paymentType - $description",
+          value = Some(n.toString)
         )
-      )
-    ),
-    hint = Some(
-      Hint(
-        content = Text("What should self-assessment-refund-stubs return for this NINO?")
-      )
-    ),
-    items = PrimeStubsOption.values.map { opt =>
-      RadioItem(
-        content = Text(opt.label),
-        id = Some(opt.entryName),
-        value = Some(opt.entryName)
-        //          checked = opt == options.primeStubs
-      )
-    },
-    classes = "govuk-!-full-width govuk-radios--inline govuk-radios--small"
-  ).withFormField(form("primeStubs"))
+      },
+      vh => SelectItem(text = s"View History: ${vh.nino} - $description", value = Some(n.toString))
+    )
 
 }
 

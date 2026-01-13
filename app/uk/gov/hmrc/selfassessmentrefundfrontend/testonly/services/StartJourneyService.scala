@@ -23,7 +23,7 @@ import play.api.mvc.Results.Redirect
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.selfassessmentrefundfrontend.connectors.JourneyConnector
 import uk.gov.hmrc.selfassessmentrefundfrontend.testonly.connectors.StubsAdminConnector
-import uk.gov.hmrc.selfassessmentrefundfrontend.testonly.model.{PrimeStubsOption, StartJourneyOptions}
+import uk.gov.hmrc.selfassessmentrefundfrontend.testonly.model.StartJourneyOptions
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -41,17 +41,6 @@ final case class StartJourneyService @Inject() (
     val req = options.toSsarjRequest
 
     for {
-      _       <- options.primeStubs match {
-                   case PrimeStubsOption.IfNotExists =>
-                     logger.info(s"Priming ${req.nino} with empty account (if not exists)")
-                     stubsAdmin.createAccount(req.nino, true)
-                   case PrimeStubsOption.SetEmpty    =>
-                     logger.info(s"Priming ${req.nino} with empty account (reset if exists)")
-                     stubsAdmin.createAccount(req.nino)
-                   case PrimeStubsOption.SetDefault  =>
-                     logger.info(s"Priming ${req.nino} with mock account")
-                     stubsAdmin.updateAccount(req.nino, mock = true)
-                 }
       created <- journeyConnector.start(req, origin)
     } yield Redirect(created.nextUrl)
   }

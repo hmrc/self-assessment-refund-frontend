@@ -25,9 +25,7 @@
 @this(
         layout: TestonlyLayout,
         forms: FormComponents,
-        govukTable: uk.gov.hmrc.govukfrontend.views.html.components.GovukTable,
         govukSelect: uk.gov.hmrc.govukfrontend.views.html.components.GovukSelect,
-        govukRadios: uk.gov.hmrc.govukfrontend.views.html.components.GovukRadios,
         govukErrorSummary: uk.gov.hmrc.govukfrontend.views.html.components.GovukErrorSummary
 )
 
@@ -41,23 +39,45 @@
     <h1 class="govuk-heading-l">Ssarj: Start Self Assessment Refund Journey</h1>
     <p class="govuk-body">
         <i>
-            This is a `test-only` endpoint for testing purposes.
-            It will do a log in and set up some responses in self-assessment-refund-stubs.
-            <a href="https://github.com/hmrc/self-assessment-refund-stubs" target="_blank">
-                https://github.com/hmrc/self-assessment-refund-stubs</a>.
-            Use presets to prepopulate forms with data.
+            This is a `test-only` page for testing purposes.
+            <br>
+            To enter the service we call a start endpoint in self-assessment-refund-backend.
+            <br>
+            For this request you can select a preset scenario or manually enter details.
+            <br>
+            If you are not already logged in, you will be redirected to log in once you submit your request.
+            <br>
+            If you are an individual / organisation, you require confidence level 250 and a NINO that matches the request.
+            <br>
+            If you are an agent, you require an delegated enrolment for HMRC-MTD-IT.
         </i>
     </p>
-
-    <h2 class="govuk-heading-m" id="start-journey">
-        Start Journey
-    </h2>
 
     @if(model.form.errors.nonEmpty) {
         @govukErrorSummary(model.errorSummary)
     }
 
+    <form method="POST" action="@model.selectPreset.url">
+        <h2 class="govuk-heading-m" id="presets">
+            Presets
+        </h2>
+
+        <div class="govuk-form-group">
+            @govukSelect(model.makePresetSelect[StartRefund])
+        </div>
+
+        @forms.button(Button(
+        id = Some("selectJourneyPresetSubmit"),
+        inputType = Some("submit"),
+        content = Text("Select journey preset")
+        ))
+    </form>
+
     <form method="POST" action="@model.submitStartJourney.url">
+        <h2 class="govuk-heading-m" id="start-journey">
+            Manual Input
+        </h2>
+
         @govukSelect(Select(
             label = Label(content = Text("Journey type")),
             items = StartJourneyType.values.map(journeyType =>
@@ -82,13 +102,13 @@
             id = "fullAmount", name = "fullAmount",
             inputType = if(model.journeyType == StartJourneyType.StartRefund) "input" else "hidden",
 //            value = model.options.fullAmount.map(_.toString),
-            label = Label(content = Text("Full amount"), classes=model.hideInputsClass),
+            label = Label(content = Text("Full amount - not needed to View History"), classes=model.hideInputsClass),
             prefix = Some(PrefixOrSuffix(content = Text("£"), classes=model.hideInputsClass)),
             classes = "govuk-!-width-one-quarter" + model.hideInputsClass
         ).withFormField(model.form("fullAmount")))
 
         @govukSelect(Select(
-            label = Label(content = Text("Last payment type (ignored if NINO starts 'AB') "), classes = model.hideInputsClass),
+            label = Label(content = Text("Last payment type - ignored if NINO starts 'AB'"), classes = model.hideInputsClass),
             items = Seq(
                 SelectItem(value = Some("BACS"), text = "BACS"),
                 SelectItem(value = Some("CARD"), text = "CARD")
@@ -99,42 +119,10 @@
         @forms.input(Input(
             id = "returnUrl", name = "returnUrl",
             inputType = if(model.journeyType == StartJourneyType.StartRefund) "input" else "hidden",
-            label = Label(content = Text("Return URL"), classes=model.hideInputsClass),
+            label = Label(content = Text("Return URL - not needed to View History"), classes=model.hideInputsClass),
             classes = "govuk-!-width-one-quarter" + model.hideInputsClass
         ).withFormField(model.form("returnUrl")))
 
-        @govukRadios(model.makeStubPrimerRadios)
-
-        @forms.continue(model.journeyType.label)
-    </form>
-
-    <form method="POST" action="@model.selectPreset.url">
-        <h2 class="govuk-heading-m" id="presets">
-            Presets
-        </h2>
-
-        <div class="govuk-radios govuk-radios--small">
-            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-                <h3 class="govuk-fieldset__heading">
-                    Start Refund
-                </h3>
-            </legend>
-            @govukTable(model.makePresetTable[StartRefund])
-        </div>
-
-        <div class="govuk-radios govuk-radios--small">
-            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-                <h3 class="govuk-fieldset__heading">
-                    View History
-                </h3>
-            </legend>
-            @govukTable(model.makePresetTable[ViewHistory])
-        </div>
-
-        @forms.button(Button(
-          id = Some("selectJourneyPresetSubmit"),
-          inputType = Some("submit"),
-          content = Text("Select journey preset")
-        ))
+        @forms.continue("Start Journey")
     </form>
 }

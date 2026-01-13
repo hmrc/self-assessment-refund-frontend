@@ -85,15 +85,41 @@ class StartJourneyController @Inject() (
   }
 
   val selectPreset: Action[AnyContent] = Action.async { implicit request =>
-    val index = Form(
+    val indexForm: Form[Int] = Form(
       mapping(
         "index" -> number
       )(identity)(Some(_))
-    ).bindFromRequest().get
+    )
 
-    val details = StartJourneyPresets.fromIndex(index)
-
-    Future.successful(Redirect(routes.StartJourneyController.showStartJourneyPage(details)))
+    indexForm
+      .bindFromRequest()
+      .fold(
+        formWithErrors => {
+          val pageModel = StartJourneyPageModel(
+            StartJourneyOptions.form,
+            StartJourneyPresets.presets
+          )
+          Future.successful(Ok(page(pageModel)))
+        },
+        index => {
+          val startOptions = StartJourneyPresets.fromIndex(index)
+          authorised() {
+            service.start(startOptions, origin)
+          }.recover {
+            case _: NoActiveSession        =>
+              val continueUrl = Seq(
+                appConfig.frontendBaseUrl +
+                  uk.gov.hmrc.selfassessmentrefundfrontend.testonly.controllers.routes.StartJourneyController
+                    .showStartJourneyPage(startOptions)
+                    .url
+              )
+              Redirect(appConfig.loginUrl, Map("continue" -> continueUrl))
+            case e: AuthorisationException =>
+              logger.warn(s"Unauthorised because of ${e.reason}")
+              BadRequest("ERROR" + e.reason)
+          }
+        }
+      )
   }
 
   val redirectToStartJourneyPage: Action[AnyContent] = Action {
