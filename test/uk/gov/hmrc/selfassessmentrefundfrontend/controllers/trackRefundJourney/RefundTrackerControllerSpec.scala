@@ -144,6 +144,138 @@ class RefundTrackerControllerSpec extends ItSpec with TdRepayments with RefundTr
           }
       }
 
+      "the user receives a 404 from API 1771" should {
+        for ((affinity, authoriseAffinity) <- authoriseFunctions)
+          s"display 'no refund history' content on the page for [${affinity.toString}]" in {
+            authoriseAffinity()
+
+            val fakeRequest: FakeRequest[AnyContentAsEmpty.type] =
+              FakeRequest("GET", "/track-a-self-assessment-refund/refund-request-tracker")
+                .withAuthToken()
+                .withSessionId()
+
+            stubFor(
+              get(urlEqualTo(s"/self-assessment-refund-backend/repayments/${nino.value}"))
+                .willReturn(
+                  aResponse()
+                    .withStatus(404)
+                )
+            )
+            stubBackendPersonalJourney(Some(nino))
+            stubBarsVerifyStatus()
+            stubBackendBusinessJourney(Some(Nino("AA111111A")))
+
+            val result: Future[Result] = refundTrackerController.refundTracker()(fakeRequest)
+
+            result.checkPageIsDisplayed(
+              expectedHeading = "Refund request tracker",
+              expectedServiceLink = "http://localhost:9171/track-a-self-assessment-refund/refund-request-tracker",
+              contentChecks = checkNoHistoryPageContent(isAgent = Option(affinity).contains(Agent), welsh = false),
+              expectedStatus = Status.OK,
+              journey = "track"
+            )
+          }
+
+        for ((affinity, authoriseAffinity) <- authoriseFunctions)
+          s"display welsh 'no refund history' content on the page for [${affinity.toString}]" in {
+            authoriseAffinity()
+
+            val fakeRequest: FakeRequest[AnyContentAsEmpty.type] =
+              FakeRequest("GET", "/track-a-self-assessment-refund/refund-request-tracker")
+                .withAuthToken()
+                .withSessionId()
+                .withCookies(Cookie("PLAY_LANG", "cy"))
+
+            stubFor(
+              get(urlEqualTo(s"/self-assessment-refund-backend/repayments/${nino.value}"))
+                .willReturn(
+                  aResponse()
+                    .withStatus(404)
+                )
+            )
+            stubBackendPersonalJourney(Some(nino))
+            stubBarsVerifyStatus()
+            stubBackendBusinessJourney(Some(Nino("AA111111A")))
+
+            val result: Future[Result] = refundTrackerController.refundTracker()(fakeRequest)
+
+            result.checkPageIsDisplayed(
+              expectedHeading = "System olrhain ceisiadau am ad-daliad",
+              expectedServiceLink = "http://localhost:9171/track-a-self-assessment-refund/refund-request-tracker",
+              contentChecks = checkNoHistoryPageContent(isAgent = Option(affinity).contains(Agent), welsh = true),
+              expectedStatus = Status.OK,
+              journey = "track",
+              welsh = true
+            )
+          }
+      }
+
+      "the user receives a 422 from API 1771" should {
+        for ((affinity, authoriseAffinity) <- authoriseFunctions)
+          s"display 'no refund history' content on the page for [${affinity.toString}]" in {
+            authoriseAffinity()
+
+            val fakeRequest: FakeRequest[AnyContentAsEmpty.type] =
+              FakeRequest("GET", "/track-a-self-assessment-refund/refund-request-tracker")
+                .withAuthToken()
+                .withSessionId()
+
+            stubFor(
+              get(urlEqualTo(s"/self-assessment-refund-backend/repayments/${nino.value}"))
+                .willReturn(
+                  aResponse()
+                    .withStatus(422)
+                )
+            )
+            stubBackendPersonalJourney(Some(nino))
+            stubBarsVerifyStatus()
+            stubBackendBusinessJourney(Some(Nino("AA111111A")))
+
+            val result: Future[Result] = refundTrackerController.refundTracker()(fakeRequest)
+
+            result.checkPageIsDisplayed(
+              expectedHeading = "Sorry, there is a problem with the service",
+              expectedServiceLink = "http://localhost:9171/track-a-self-assessment-refund/refund-request-tracker",
+              expectedStatus = Status.INTERNAL_SERVER_ERROR,
+              journey = "track",
+              withBackButton = false
+            )
+          }
+
+        for ((affinity, authoriseAffinity) <- authoriseFunctions)
+          s"display welsh 'no refund history' content on the page for [${affinity.toString}]" in {
+            authoriseAffinity()
+
+            val fakeRequest: FakeRequest[AnyContentAsEmpty.type] =
+              FakeRequest("GET", "/track-a-self-assessment-refund/refund-request-tracker")
+                .withAuthToken()
+                .withSessionId()
+                .withCookies(Cookie("PLAY_LANG", "cy"))
+
+            stubFor(
+              get(urlEqualTo(s"/self-assessment-refund-backend/repayments/${nino.value}"))
+                .willReturn(
+                  aResponse()
+                    .withStatus(422)
+                )
+            )
+            stubBackendPersonalJourney(Some(nino))
+            stubBarsVerifyStatus()
+            stubBackendBusinessJourney(Some(Nino("AA111111A")))
+
+            val result: Future[Result] = refundTrackerController.refundTracker()(fakeRequest)
+
+            result.checkPageIsDisplayed(
+              expectedHeading = "Mae’n ddrwg gennym, mae problem gyda’r gwasanaeth",
+              expectedServiceLink = "http://localhost:9171/track-a-self-assessment-refund/refund-request-tracker",
+              expectedStatus = Status.INTERNAL_SERVER_ERROR,
+              journey = "track",
+              withBackButton = false,
+              welsh = true
+            )
+          }
+      }
+
       "the user has a session and a refund history" should {
 
         "display 'refund tracker' page" in new HistoryWithSessionFixture {

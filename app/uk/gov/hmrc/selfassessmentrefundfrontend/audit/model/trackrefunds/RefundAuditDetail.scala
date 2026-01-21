@@ -25,12 +25,12 @@ import java.time.LocalDate
 import uk.gov.hmrc.selfassessmentrefundfrontend.model.PaymentMethod
 
 final case class RefundAuditDetail(
-  refundReference:     RequestNumber,
-  amount:              BigDecimal,
-  status:              String,
-  dateRefundRequested: LocalDate,
-  repaymentDate:       Option[LocalDate],
-  repaymentMethod:     Option[PaymentMethod]
+  refundReference:        RequestNumber,
+  amount:                 BigDecimal,
+  status:                 String,
+  dateRefundRequested:    LocalDate,
+  estimatedRepaymentDate: Option[LocalDate],
+  repaymentMethod:        Option[PaymentMethod]
 )
 
 object RefundAuditDetail {
@@ -55,7 +55,7 @@ object RefundAuditDetail {
             "Rejected"
         },
         dateRefundRequested = taxRepayment.claim.created,
-        repaymentDate = taxRepayment match {
+        estimatedRepaymentDate = taxRepayment match {
           case ProcessingRiskingTaxRepayment(_) | ProcessingTaxRepayment(_) =>
             None
           case ApprovedTaxRepayment(_, completed)                           =>
