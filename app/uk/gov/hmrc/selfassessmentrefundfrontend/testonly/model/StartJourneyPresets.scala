@@ -59,11 +59,11 @@ object StartJourneyPresets {
     Preset(StartRefund("AB200112D", 987.65, CARD, defaultReturnUrl), "API 1770, Send Repayment Request returns error"),
 
     // Successful ViewHistory presets
-    Preset(ViewHistory("AB111111A"), "No payments, you have not yet requested a refund"),
     Preset(ViewHistory("AB111111C"), "4 payments (round numbers)"),
     Preset(ViewHistory("AB111111D"), "4 payments (pounds and pence)"),
-    Preset(ViewHistory("AS111118A"), "API 1771, Get Repayment Status returns unexpected error"),
+    Preset(ViewHistory("AB111111A"), "No payments, you have not yet requested a refund"),
     Preset(ViewHistory("AA111111A"), "API 1771, Get Repayment Status returns 404"),
-    Preset(ViewHistory("AC111111A"), "API 1771, Get Repayment Status returns 422")
+    Preset(ViewHistory("AC111111A"), "API 1771, Get Repayment Status returns 422"),
+    Preset(ViewHistory("AS111118A"), "API 1771, Get Repayment Status returns unexpected error")
   )
 }
