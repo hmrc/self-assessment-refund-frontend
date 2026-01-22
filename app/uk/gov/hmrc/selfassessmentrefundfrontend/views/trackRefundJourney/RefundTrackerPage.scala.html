@@ -53,6 +53,7 @@ govukTabs : GovukTabs
         @govukTabs(Tabs(items = tabItemsList))
     } else {
         <p class="govuk-body">@messages("refund.no-history.message1")</p>
-        <p class="govuk-body">@messages("refund.no-history.message2a") <a class="govuk-link" href=@creditAndRefundsUrl>@messages("refund.no-history.message2b")</a>.</p>
+        <p class="govuk-body">@messages("refund.no-history.message2")</p>
+        <p class="govuk-body">@messages("refund.no-history.message3a") <a class="govuk-link" href=@creditAndRefundsUrl>@messages("refund.no-history.message3b")</a>.</p>
     }
 }

@@ -74,7 +74,8 @@ trait RefundTrackerPageTesting extends PageContentTesting {
     } else {
       doc.checkHasParagraphs(
         List(
-          "You have not yet requested a Self Assessment refund.",
+          "We have not received a Self Assessment refund request.",
+          "If you have made a refund request, it can take up to 5 days to appear in the refund request tracker.",
           "If you have credit in your online account, you can request a refund."
         )
       )

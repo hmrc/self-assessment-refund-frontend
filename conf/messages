@@ -140,9 +140,10 @@ refund-rejected.message1 = We rejected your request for a refund of {0}.
 refund-rejected.message2a = If you have credit in your online account, you can
 refund-rejected.message2b = try again to request a refund
 
-refund.no-history.message1 = You have not yet requested a Self Assessment refund.
-refund.no-history.message2a = If you have credit in your online account, you can
-refund.no-history.message2b = request a refund
+refund.no-history.message1 = We have not received a Self Assessment refund request.
+refund.no-history.message2 = If you have made a refund request, it can take up to 5 days to appear in the refund request tracker.
+refund.no-history.message3a = If you have credit in your online account, you can
+refund.no-history.message3b = request a refund
 
 confirmation.reference =  Your refund reference
 repaymentConfirmation.tax = Tax
