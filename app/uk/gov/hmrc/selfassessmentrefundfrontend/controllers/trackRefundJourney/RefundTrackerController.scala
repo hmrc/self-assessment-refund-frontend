@@ -25,9 +25,11 @@ import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.action.Actions
 import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.trackRefundJourney
 import uk.gov.hmrc.selfassessmentrefundfrontend.services.{RefundTrackerViewHelper, RepaymentsService}
 import uk.gov.hmrc.selfassessmentrefundfrontend.views.html.trackRefundJourney.RefundTrackerPage
+import uk.gov.hmrc.http.UpstreamErrorResponse
+import play.api.mvc.Results.Redirect
 
 import javax.inject.{Inject, Singleton}
-import scala.concurrent.ExecutionContext
+import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
 class RefundTrackerController @Inject() (
@@ -54,11 +56,24 @@ class RefundTrackerController @Inject() (
       .repayments(request.journey.nino.getOrElse(sys.error("nino not found")))
       .map { taxRepayments =>
         val yearlyRefundsModel = refundTackerViewHelper.refundTrackerYearModelMap(taxRepayments)
+        if (yearlyRefundsModel.isEmpty) {
+          logger.error(
+            s"[API 1771 200 response] Empty refund history for nino=${request.journey.nino.map(_.value).getOrElse("nino not found")}"
+          )
+        }
         Ok(refundTrackerPage(yearlyRefundsModel, creditAndRefundsUrl))
       }
-      .recoverWith { case e: Exception =>
-        logger.warn(s"[RefundTrackerController][refundTracker] - Unsuccessful retrieval from the repayments service", e)
-        errorHandler.internalServerErrorTemplate.map(InternalServerError(_))
+      .recoverWith {
+        case UpstreamErrorResponse(_, 404, _, _) =>
+          Future.successful(Ok(refundTrackerPage(Map.empty, creditAndRefundsUrl)))
+        case UpstreamErrorResponse(_, 422, _, _) =>
+          errorHandler.internalServerErrorTemplate.map(InternalServerError(_))
+        case e: Exception                        =>
+          logger.warn(
+            s"[RefundTrackerController][refundTracker] - Unsuccessful retrieval from the repayments service",
+            e
+          )
+          errorHandler.internalServerErrorTemplate.map(InternalServerError(_))
       }
   }
 }

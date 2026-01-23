@@ -486,7 +486,7 @@ class AuditServiceSpec extends ItSpec with ApplicationLogging {
              |      "amount": 76000,
              |      "status": "Approved",
              |      "dateRefundRequested": "2021-08-16",
-             |      "repaymentDate": "2021-08-17",
+             |      "estimatedRepaymentDate": "2021-08-17",
              |      "repaymentMethod": "BACS"
              |    },
              |    {
@@ -501,7 +501,7 @@ class AuditServiceSpec extends ItSpec with ApplicationLogging {
              |      "amount": 66000,
              |      "status": "Rejected",
              |      "dateRefundRequested": "2021-08-06",
-             |      "repaymentDate": "2021-08-07"
+             |      "estimatedRepaymentDate": "2021-08-07"
              |    }
              |  ]
              |}""".stripMargin
@@ -578,7 +578,7 @@ class AuditServiceSpec extends ItSpec with ApplicationLogging {
              |      "amount": 76000,
              |      "status": "Approved",
              |      "dateRefundRequested": "2021-08-16",
-             |      "repaymentDate": "2021-08-17",
+             |      "estimatedRepaymentDate": "2021-08-17",
              |      "repaymentMethod": "Card"
              |    }
              |  ]
