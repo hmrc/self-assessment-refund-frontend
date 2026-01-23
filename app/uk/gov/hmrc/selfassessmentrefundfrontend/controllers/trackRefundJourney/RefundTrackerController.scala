@@ -56,6 +56,11 @@ class RefundTrackerController @Inject() (
       .repayments(request.journey.nino.getOrElse(sys.error("nino not found")))
       .map { taxRepayments =>
         val yearlyRefundsModel = refundTackerViewHelper.refundTrackerYearModelMap(taxRepayments)
+        if (yearlyRefundsModel.isEmpty) {
+          logger.error(
+            s"[API 1771 200 response] Empty refund history for nino=${request.journey.nino.map(_.value).getOrElse("nino not found")}"
+          )
+        }
         Ok(refundTrackerPage(yearlyRefundsModel, creditAndRefundsUrl))
       }
       .recoverWith {
