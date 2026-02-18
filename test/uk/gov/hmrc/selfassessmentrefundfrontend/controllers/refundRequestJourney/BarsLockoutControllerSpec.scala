@@ -44,7 +44,7 @@ class BarsLockoutControllerSpec extends ItSpec with BarsLockoutPageTesting {
 
         response.checkPageIsDisplayed(
           expectedHeading = "You’ve tried to confirm your bank details too many times",
-          expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/claim-refund",
+          expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
           contentChecks =
             checkPageContent(TdBars.futureDateTime, "http://localhost:9081/report-quarterly/income-and-expenses/view"),
           expectedStatus = Status.OK,
@@ -60,7 +60,8 @@ class BarsLockoutControllerSpec extends ItSpec with BarsLockoutPageTesting {
 
         response.checkPageIsDisplayed(
           expectedHeading = "You’ve tried to confirm your bank details too many times",
-          expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/agents/claim-refund",
+          expectedServiceLink =
+            "http://localhost:9081/report-quarterly/income-and-expenses/view/agents/money-in-your-account",
           contentChecks = checkPageContent(
             TdBars.futureDateTime,
             "http://localhost:9081/report-quarterly/income-and-expenses/view/agents"
@@ -77,7 +78,7 @@ class BarsLockoutControllerSpec extends ItSpec with BarsLockoutPageTesting {
 
         response.checkPageIsDisplayed(
           expectedHeading = "Rydych wedi ceisio cadarnhau’ch manylion banc ormod o weithiau",
-          expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/claim-refund",
+          expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
           contentChecks = checkPageContentWelsh(
             TdBars.futureDateTime,
             "http://localhost:9081/report-quarterly/income-and-expenses/view"

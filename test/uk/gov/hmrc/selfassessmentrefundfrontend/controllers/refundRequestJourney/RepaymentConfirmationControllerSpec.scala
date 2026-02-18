@@ -57,7 +57,7 @@ class RepaymentConfirmationControllerSpec extends ItSpec with TdRepayments with 
 
         result.checkPageIsDisplayed(
           expectedHeading = "Refund request received",
-          expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/claim-refund",
+          expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
           contentChecks = checkPageContent(
             amount.totalCreditAvailableForRepayment.getOrElse(BigDecimal(0.0)),
             timeOfConfirmation,
@@ -90,7 +90,7 @@ class RepaymentConfirmationControllerSpec extends ItSpec with TdRepayments with 
 
         result.checkPageIsDisplayed(
           expectedHeading = "Cais am ad-daliad wedi dod i law",
-          expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/claim-refund",
+          expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
           contentChecks = checkPageContentWelsh(
             amount.totalCreditAvailableForRepayment.getOrElse(BigDecimal(0.0)),
             timeOfConfirmation,
@@ -126,7 +126,7 @@ class RepaymentConfirmationControllerSpec extends ItSpec with TdRepayments with 
 
         result.checkPageIsDisplayed(
           expectedHeading = "Refund request received",
-          expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/claim-refund",
+          expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
           contentChecks = checkPageContent(
             amount.totalCreditAvailableForRepayment.getOrElse(BigDecimal(0.0)),
             timeOfConfirmation,
@@ -165,7 +165,8 @@ class RepaymentConfirmationControllerSpec extends ItSpec with TdRepayments with 
 
         result.checkPageIsDisplayed(
           expectedHeading = "Refund request received",
-          expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/agents/claim-refund",
+          expectedServiceLink =
+            "http://localhost:9081/report-quarterly/income-and-expenses/view/agents/money-in-your-account",
           contentChecks = checkPageContent(
             amount.totalCreditAvailableForRepayment.getOrElse(BigDecimal(0.0)),
             timeOfConfirmation,
@@ -202,7 +203,8 @@ class RepaymentConfirmationControllerSpec extends ItSpec with TdRepayments with 
 
         result.checkPageIsDisplayed(
           expectedHeading = "Refund request received",
-          expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/agents/claim-refund",
+          expectedServiceLink =
+            "http://localhost:9081/report-quarterly/income-and-expenses/view/agents/money-in-your-account",
           contentChecks = checkPageContent(
             amount.totalCreditAvailableForRepayment.getOrElse(BigDecimal(0.0)),
             timeOfConfirmation,

@@ -94,7 +94,7 @@ class YouNeedToSignInAgainControllerSpec
 
         result.checkPageIsDisplayed(
           expectedHeading = PageHeading,
-          expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/claim-refund",
+          expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
           contentChecks = checkPageContent,
           expectedStatus = Status.OK,
           journey = "request"
@@ -109,7 +109,8 @@ class YouNeedToSignInAgainControllerSpec
 
         result.checkPageIsDisplayed(
           expectedHeading = PageHeading,
-          expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/agents/claim-refund",
+          expectedServiceLink =
+            "http://localhost:9081/report-quarterly/income-and-expenses/view/agents/money-in-your-account",
           contentChecks = checkPageContent,
           expectedStatus = Status.OK,
           journey = "request"
@@ -124,7 +125,7 @@ class YouNeedToSignInAgainControllerSpec
 
         result.checkPageIsDisplayed(
           expectedHeading = PageHeadingWelsh,
-          expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/claim-refund",
+          expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
           contentChecks = checkPageContentWelsh,
           expectedStatus = Status.OK,
           journey = "request",

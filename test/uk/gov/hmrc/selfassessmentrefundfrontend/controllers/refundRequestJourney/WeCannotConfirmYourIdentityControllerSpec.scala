@@ -45,7 +45,7 @@ class WeCannotConfirmYourIdentityControllerSpec extends ItSpec with WeCannotConf
 
       response.checkPageIsDisplayed(
         expectedHeading = "We cannot confirm your identity",
-        expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/claim-refund",
+        expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
         contentChecks = checkPageContent,
         expectedStatus = Status.OK,
         withBackButton = false,
@@ -68,7 +68,7 @@ class WeCannotConfirmYourIdentityControllerSpec extends ItSpec with WeCannotConf
 
       response.checkPageIsDisplayed(
         expectedHeading = "Ni allwn gadarnhau pwy ydych",
-        expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/claim-refund",
+        expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
         contentChecks = checkPageContentWelsh,
         expectedStatus = Status.OK,
         withBackButton = false,
