@@ -91,7 +91,8 @@ class CheckYourAnswersPageControllerSpec extends ItSpec with CheckYourAnswersPag
 
           response.checkPageIsDisplayed(
             expectedHeading = "Check your answers",
-            expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/claim-refund",
+            expectedServiceLink =
+              "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
             contentChecks =
               checkPageContent("Personal", BankAccountInfo("name", SortCode("111111"), AccountNumber("12345678")), 123),
             expectedStatus = OK,
@@ -138,7 +139,8 @@ class CheckYourAnswersPageControllerSpec extends ItSpec with CheckYourAnswersPag
 
           response.checkPageIsDisplayed(
             expectedHeading = "Check your answers",
-            expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/agents/claim-refund",
+            expectedServiceLink =
+              "http://localhost:9081/report-quarterly/income-and-expenses/view/agents/money-in-your-account",
             contentChecks =
               checkPageContent("Personal", BankAccountInfo("name", SortCode("111111"), AccountNumber("12345678")), 123),
             expectedStatus = OK,
@@ -184,7 +186,8 @@ class CheckYourAnswersPageControllerSpec extends ItSpec with CheckYourAnswersPag
 
           response.checkPageIsDisplayed(
             expectedHeading = "Gwiriwch eich atebion",
-            expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/claim-refund",
+            expectedServiceLink =
+              "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
             contentChecks = checkPageContentWelsh(
               "Personol",
               BankAccountInfo("name", SortCode("111111"), AccountNumber("12345678")),

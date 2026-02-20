@@ -91,7 +91,8 @@ class BankAccountDetailsControllerSpec extends ItSpec with BankAccountDetailsPag
 
             response.checkPageIsDisplayed(
               expectedHeading = "Bank or building society account details",
-              expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/claim-refund",
+              expectedServiceLink =
+                "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
               contentChecks = checkPageContent,
               expectedStatus = Status.OK,
               journey = "request"
@@ -106,7 +107,8 @@ class BankAccountDetailsControllerSpec extends ItSpec with BankAccountDetailsPag
 
             response.checkPageIsDisplayed(
               expectedHeading = "Manylion y cyfrif banc neu gymdeithas adeiladu",
-              expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/claim-refund",
+              expectedServiceLink =
+                "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
               contentChecks = checkPageContentWelsh,
               expectedStatus = Status.OK,
               journey = "request",
@@ -126,7 +128,8 @@ class BankAccountDetailsControllerSpec extends ItSpec with BankAccountDetailsPag
               expectedHeading = "Bank or building society account details",
               contentChecks = checkPageContent,
               expectedStatus = Status.OK,
-              expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/claim-refund",
+              expectedServiceLink =
+                "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
               journey = "request"
             )
           }
@@ -302,7 +305,8 @@ class BankAccountDetailsControllerSpec extends ItSpec with BankAccountDetailsPag
 
                 response.checkPageIsDisplayed(
                   expectedHeading = "Bank or building society account details",
-                  expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/claim-refund",
+                  expectedServiceLink =
+                    "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
                   contentChecks = checkPageWithFormError(errorMessage, errorFieldSpan, s"#$errorFieldSpan"),
                   expectedStatus = Status.BAD_REQUEST,
                   withError = true,
@@ -358,7 +362,8 @@ class BankAccountDetailsControllerSpec extends ItSpec with BankAccountDetailsPag
 
                 response.checkPageIsDisplayed(
                   expectedHeading = "Bank or building society account details",
-                  expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/claim-refund",
+                  expectedServiceLink =
+                    "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
                   contentChecks = checkPageWithFormError(errorMessage, errorFieldSpan, "#sortCode"),
                   expectedStatus = Status.BAD_REQUEST,
                   withError = true,
@@ -415,7 +420,8 @@ class BankAccountDetailsControllerSpec extends ItSpec with BankAccountDetailsPag
 
                 response.checkPageIsDisplayed(
                   expectedHeading = "Manylion y cyfrif banc neu gymdeithas adeiladu",
-                  expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/claim-refund",
+                  expectedServiceLink =
+                    "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
                   contentChecks = checkPageWithFormErrorWelsh(errorMessage, errorFieldSpan, "#sortCode"),
                   expectedStatus = Status.BAD_REQUEST,
                   withError = true,
@@ -495,7 +501,8 @@ class BankAccountDetailsControllerSpec extends ItSpec with BankAccountDetailsPag
 
               response.checkPageIsDisplayed(
                 expectedHeading = "Bank or building society account details",
-                expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/claim-refund",
+                expectedServiceLink =
+                  "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
                 contentChecks = checkPageWithFormError(errorMessage, errorFieldSpan, errorLink),
                 expectedStatus = Status.BAD_REQUEST,
                 withError = true,
@@ -586,7 +593,7 @@ class BankAccountDetailsControllerSpec extends ItSpec with BankAccountDetailsPag
 
         response.checkPageIsDisplayed(
           expectedHeading = "Bank or building society account details",
-          expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/claim-refund",
+          expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
           contentChecks = checkPageWithFormError(
             Map(
               "accountName"   -> "This field is required",
