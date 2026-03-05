@@ -61,7 +61,8 @@ trait RefundTrackerPageTesting extends PageContentTesting {
     if (welsh) {
       doc.checkHasParagraphs(
         List(
-          "Nid ydych wedi gwneud cais am ad-daliad Hunanasesiad eto.",
+          "Nid ydym wedi cael cais am ad-daliad Hunanasesiad.",
+          "Os ydych wedi gwneud cais am ad-daliad, gall gymryd hyd at 5 diwrnod i ymddangos ar y system olrhain ceisiadau am ad-daliad.",
           "Os oes gennych gredyd yn eich cyfrif ar-lein, gallwch wneud cais am ad-daliad."
         )
       )
