@@ -10,7 +10,7 @@ object AppDependencies {
     "uk.gov.hmrc"    %% "play-frontend-hmrc-play-30"            % "12.32.0",
     "org.typelevel"  %% "cats-core"                             % "2.13.0",
     "uk.gov.hmrc"    %% "play-conditional-form-mapping-play-30" % "3.5.0",
-    "com.beachape"   %% "enumeratum-play"                       % "1.9.5",
+    "com.beachape"   %% "enumeratum-play"                       % "1.9.6",
     "io.lemonlabs"   %% "scala-uri"                             % "4.0.3"
   // format: ON
   )
