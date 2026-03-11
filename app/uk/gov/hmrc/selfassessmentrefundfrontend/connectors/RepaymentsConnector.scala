@@ -116,10 +116,10 @@ object RepaymentsConnector {
         )
       )
       val maybePaymentMethod = response.repaymentMethod.map(_.toUpperCase) match {
-        case Some("CARD") => Some(PaymentMethod.Card)
-        case Some("BACS") => Some(PaymentMethod.BACS)
-        case Some("PO")   => Some(PaymentMethod.PaymentOrder)
-        case _            => None
+        case Some(method) if method.contains("CARD") => Some(PaymentMethod.Card)
+        case Some(method) if method.contains("BACS") => Some(PaymentMethod.BACS)
+        case Some(method) if method.contains("PO")   => Some(PaymentMethod.PaymentOrder)
+        case _                                       => None
       }
 
       response.status match {

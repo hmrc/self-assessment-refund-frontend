@@ -34,11 +34,11 @@ layout: Layout
         @messages("refundApproved.reference", refundReference)
         </b></p>
         <p>
-        @if(paymentMethod == "CARD") {
+        @if(paymentMethod == "Card") {
             @messages("refundApproved.p1.card", amount)
         } else if (paymentMethod == "BACS") {
             @messages("refundApproved.p1.bacs", amount)
-        } else if (paymentMethod == "PO") {
+        } else if (paymentMethod == "PaymentOrder") {
             @messages("refundApproved.p1.po", amount)
         } else {
             @messages("refundApproved.p1.unknown", amount)

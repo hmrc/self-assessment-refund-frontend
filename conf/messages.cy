@@ -107,10 +107,12 @@ help-us-improve-our-services.para2 = (mae’n cymryd 30 eiliad)
 refundApproved.title = Mae’ch ad-daliad o {0} wedi’i gymeradwyo
 refundApproved.heading = Mae’ch ad-daliad o {0} wedi’i gymeradwyo
 refundApproved.reference = Cyfeirnod yr ad-daliad: {0}
-refundApproved.p1 = Rydym wedi cymeradwyo’ch ad-daliad o {0} ac wrthi’n prosesu’r taliad.
+refundApproved.p1.unknown = Rydym wedi cymeradwyo’ch ad-daliad o {0} ac wrthi’n prosesu’r taliad.
+refundApproved.p1.card = Rydym wedi cymeradwyo’ch ad-daliad o {0}, ac wedi ei anfon i’r cerdyn y gwnaethoch ei ddefnyddio er mwyn talu’ch bil Hunanasesiad diwethaf.
+refundApproved.p1.bacs = Rydym wedi cymeradwyo’ch ad-daliad o {0}, ac wedi ei anfon i’r cyfrif banc y gwnaethoch ei rannu gyda ni.
+refundApproved.p1.po = Rydym wedi cymeradwyo’ch ad-daliad o {0}, ac wedi ei anfon atoch drwy siec.
 refundApproved.p2 = Dylech gael eich ad-daliad erbyn {0}.
 refundApproved.moreDetails = Rhagor o fanylion am yr ad-daliad hwn
-
 
 refund-tracker.title = System olrhain ceisiadau am ad-daliad
 refund-tracker.heading = System olrhain ceisiadau am ad-daliad
