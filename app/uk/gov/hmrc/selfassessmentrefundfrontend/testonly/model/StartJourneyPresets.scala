@@ -61,6 +61,7 @@ object StartJourneyPresets {
     // Successful ViewHistory presets
     Preset(ViewHistory("AB111111C"), "4 payments (round numbers)"),
     Preset(ViewHistory("AB111111D"), "4 payments (pounds and pence)"),
+    Preset(ViewHistory("AB111111B"), "Approved payments for all payment methods"),
     Preset(ViewHistory("AB111111A"), "No payments, you have not yet requested a refund"),
     Preset(ViewHistory("AA111111A"), "API 1771, Get Repayment Status returns 404"),
     Preset(ViewHistory("AC111111A"), "API 1771, Get Repayment Status returns 422"),

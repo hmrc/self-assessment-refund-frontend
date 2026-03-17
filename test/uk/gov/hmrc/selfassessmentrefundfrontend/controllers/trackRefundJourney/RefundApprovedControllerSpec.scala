@@ -33,7 +33,8 @@ import uk.gov.hmrc.selfassessmentrefundfrontend.connectors.RepaymentsConnector.R
 import uk.gov.hmrc.selfassessmentrefundfrontend.model.customer.Nino
 import uk.gov.hmrc.selfassessmentrefundfrontend.model.repayment.RequestNumber
 import uk.gov.hmrc.selfassessmentrefundfrontend.testdata.TdAll.{nino, no1, request, welshRequest}
-import uk.gov.hmrc.selfassessmentrefundfrontend.testdata.TdSupport._
+import uk.gov.hmrc.selfassessmentrefundfrontend.testdata.TdSupport.*
+import org.scalatest.prop.TableDrivenPropertyChecks.*
 
 import scala.concurrent.Future
 
@@ -49,46 +50,40 @@ class RefundApprovedControllerSpec extends ItSpec with PageContentTesting {
     stubBarsVerifyStatus()
   }
 
+  val table = Table(
+    ("method", "hyperlink", "heading", "Welsh"),
+    ("BACS", "More details about this refund", "Your refund of £12,000 has been approved", false),
+    ("BACS", "Rhagor o fanylion am yr ad-daliad hwn", "Mae’ch ad-daliad o £12,000 wedi’i gymeradwyo", true),
+    ("CARD", "More details about this refund", "Your refund of £12,000 has been approved", false),
+    ("CARD", "Rhagor o fanylion am yr ad-daliad hwn", "Mae’ch ad-daliad o £12,000 wedi’i gymeradwyo", true),
+    ("PO", "More details about this refund", "Your refund of £12,000 has been approved", false),
+    ("PO", "Rhagor o fanylion am yr ad-daliad hwn", "Mae’ch ad-daliad o £12,000 wedi’i gymeradwyo", true)
+  )
+
   "onPageLoad" should {
-    "render 'Refund Approved' page with correct content - Individual or Organisation" in new TestSetup() {
-      givenTheApprovedRefundExists(no1, nino, 12000)
+    forAll(table) { (method, hyperlink, heading, welsh) =>
+      s"render 'Refund Approved' page with correct content - Individual or Organisation - Welsh set to $welsh and $method" in new TestSetup() {
+        givenTheApprovedRefundExists(no1, nino, 12000, Some(method))
 
-      val result: Future[Result] = refundApprovedController.showApprovedPage(no1)(request)
-      val doc: Document          = Jsoup.parse(contentAsString(result))
+        val result: Future[Result] =
+          if (welsh) refundApprovedController.showApprovedPage(no1)(welshRequest)
+          else refundApprovedController.showApprovedPage(no1)(request)
+        val doc: Document          = Jsoup.parse(contentAsString(result))
 
-      doc.checkHasHyperlink(
-        "More details about this refund",
-        "http://localhost:9081/report-quarterly/income-and-expenses/view/refund-to-taxpayer/1"
-      )
+        doc.checkHasHyperlink(
+          hyperlink,
+          "http://localhost:9081/report-quarterly/income-and-expenses/view/refund-to-taxpayer/1"
+        )
 
-      result.checkPageIsDisplayed(
-        expectedHeading = "Your refund of £12,000 has been approved",
-        expectedServiceLink = "http://localhost:9171/track-a-self-assessment-refund/refund-request-tracker",
-        contentChecks = checkApprovedPageContent(welsh = false),
-        expectedStatus = Status.OK,
-        journey = "track"
-      )
-    }
-
-    "render 'Refund Approved' page with correct content - Individual or Organisation - in Welsh" in new TestSetup() {
-      givenTheApprovedRefundExists(no1, nino, 12000)
-
-      val result: Future[Result] = refundApprovedController.showApprovedPage(no1)(welshRequest)
-      val doc: Document          = Jsoup.parse(contentAsString(result))
-
-      doc.checkHasHyperlink(
-        "Rhagor o fanylion am yr ad-daliad hwn",
-        "http://localhost:9081/report-quarterly/income-and-expenses/view/refund-to-taxpayer/1"
-      )
-
-      result.checkPageIsDisplayed(
-        expectedHeading = "Mae’ch ad-daliad o £12,000 wedi’i gymeradwyo",
-        expectedServiceLink = "http://localhost:9171/track-a-self-assessment-refund/refund-request-tracker",
-        contentChecks = checkApprovedPageContent(welsh = true),
-        expectedStatus = Status.OK,
-        journey = "track",
-        welsh = true
-      )
+        result.checkPageIsDisplayed(
+          expectedHeading = heading,
+          expectedServiceLink = "http://localhost:9171/track-a-self-assessment-refund/refund-request-tracker",
+          contentChecks = checkApprovedPageContent(welsh, method),
+          expectedStatus = Status.OK,
+          journey = "track",
+          welsh = welsh
+        )
+      }
     }
 
     "render 'Refund Approved' page with correct content - Agent" in new TestSetup(isAgent = true) {
@@ -214,7 +209,12 @@ class RefundApprovedControllerSpec extends ItSpec with PageContentTesting {
     }
   }
 
-  def givenTheApprovedRefundExists(key: RequestNumber, nino: Nino, cashAmount: Long): StubMapping =
+  def givenTheApprovedRefundExists(
+    key:        RequestNumber,
+    nino:       Nino,
+    cashAmount: Long,
+    method:     Option[String] = None
+  ): StubMapping =
     stubFor(
       get(urlEqualTo(s"/self-assessment-refund-backend/repayments/${nino.value}/${key.value}"))
         .willReturn(
@@ -222,21 +222,21 @@ class RefundApprovedControllerSpec extends ItSpec with PageContentTesting {
             .withStatus(200)
             .withBody(
               Json.prettyPrint(
-                Json.toJson(Response(key, nino, cashAmount, "Approved", "2021-08-14", Some("2021-08-31")))
+                Json.toJson(Response(key, nino, cashAmount, "Approved", "2021-08-14", Some("2021-08-31"), None, method))
               )
             )
         )
     )
 
-  private def checkApprovedPageContent(welsh: Boolean)(doc: Document): Unit = {
+  private def checkApprovedPageContent(welsh: Boolean, method: String = "")(doc: Document): Unit = {
     if (welsh) {
-      doc.checkHasParagraphs(approvedParagraphsWelsh)
+      doc.checkHasParagraphs(approvedParagraphsWelsh(method))
       doc.checkHasHyperlink(
         "A yw’r dudalen hon yn gweithio’n iawn? (yn agor tab newydd)",
         "/contact/report-technical-problem?service=self-assessment-repayment"
       )
     } else {
-      doc.checkHasParagraphs(approvedParagraphs)
+      doc.checkHasParagraphs(approvedParagraphs(method))
       doc.checkHasHyperlink(
         "Is this page not working properly? (opens in new tab)",
         "/contact/report-technical-problem?service=self-assessment-repayment"
@@ -245,15 +245,25 @@ class RefundApprovedControllerSpec extends ItSpec with PageContentTesting {
     doc.checkHasBackLinkWithUrl("#")
   }
 
-  private val approvedParagraphs: List[String] = List(
+  private def approvedParagraphs(method: String): List[String] = List(
     "Refund reference: 1",
-    "We have approved your refund of £12,000 and sent it for payment.",
+    if (method == "BACS") "We have approved your refund of £12,000 and sent it to the bank account you shared with us."
+    else if (method == "CARD")
+      "We have approved your refund of £12,000 and sent it to the card you used to pay your last Simple Assessment bill."
+    else if (method == "PO") "We have approved your refund of £12,000 and sent it to to you by cheque."
+    else "We have approved your refund of £12,000 and sent it for payment.",
     "You should receive your refund by 31 August 2021."
   )
 
-  private val approvedParagraphsWelsh: List[String] = List(
+  private def approvedParagraphsWelsh(method: String): List[String] = List(
     "Cyfeirnod yr ad-daliad: 1",
-    "Rydym wedi cymeradwyo’ch ad-daliad o £12,000 ac wrthi’n prosesu’r taliad.",
+    if (method == "BACS")
+      "Rydym wedi cymeradwyo’ch ad-daliad o £12,000, ac wedi ei anfon i’r cyfrif banc y gwnaethoch ei rannu gyda ni."
+    else if (method == "CARD")
+      "Rydym wedi cymeradwyo’ch ad-daliad o £12,000, ac wedi ei anfon i’r cerdyn y gwnaethoch ei ddefnyddio er mwyn talu’ch bil Hunanasesiad diwethaf."
+    else if (method == "PO") "Rydym wedi cymeradwyo’ch ad-daliad o £12,000, ac wedi ei anfon atoch drwy siec."
+    else "Rydym wedi cymeradwyo’ch ad-daliad o £12,000 ac wrthi’n prosesu’r taliad.",
     "Dylech gael eich ad-daliad erbyn 31 Awst 2021."
   )
+
 }

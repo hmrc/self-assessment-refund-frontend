@@ -58,6 +58,7 @@ class RefundApprovedController @Inject() (
                 amount = AmountFormatter.formatAmount(repayment.claim.amount),
                 completedDate = languageUtils.Dates.formatDate(repayment.completed),
                 refundReference = repayment.claim.key.value,
+                paymentMethod = repayment.claim.repaymentMethod.getOrElse("unknown").toString,
                 moreDetailsUrl = s"$redirectUrl/${repayment.claim.key.value}"
               )
             )

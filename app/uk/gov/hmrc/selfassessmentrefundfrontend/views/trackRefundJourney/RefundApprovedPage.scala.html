@@ -21,7 +21,7 @@
 layout: Layout
 )
 
-@(amount: String, completedDate: String, refundReference: String, moreDetailsUrl: String )(implicit request: Request[_], messages: Messages)
+@(amount: String, completedDate: String, refundReference: String, paymentMethod: String, moreDetailsUrl: String)(implicit request: Request[_], messages: Messages)
 
 @layout(
     pageTitle = Some(PageTitle(messages("refundApproved.title", amount), messages("service.name.track"))),
@@ -34,7 +34,15 @@ layout: Layout
         @messages("refundApproved.reference", refundReference)
         </b></p>
         <p>
-        @messages("refundApproved.p1", amount)
+        @if(paymentMethod == "Card") {
+            @messages("refundApproved.p1.card", amount)
+        } else if (paymentMethod == "BACS") {
+            @messages("refundApproved.p1.bacs", amount)
+        } else if (paymentMethod == "PaymentOrder") {
+            @messages("refundApproved.p1.po", amount)
+        } else {
+            @messages("refundApproved.p1.unknown", amount)
+        }
         </p>
         <p>
         @messages("refundApproved.p2", completedDate)
