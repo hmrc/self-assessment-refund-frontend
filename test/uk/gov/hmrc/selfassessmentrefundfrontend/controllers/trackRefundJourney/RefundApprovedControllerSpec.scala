@@ -250,7 +250,7 @@ class RefundApprovedControllerSpec extends ItSpec with PageContentTesting {
     if (method == "BACS") "We have approved your refund of £12,000 and sent it to the bank account you shared with us."
     else if (method == "CARD")
       "We have approved your refund of £12,000 and sent it to the card you used to pay your last Simple Assessment bill."
-    else if (method == "PO") "We have approved your refund of £12,000 and sent it to to you by cheque."
+    else if (method == "PO") "We have approved your refund of £12,000 and sent it to you by cheque."
     else "We have approved your refund of £12,000 and sent it for payment.",
     "You should receive your refund by 31 August 2021."
   )

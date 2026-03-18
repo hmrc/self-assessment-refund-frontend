@@ -110,7 +110,7 @@ refundApproved.reference = Refund reference: {0}
 refundApproved.p1.unknown = We have approved your refund of {0} and sent it for payment.
 refundApproved.p1.card = We have approved your refund of {0} and sent it to the card you used to pay your last Simple Assessment bill.
 refundApproved.p1.bacs = We have approved your refund of {0} and sent it to the bank account you shared with us.
-refundApproved.p1.po = We have approved your refund of {0} and sent it to to you by cheque.
+refundApproved.p1.po = We have approved your refund of {0} and sent it to you by cheque.
 refundApproved.p2 = You should receive your refund by {0}.
 refundApproved.moreDetails = More details about this refund
 
