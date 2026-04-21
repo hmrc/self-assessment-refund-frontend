@@ -83,11 +83,11 @@ class HowYouWillGetYourRefundControllerSpec extends ItSpec with HowYouWillGetYou
       }
     }
     "called on 'onSubmit'" should {
-      "redirect to /type-of-bank-account" in {
+      "redirect to /account-type" in {
         setupStubsForShowRepayment(lastPaymentByCard = true)
         val response = controller.onSubmit(TdAll.request)
         status(response) shouldBe Status.SEE_OTHER
-        redirectLocation(response) shouldBe Some("/request-a-self-assessment-refund/type-of-bank-account")
+        redirectLocation(response) shouldBe Some("/request-a-self-assessment-refund/account-type")
       }
     }
   }
