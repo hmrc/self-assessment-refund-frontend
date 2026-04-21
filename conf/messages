@@ -41,9 +41,9 @@ weNeedBankDetails.individual.message = To get a refund, you need to enter your o
 weNeedBankDetails.agent.title = We need your client’s bank details
 weNeedBankDetails.agent.message = To get a refund, you need to enter your client’s bank details.
 
-accountType.error.title = Error: What type of bank account are you providing?
-accountType.title = What type of bank account are you providing?
-accountType.heading = What type of bank account are you providing?
+accountType.error.title = Error: Which type of bank account are you providing?
+accountType.title = Which type of bank account are you providing?
+accountType.heading = Which type of bank account are you providing?
 accountType.text = The bank details you provide must be for a UK bank account
 accountType.personal = Personal bank account
 accountType.business = Business bank account
