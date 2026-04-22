@@ -93,13 +93,12 @@ class HowYouWillGetYourRefundControllerSpec extends ItSpec with HowYouWillGetYou
   }
 
   def setupStubsForShowRepayment(lastPaymentByCard: Boolean): StubMapping =
-    lastPaymentByCard match {
-      case true  =>
-        stubBackendLastPaymentMethod(Card)
-        stubBackendBusinessJourney(method = Some(Card))
-      case false =>
-        stubBackendLastPaymentMethod(BACS)
-        stubBackendBusinessJourney()
+    if (lastPaymentByCard) {
+      stubBackendLastPaymentMethod(Card)
+      stubBackendBusinessJourney(method = Some(Card))
+    } else {
+      stubBackendLastPaymentMethod(BACS)
+      stubBackendBusinessJourney()
     }
 
 }
