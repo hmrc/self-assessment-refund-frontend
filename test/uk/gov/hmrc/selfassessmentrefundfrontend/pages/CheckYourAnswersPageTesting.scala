@@ -43,7 +43,7 @@ trait CheckYourAnswersPageTesting extends PageContentTesting {
         List(
           ("Change", "/request-a-self-assessment-refund/check-your-answers-change-amount"),
           ("Change", "/request-a-self-assessment-refund/check-your-answers-change-account"),
-          ("Change", "/request-a-self-assessment-refund/bank-building-society-details")
+          ("Change", "/request-a-self-assessment-refund/enter-account-details")
         )
       )
     )
@@ -70,7 +70,7 @@ trait CheckYourAnswersPageTesting extends PageContentTesting {
         List(
           ("Newid", "/request-a-self-assessment-refund/check-your-answers-change-amount"),
           ("Newid", "/request-a-self-assessment-refund/check-your-answers-change-account"),
-          ("Newid", "/request-a-self-assessment-refund/bank-building-society-details")
+          ("Newid", "/request-a-self-assessment-refund/enter-account-details")
         )
       )
     )

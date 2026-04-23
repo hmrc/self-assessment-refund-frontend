@@ -90,7 +90,7 @@ class BankAccountDetailsControllerSpec extends ItSpec with BankAccountDetailsPag
             val response: Future[Result] = controller.getAccountDetails(request)
 
             response.checkPageIsDisplayed(
-              expectedHeading = "Bank or building society account details",
+              expectedHeading = "Enter your bank or building society account details",
               expectedServiceLink =
                 "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
               contentChecks = checkPageContent,
@@ -106,7 +106,7 @@ class BankAccountDetailsControllerSpec extends ItSpec with BankAccountDetailsPag
             val response: Future[Result] = controller.getAccountDetails(request)
 
             response.checkPageIsDisplayed(
-              expectedHeading = "Manylion y cyfrif banc neu gymdeithas adeiladu",
+              expectedHeading = "Nodwch fanylion eich cyfrif banc neu gyfrif cymdeithas adeiladu",
               expectedServiceLink =
                 "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
               contentChecks = checkPageContentWelsh,
@@ -125,7 +125,7 @@ class BankAccountDetailsControllerSpec extends ItSpec with BankAccountDetailsPag
             val response: Future[Result] = controller.getAccountDetails(request)
 
             response.checkPageIsDisplayed(
-              expectedHeading = "Bank or building society account details",
+              expectedHeading = "Enter your bank or building society account details",
               contentChecks = checkPageContent,
               expectedStatus = Status.OK,
               expectedServiceLink =
@@ -304,7 +304,7 @@ class BankAccountDetailsControllerSpec extends ItSpec with BankAccountDetailsPag
                 val response: Future[Result]   = call(action, request, request.body)
 
                 response.checkPageIsDisplayed(
-                  expectedHeading = "Bank or building society account details",
+                  expectedHeading = "Enter your bank or building society account details",
                   expectedServiceLink =
                     "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
                   contentChecks = checkPageWithFormError(errorMessage, errorFieldSpan, s"#$errorFieldSpan"),
@@ -361,7 +361,7 @@ class BankAccountDetailsControllerSpec extends ItSpec with BankAccountDetailsPag
                 val response: Future[Result]   = call(action, request, request.body)
 
                 response.checkPageIsDisplayed(
-                  expectedHeading = "Bank or building society account details",
+                  expectedHeading = "Enter your bank or building society account details",
                   expectedServiceLink =
                     "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
                   contentChecks = checkPageWithFormError(errorMessage, errorFieldSpan, "#sortCode"),
@@ -419,7 +419,7 @@ class BankAccountDetailsControllerSpec extends ItSpec with BankAccountDetailsPag
                 val response: Future[Result]   = call(action, request, request.body)
 
                 response.checkPageIsDisplayed(
-                  expectedHeading = "Manylion y cyfrif banc neu gymdeithas adeiladu",
+                  expectedHeading = "Nodwch fanylion eich cyfrif banc neu gyfrif cymdeithas adeiladu",
                   expectedServiceLink =
                     "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
                   contentChecks = checkPageWithFormErrorWelsh(errorMessage, errorFieldSpan, "#sortCode"),
@@ -500,7 +500,7 @@ class BankAccountDetailsControllerSpec extends ItSpec with BankAccountDetailsPag
               val response: Future[Result]   = call(action, request, request.body)
 
               response.checkPageIsDisplayed(
-                expectedHeading = "Bank or building society account details",
+                expectedHeading = "Enter your bank or building society account details",
                 expectedServiceLink =
                   "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
                 contentChecks = checkPageWithFormError(errorMessage, errorFieldSpan, errorLink),
@@ -592,7 +592,7 @@ class BankAccountDetailsControllerSpec extends ItSpec with BankAccountDetailsPag
         val response: Future[Result]   = call(action, request, request.body)
 
         response.checkPageIsDisplayed(
-          expectedHeading = "Bank or building society account details",
+          expectedHeading = "Enter your bank or building society account details",
           expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
           contentChecks = checkPageWithFormError(
             Map(

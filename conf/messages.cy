@@ -51,8 +51,8 @@ accountType.summaryText = Mae problem wedi codi
 accountType.submit = Yn eich blaen
 accountType.error.required = Dewiswch y math o gyfrif
 
-enter-bank-details.title = Manylion y cyfrif banc neu gymdeithas adeiladu
-enter-bank-details.error.title = Gwall: Manylion y cyfrif banc neu gymdeithas adeiladu
+enter-bank-details.title = Nodwch fanylion eich cyfrif banc neu gyfrif cymdeithas adeiladu
+enter-bank-details.error.title = Gwall: Nodwch fanylion eich cyfrif banc neu gyfrif cymdeithas adeiladu
 enter-bank-details.accountName.label = Yr enw sydd ar y cyfrif
 enter-bank-details.sortCode.label = Cod didoli
 enter-bank-details.sortCode.hint = Mae’n rhaid iddo fod yn 6 digid o hyd

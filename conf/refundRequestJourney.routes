@@ -19,8 +19,8 @@ POST        /check-your-answers-confirm              uk.gov.hmrc.selfassessmentr
 GET         /check-your-answers-change-amount        uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.CheckYourAnswersPageController.changeAmount
 GET         /check-your-answers-change-account       uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.CheckYourAnswersPageController.changeAccount
 
-GET         /bank-building-society-details           uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.BankAccountDetailsController.getAccountDetails
-POST        /bank-building-society-details           uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.BankAccountDetailsController.postAccountDetails
+GET         /enter-account-details                   uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.BankAccountDetailsController.getAccountDetails
+POST        /enter-account-details                   uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.BankAccountDetailsController.postAccountDetails
 
 GET         /sign-in-again                           uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.YouNeedToSignInAgainController.onPageLoad
 POST        /sign-in-again                           uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.YouNeedToSignInAgainController.onSubmit

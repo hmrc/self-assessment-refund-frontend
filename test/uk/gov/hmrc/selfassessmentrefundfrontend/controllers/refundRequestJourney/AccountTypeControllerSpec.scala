@@ -153,7 +153,7 @@ class AccountTypeControllerSpec extends ItSpec with AccountTypePageTesting {
             stubBackendBusinessJourney()
             val response: Future[Result] = call(action, request, request.body)
             status(response) shouldBe Status.SEE_OTHER
-            redirectLocation(response) shouldBe Some("/request-a-self-assessment-refund/bank-building-society-details")
+            redirectLocation(response) shouldBe Some("/request-a-self-assessment-refund/enter-account-details")
 
             verifyUpdateJourneyCalled(
               journey(
