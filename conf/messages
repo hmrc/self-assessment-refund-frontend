@@ -65,13 +65,13 @@ enter-bank-details.submitButton.label = Continue
 enter-bank-details.view-bank-details-hidden = Bank details
 
 enter-bank-details.error.summaryText = There is a problem
-enter-bank-details.error.accountName.required = Enter the name on the account
+enter-bank-details.error.accountName.required = Enter an account name
 enter-bank-details.error.accountName.maxLength = Name on the account must be 60 characters or less
-enter-bank-details.error.accountName.format = Name on the account must only include letters, hyphens, spaces and apostrophes
+enter-bank-details.error.accountName.format = Check your account name is correct
 enter-bank-details.error.accountNumber.required = Enter an account number
 enter-bank-details.error.accountNumber.length = Account number must be between 6 and 8 digits
 enter-bank-details.error.sortCode.required = Enter a sort code
-enter-bank-details.error.sortCode.invalid = Sort code must be 6 digits
+enter-bank-details.error.sortCode.invalid = Sort code must be a 6 digit number
 enter-bank-details.error.rollNumber.format = Building society roll number must only include letters a to z, numbers and spaces
 enter-bank-details.error.rollNumber.length = Building society roll number must be between 1 and 10 characters
 

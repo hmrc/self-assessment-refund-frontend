@@ -192,7 +192,7 @@ class BankAccountDetailsControllerSpec extends ItSpec with BankAccountDetailsPag
             validSortCode,
             validAccountNumber,
             "",
-            "Enter the name on the account",
+            "Enter an account name",
             "accountName"
           ),
           (
@@ -210,7 +210,7 @@ class BankAccountDetailsControllerSpec extends ItSpec with BankAccountDetailsPag
             validSortCode,
             validAccountNumber,
             "",
-            "Name on the account must only include letters, hyphens, spaces and apostrophes",
+            "Check your account name is correct",
             "accountName"
           ),
           (
@@ -247,7 +247,7 @@ class BankAccountDetailsControllerSpec extends ItSpec with BankAccountDetailsPag
             "12345678",
             validAccountNumber,
             "",
-            "Sort code must be 6 digits",
+            "Sort code must be a 6 digit number",
             "sortCode"
           ),
           (
@@ -256,7 +256,7 @@ class BankAccountDetailsControllerSpec extends ItSpec with BankAccountDetailsPag
             "123abc",
             validAccountNumber,
             "",
-            "Sort code must be 6 digits",
+            "Sort code must be a 6 digit number",
             "sortCode"
           ),
 

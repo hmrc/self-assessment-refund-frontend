@@ -65,13 +65,13 @@ enter-bank-details.submitButton.label = Yn eich blaen
 enter-bank-details.view-bank-details-hidden = Fanylion banc
 
 enter-bank-details.error.summaryText = Mae problem wedi codi
-enter-bank-details.error.accountName.required = Nodwch yr enw sydd ar y cyfrif
+enter-bank-details.error.accountName.required = Nodwch enw cyfrif
 enter-bank-details.error.accountName.maxLength = Mae’n rhaid i’r enw sydd ar y cyfrif fod yn 60 o gymeriadau neu lai
-enter-bank-details.error.accountName.format = Mae’n rhaid i’r enw sydd ar y cyfrif gynnwys llythrennau, cysylltnodau, bylchau a chollnodau yn unig
+enter-bank-details.error.accountName.format = Gwiriwch fod enw eich cyfrif yn gywir
 enter-bank-details.error.accountNumber.required = Nodwch rif cyfrif
 enter-bank-details.error.accountNumber.length = Mae’n rhaid i rif y cyfrif fod rhwng 6 ac 8 digid
 enter-bank-details.error.sortCode.required = Nodwch god didoli
-enter-bank-details.error.sortCode.invalid = Mae’n rhaid i’r cod didoli fod yn 6 digid
+enter-bank-details.error.sortCode.invalid = Rhaid i’r cod didoli fod yn rhif 6 digid
 enter-bank-details.error.rollNumber.format = Gall rhif rôl y gymdeithas gynnwys dim ond llythrennau a i z, rhifau a bylchau
 enter-bank-details.error.rollNumber.length = Mae’n rhaid i rif rôl y gymdeithas adeiladu fod rhwng 1 ac 10 o gymeriadau
 
