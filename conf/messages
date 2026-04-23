@@ -54,6 +54,7 @@ accountType.error.required = Select a type of account
 enter-bank-details.title = Enter your bank or building society account details
 enter-bank-details.error.title = Error: Enter your bank or building society account details
 enter-bank-details.accountName.label = Name on the account
+enter-bank-details.accountName.hint = For business accounts, enter the name of the business
 enter-bank-details.sortCode.label = Sort code
 enter-bank-details.sortCode.hint = Must be 6 digits long
 enter-bank-details.accountNumber.label = Account number

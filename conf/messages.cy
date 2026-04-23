@@ -54,6 +54,7 @@ accountType.error.required = Dewiswch y math o gyfrif
 enter-bank-details.title = Nodwch fanylion eich cyfrif banc neu gyfrif cymdeithas adeiladu
 enter-bank-details.error.title = Gwall: Nodwch fanylion eich cyfrif banc neu gyfrif cymdeithas adeiladu
 enter-bank-details.accountName.label = Yr enw sydd ar y cyfrif
+enter-bank-details.accountName.hint = Ar gyfer cyfrifon busnes, nodwch enw’r busnes
 enter-bank-details.sortCode.label = Cod didoli
 enter-bank-details.sortCode.hint = Mae’n rhaid iddo fod yn 6 digid o hyd
 enter-bank-details.accountNumber.label = Rhif y cyfrif

@@ -68,6 +68,7 @@
             value = model.form("accountName").value,
             attributes = Map("autocomplete" -> "name", "spellcheck" -> "false"),
             label = Label(content = HtmlContent(messages("enter-bank-details.accountName.label"))),
+            hint = Some(Hint(content = HtmlContent(messages("enter-bank-details.accountName.hint")))),
             formGroup = FormGroup(classes = Some("form-field-group")),
             errorMessage = fieldErrorMessage("accountName")
         ))
