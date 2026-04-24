@@ -71,75 +71,75 @@ object BankAccountDetailsForm {
     )
 
   def accountNameConstraint: Constraint[String] = Constraint[String]("constraint.account-name") { accountName =>
-    if (accountName.isEmpty) Invalid(ValidationError("enter-bank-details.error.accountName.required"))
-    else if (accountName.length > 60) Invalid(ValidationError("enter-bank-details.error.accountName.maxLength"))
+    if (accountName.isEmpty) Invalid(ValidationError("enter-account-details.error.accountName.required"))
+    else if (accountName.length > 60) Invalid(ValidationError("enter-account-details.error.accountName.maxLength"))
     else if (!accountName.matches(validAccountNameRegex))
-      Invalid(ValidationError("enter-bank-details.error.accountName.format"))
+      Invalid(ValidationError("enter-account-details.error.accountName.format"))
     else Valid
   }
 
   def sortCodeConstraint: Constraint[String] = Constraint[String]("constraint.sort-code") { sc =>
-    if (sc.length === 0) Invalid(ValidationError("enter-bank-details.error.sortCode.required"))
-    else if (sc.length =!= 6) Invalid(ValidationError("enter-bank-details.error.sortCode.invalid"))
-    else if (!sc.forall(_.isDigit)) Invalid(ValidationError("enter-bank-details.error.sortCode.invalid"))
-    else if (!sc.matches(validSortCodeRegex)) Invalid(ValidationError("enter-bank-details.error.sortCode.invalid"))
+    if (sc.length === 0) Invalid(ValidationError("enter-account-details.error.sortCode.required"))
+    else if (sc.length =!= 6) Invalid(ValidationError("enter-account-details.error.sortCode.invalid"))
+    else if (!sc.forall(_.isDigit)) Invalid(ValidationError("enter-account-details.error.sortCode.invalid"))
+    else if (!sc.matches(validSortCodeRegex)) Invalid(ValidationError("enter-account-details.error.sortCode.invalid"))
     else Valid
   }
 
   def accountNumberConstraint: Constraint[String] = Constraint[String]("constraint.account-number") { accNum =>
-    if (accNum.length === 0) Invalid(ValidationError("enter-bank-details.error.accountNumber.required"))
-    else if (accNum.length =!= 8) Invalid(ValidationError("enter-bank-details.error.accountNumber.length"))
-    else if (!accNum.forall(_.isDigit)) Invalid(ValidationError("enter-bank-details.error.accountNumber.length"))
+    if (accNum.length === 0) Invalid(ValidationError("enter-account-details.error.accountNumber.required"))
+    else if (accNum.length =!= 8) Invalid(ValidationError("enter-account-details.error.accountNumber.length"))
+    else if (!accNum.forall(_.isDigit)) Invalid(ValidationError("enter-account-details.error.accountNumber.length"))
     else Valid
   }
 
   def rollNumberConstraint: Constraint[String] = Constraint[String]("constraint.rollNumber") { rollNum =>
-    if (rollNum.length > 10) Invalid(ValidationError("enter-bank-details.error.rollNumber.length"))
+    if (rollNum.length > 10) Invalid(ValidationError("enter-account-details.error.rollNumber.length"))
     else if (!rollNum.matches(validRollNumberRegex))
-      Invalid(ValidationError("enter-bank-details.error.rollNumber.format"))
+      Invalid(ValidationError("enter-account-details.error.rollNumber.format"))
     else Valid
   }
 
   private val sortCodeAndAccountNumberOverrides: Seq[FormError]               = Seq(
     FormError("sortCode", ""),      // 'turns off' the sortCode field error
     FormError("accountNumber", ""), // 'turns off' the accountNumber field error
-    FormError("sortCodeAndAccountNumber", "enter-bank-details.bars.account.number.not.well.formatted")
+    FormError("sortCodeAndAccountNumber", "enter-account-details.bars.account.number.not.well.formatted")
   )
   val accountNumberNotWellFormatted: FormErrorWithFieldMessageOverrides       =
     FormErrorWithFieldMessageOverrides(
-      formError = FormError("sortCode", "enter-bank-details.bars.account.number.not.well.formatted"),
+      formError = FormError("sortCode", "enter-account-details.bars.account.number.not.well.formatted"),
       fieldMessageOverrides = sortCodeAndAccountNumberOverrides
     )
   val sortCodeNotPresentOnEiscd: FormErrorWithFieldMessageOverrides           =
     FormErrorWithFieldMessageOverrides(
-      formError = FormError("sortCode", "enter-bank-details.bars.sortcode.not.present.on.eiscd"),
+      formError = FormError("sortCode", "enter-account-details.bars.sortcode.not.present.on.eiscd"),
       fieldMessageOverrides = sortCodeAndAccountNumberOverrides
     )
   val sortCodeDoesNotSupportsDirectCredit: FormErrorWithFieldMessageOverrides =
     FormErrorWithFieldMessageOverrides(
-      formError = FormError("sortCode", "enter-bank-details.bars.sortcode.does.not.support.direct.credit")
+      formError = FormError("sortCode", "enter-account-details.bars.sortcode.does.not.support.direct.credit")
     )
   val nameDoesNotMatch: FormErrorWithFieldMessageOverrides                    =
     FormErrorWithFieldMessageOverrides(
-      formError = FormError("accountName", "enter-bank-details.bars.account.name.no.match")
+      formError = FormError("accountName", "enter-account-details.bars.account.name.no.match")
     )
   val nonStandardDetailsRequired: FormErrorWithFieldMessageOverrides          =
     FormErrorWithFieldMessageOverrides(
-      formError = FormError("rollNumber", "enter-bank-details.bars.account.roll.number.required")
+      formError = FormError("rollNumber", "enter-account-details.bars.account.roll.number.required")
     )
   val accountDoesNotExist: FormErrorWithFieldMessageOverrides                 =
     FormErrorWithFieldMessageOverrides(
-      formError = FormError("sortCode", "enter-bank-details.bars.account.does.not.exist"),
+      formError = FormError("sortCode", "enter-account-details.bars.account.does.not.exist"),
       fieldMessageOverrides = sortCodeAndAccountNumberOverrides
     )
   val sortCodeOnDenyList: FormErrorWithFieldMessageOverrides                  =
     FormErrorWithFieldMessageOverrides(
-      formError = FormError("sortCode", "enter-bank-details.bars.sortcode.on.deny.list"),
+      formError = FormError("sortCode", "enter-account-details.bars.sortcode.on.deny.list"),
       fieldMessageOverrides = sortCodeAndAccountNumberOverrides
     )
   val otherBarsError: FormErrorWithFieldMessageOverrides                      =
     FormErrorWithFieldMessageOverrides(
-      formError = FormError("sortCode", "enter-bank-details.bars.other.error"),
+      formError = FormError("sortCode", "enter-account-details.bars.other.error"),
       fieldMessageOverrides = sortCodeAndAccountNumberOverrides
     )
 }

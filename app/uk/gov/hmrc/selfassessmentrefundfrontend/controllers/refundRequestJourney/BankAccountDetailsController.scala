@@ -211,7 +211,7 @@ object BankAccountDetailsController {
     val DirectCreditNotSupportedKey = "bars.error.sortCode.directCreditNotSupported"
 
     def pageTitle(form: Form[BankAccount])(implicit messages: Messages): String =
-      if (form.hasErrors) messages("enter-bank-details.error.title") else messages("enter-bank-details.title")
+      if (form.hasErrors) messages("enter-account-details.error.title") else messages("enter-account-details.title")
 
     def apply(bankDetails: Option[BankAccountInfo], isAgent: Boolean)(implicit messages: Messages): AccountPageModel = {
       val form = bankDetails
