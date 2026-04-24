@@ -28,7 +28,7 @@ import uk.gov.hmrc.selfassessmentrefundfrontend.util.AmountFormatter
 import javax.inject.{Inject, Singleton}
 
 @Singleton
-class CheckYourDetailsHelper @Inject() (i18n: I18nSupport) {
+class CheckDetailsHelper @Inject() (i18n: I18nSupport) {
   import i18n._
 
   def buildSummaryList(amount: Amount, accountType: AccountType, bankAccountInfo: BankAccountInfo)(implicit
@@ -46,7 +46,7 @@ class CheckYourDetailsHelper @Inject() (i18n: I18nSupport) {
       key = Messages("check-details.amount"),
       value = AmountFormatter.formatAmount(amount.repay),
       call =
-        uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.routes.CheckYourDetailsPageController.changeAmount
+        uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.routes.CheckDetailsPageController.changeAmount
     )
 
   private def accountTypeRow(accountType: AccountType)(implicit request: Request[_]): SummaryListRow =
@@ -56,7 +56,7 @@ class CheckYourDetailsHelper @Inject() (i18n: I18nSupport) {
         Messages("check-details.personal")
       } else Messages("check-details.business"),
       call =
-        uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.routes.CheckYourDetailsPageController.changeAccount
+        uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.routes.CheckDetailsPageController.changeAccount
     )
 
   private def accountDetailsRow(bankAccountInfo: BankAccountInfo)(implicit request: Request[_]): SummaryListRow =

@@ -22,7 +22,7 @@ import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney
 import uk.gov.hmrc.selfassessmentrefundfrontend.model.BankAccountInfo
 import uk.gov.hmrc.selfassessmentrefundfrontend.util.AmountFormatter
 
-trait CheckYourDetailsPageTesting extends PageContentTesting {
+trait CheckDetailsPageTesting extends PageContentTesting {
   def checkPageContent(
     accountType:      String,
     bankAccountInfo:  BankAccountInfo,
@@ -48,7 +48,7 @@ trait CheckYourDetailsPageTesting extends PageContentTesting {
       )
     )
 
-    doc.checkHasFormAction("Confirm and continue", routes.CheckYourDetailsPageController.confirm)
+    doc.checkHasFormAction("Confirm and continue", routes.CheckDetailsPageController.confirm)
   }
   def checkPageContentWelsh(
     accountType:      String,
@@ -75,7 +75,7 @@ trait CheckYourDetailsPageTesting extends PageContentTesting {
       )
     )
 
-    doc.checkHasFormAction("Cadarnhau ac yn eich blaen", routes.CheckYourDetailsPageController.confirm)
+    doc.checkHasFormAction("Cadarnhau ac yn eich blaen", routes.CheckDetailsPageController.confirm)
   }
 
 }

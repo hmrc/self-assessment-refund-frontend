@@ -22,7 +22,7 @@ import play.api.test.FakeRequest
 import play.api.test.Helpers.{defaultAwaitTimeout, redirectLocation, status}
 import support.ItSpec
 import support.stubbing.BarsVerifyStatusStub
-import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.CheckYourDetailsPageController
+import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.CheckDetailsPageController
 import uk.gov.hmrc.selfassessmentrefundfrontend.model.customer.Nino
 import uk.gov.hmrc.selfassessmentrefundfrontend.testdata.TdSupport.FakeRequestOps
 
@@ -30,7 +30,7 @@ import java.time.Instant
 
 class BarsLockoutActionRefinerSpec extends ItSpec {
 
-  private val controller: CheckYourDetailsPageController = app.injector.instanceOf[CheckYourDetailsPageController]
+  private val controller: CheckDetailsPageController = app.injector.instanceOf[CheckDetailsPageController]
 
   "BarsLockoutActionFilter" should {
     "redirect to the 'Check you answers page' when bars verify status does not have a lockout expiry set" in {

@@ -65,7 +65,7 @@ class AccountDetailsController @Inject() (
       val accountType     = getJourneyAccountType(request.journey)
       if (alreadyVerifiedBankDetails(accountType, bankAccountInfo, request.journey)) {
         // if bank details haven't changed don't call BARs and don't update journey
-        Future.successful(Redirect(refundRequestJourney.routes.CheckYourDetailsPageController.start))
+        Future.successful(Redirect(refundRequestJourney.routes.CheckDetailsPageController.start))
       } else {
         barsService
           .verifyBankDetails(bankAccountInfo, accountType)
@@ -99,7 +99,7 @@ class AccountDetailsController @Inject() (
       journeyConnector
         .setJourney(request.journey.id, request.journey.copy(bankAccountInfo = Some(bankAccountInfo)))
         .flatMap { _ =>
-          Future.successful(Redirect(refundRequestJourney.routes.CheckYourDetailsPageController.start))
+          Future.successful(Redirect(refundRequestJourney.routes.CheckDetailsPageController.start))
         }
 
     import BankAccountDetailsForm._

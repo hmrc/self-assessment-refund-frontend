@@ -64,7 +64,7 @@ class AccountTypeController @Inject() (
         request.session.get("self-assessment-refund.changing-account-from-cya-page").contains("redirectToCYA")
 
       val (call: Call, bankAccountInfo: Option[BankAccountInfo]) = if (isResponseTheSame && isFromCyaPage) {
-        (refundRequestJourney.routes.CheckYourDetailsPageController.start, request.journey.bankAccountInfo)
+        (refundRequestJourney.routes.CheckDetailsPageController.start, request.journey.bankAccountInfo)
       } else {
         (refundRequestJourney.routes.AccountDetailsController.getAccountDetails, None)
       }

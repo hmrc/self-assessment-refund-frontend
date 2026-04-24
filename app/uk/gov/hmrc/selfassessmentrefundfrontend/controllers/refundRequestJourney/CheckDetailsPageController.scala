@@ -23,19 +23,19 @@ import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.selfassessmentrefundfrontend.connectors.JourneyConnector
 import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.action.Actions
 import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney
-import uk.gov.hmrc.selfassessmentrefundfrontend.views.html.refundrequestjourney.CheckYourDetailsPage
-import uk.gov.hmrc.selfassessmentrefundfrontend.views.refundrequestjourney.CheckYourDetailsHelper
+import uk.gov.hmrc.selfassessmentrefundfrontend.views.html.refundrequestjourney.CheckDetailsPage
+import uk.gov.hmrc.selfassessmentrefundfrontend.views.refundrequestjourney.CheckDetailsHelper
 
 import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
-class CheckYourDetailsPageController @Inject() (
+class CheckDetailsPageController @Inject() (
   i18n:                   I18nSupport,
   mcc:                    MessagesControllerComponents,
-  checkYourDetailsPage:   CheckYourDetailsPage,
+  checkDetailsPage:       CheckDetailsPage,
   actions:                Actions,
   journeyConnector:       JourneyConnector,
-  checkYourAnswersHelper: CheckYourDetailsHelper
+  checkYourAnswersHelper: CheckDetailsHelper
 )(implicit ec: ExecutionContext)
     extends FrontendController(mcc) {
 
@@ -45,10 +45,10 @@ class CheckYourDetailsPageController @Inject() (
     val journey         = request.journey
     val amount          = journey.amount.getOrElse(sys.error("could not find amount"))
     val bankAccountInfo = journey.bankAccountInfo.getOrElse(sys.error("Could not find bank details"))
-    val html            = checkYourDetailsPage(
+    val html            = checkDetailsPage(
       summaryList = checkYourAnswersHelper
         .buildSummaryList(amount, journey.accountType.getOrElse(sys.error("account type not found")), bankAccountInfo),
-      formAction = routes.CheckYourDetailsPageController.confirm,
+      formAction = routes.CheckDetailsPageController.confirm,
       isAgent = request.isAgent
     )
 

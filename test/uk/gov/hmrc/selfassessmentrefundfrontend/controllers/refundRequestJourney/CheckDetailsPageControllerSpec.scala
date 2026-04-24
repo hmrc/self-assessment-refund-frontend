@@ -30,10 +30,10 @@ import uk.gov.hmrc.selfassessmentrefundfrontend.model._
 import uk.gov.hmrc.selfassessmentrefundfrontend.model.customer.Nino
 import uk.gov.hmrc.selfassessmentrefundfrontend.model.journey.{Journey, JourneyId, JourneyTypes}
 import uk.gov.hmrc.selfassessmentrefundfrontend.model.repayment.RequestNumber
-import uk.gov.hmrc.selfassessmentrefundfrontend.pages.CheckYourDetailsPageTesting
+import uk.gov.hmrc.selfassessmentrefundfrontend.pages.CheckDetailsPageTesting
 import uk.gov.hmrc.selfassessmentrefundfrontend.testdata.TdAll
-import uk.gov.hmrc.selfassessmentrefundfrontend.views.html.refundrequestjourney.CheckYourDetailsPage
-import uk.gov.hmrc.selfassessmentrefundfrontend.views.refundrequestjourney.CheckYourDetailsHelper
+import uk.gov.hmrc.selfassessmentrefundfrontend.views.html.refundrequestjourney.CheckDetailsPage
+import uk.gov.hmrc.selfassessmentrefundfrontend.views.refundrequestjourney.CheckDetailsHelper
 import java.time.OffsetDateTime
 
 import support.stubbing.AuthStub
@@ -42,10 +42,10 @@ import uk.gov.hmrc.selfassessmentrefundfrontend.testdata.TdSupport.FakeRequestOp
 
 import scala.concurrent.Future
 
-class CheckYourDetailsPageControllerSpec extends ItSpec with CheckYourDetailsPageTesting {
+class CheckDetailsPageControllerSpec extends ItSpec with CheckDetailsPageTesting {
 
-  val controller: CheckYourDetailsPageController = fakeApplication().injector.instanceOf[CheckYourDetailsPageController]
-  val cyaViewHelper: CheckYourDetailsHelper      = fakeApplication().injector.instanceOf[CheckYourDetailsHelper]
+  val controller: CheckDetailsPageController = fakeApplication().injector.instanceOf[CheckDetailsPageController]
+  val cyaViewHelper: CheckDetailsHelper      = fakeApplication().injector.instanceOf[CheckDetailsHelper]
 
   override def beforeEach(): Unit = {
     super.beforeEach()
@@ -99,7 +99,7 @@ class CheckYourDetailsPageControllerSpec extends ItSpec with CheckYourDetailsPag
             journey = "request"
           )
 
-          val page: CheckYourDetailsPage  = app.injector.instanceOf[CheckYourDetailsPage]
+          val page: CheckDetailsPage      = app.injector.instanceOf[CheckDetailsPage]
           val summaryList: SummaryList    = cyaViewHelper.buildSummaryList(
             Amount(Some(123), None, None, Some(123), Some(123)),
             AccountType.Personal,
@@ -107,7 +107,7 @@ class CheckYourDetailsPageControllerSpec extends ItSpec with CheckYourDetailsPag
           )
           val html: HtmlFormat.Appendable = page(
             summaryList,
-            routes.CheckYourDetailsPageController.confirm,
+            routes.CheckDetailsPageController.confirm,
             false
           )(request, app.injector.instanceOf[MessagesApi].preferred(request))
 
@@ -147,7 +147,7 @@ class CheckYourDetailsPageControllerSpec extends ItSpec with CheckYourDetailsPag
             journey = "request"
           )
 
-          val page: CheckYourDetailsPage  = app.injector.instanceOf[CheckYourDetailsPage]
+          val page: CheckDetailsPage      = app.injector.instanceOf[CheckDetailsPage]
           val summaryList: SummaryList    = cyaViewHelper.buildSummaryList(
             Amount(Some(123), None, None, Some(123), Some(123)),
             AccountType.Personal,
@@ -155,7 +155,7 @@ class CheckYourDetailsPageControllerSpec extends ItSpec with CheckYourDetailsPag
           )
           val html: HtmlFormat.Appendable = page(
             summaryList,
-            routes.CheckYourDetailsPageController.confirm,
+            routes.CheckDetailsPageController.confirm,
             true
           )(request, app.injector.instanceOf[MessagesApi].preferred(request))
 
@@ -198,7 +198,7 @@ class CheckYourDetailsPageControllerSpec extends ItSpec with CheckYourDetailsPag
             welsh = true
           )
 
-          val page: CheckYourDetailsPage  = app.injector.instanceOf[CheckYourDetailsPage]
+          val page: CheckDetailsPage      = app.injector.instanceOf[CheckDetailsPage]
           val summaryList: SummaryList    = cyaViewHelper.buildSummaryList(
             Amount(Some(123), None, None, Some(123), Some(123)),
             AccountType.Personal,
@@ -206,7 +206,7 @@ class CheckYourDetailsPageControllerSpec extends ItSpec with CheckYourDetailsPag
           )
           val html: HtmlFormat.Appendable = page(
             summaryList,
-            routes.CheckYourDetailsPageController.confirm,
+            routes.CheckDetailsPageController.confirm,
             false
           )(request, app.injector.instanceOf[MessagesApi].preferred(request))
 

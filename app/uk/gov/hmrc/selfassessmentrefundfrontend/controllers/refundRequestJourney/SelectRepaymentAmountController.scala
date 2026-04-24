@@ -207,7 +207,7 @@ class SelectRepaymentAmountController @Inject() (
   private def handleRedirect(redirectToCYA: Option[String])(implicit request: BarsVerifiedRequest[_]): Future[Result] =
     (request.journey.paymentMethod, redirectToCYA) match {
       case (_, Some("redirectToCYA")) =>
-        Future.successful(Redirect(controllers.refundRequestJourney.routes.CheckYourDetailsPageController.start))
+        Future.successful(Redirect(controllers.refundRequestJourney.routes.CheckDetailsPageController.start))
       case (Some(value), _)           => Future(handlePaymentMethod(value))
       case (None, _)                  =>
         journeyConnector.lastPaymentMethod(request.journey.id).map { method =>
