@@ -21,7 +21,7 @@ import org.apache.commons.lang3.StringUtils
 import play.api.data.Forms.{mapping, optional, text}
 import play.api.data.validation.{Constraint, Invalid, Valid, ValidationError}
 import play.api.data.{Form, FormError, Mapping}
-import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.BankAccountDetailsController.BankAccount
+import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.AccountDetailsController.BankAccount
 
 object BankAccountDetailsForm {
   val validAccountNameRegex = """^[a-zA-Z0-9!@#$%&() \-`\.\'+,\/\"]{1,60}$"""

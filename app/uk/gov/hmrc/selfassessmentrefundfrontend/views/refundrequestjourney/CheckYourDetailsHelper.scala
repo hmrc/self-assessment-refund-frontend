@@ -28,7 +28,7 @@ import uk.gov.hmrc.selfassessmentrefundfrontend.util.AmountFormatter
 import javax.inject.{Inject, Singleton}
 
 @Singleton
-class CheckYourAnswersHelper @Inject() (i18n: I18nSupport) {
+class CheckYourDetailsHelper @Inject() (i18n: I18nSupport) {
   import i18n._
 
   def buildSummaryList(amount: Amount, accountType: AccountType, bankAccountInfo: BankAccountInfo)(implicit
@@ -46,7 +46,7 @@ class CheckYourAnswersHelper @Inject() (i18n: I18nSupport) {
       key = Messages("check-details.amount"),
       value = AmountFormatter.formatAmount(amount.repay),
       call =
-        uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.routes.CheckYourAnswersPageController.changeAmount
+        uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.routes.CheckYourDetailsPageController.changeAmount
     )
 
   private def accountTypeRow(accountType: AccountType)(implicit request: Request[_]): SummaryListRow =
@@ -56,7 +56,7 @@ class CheckYourAnswersHelper @Inject() (i18n: I18nSupport) {
         Messages("check-details.personal")
       } else Messages("check-details.business"),
       call =
-        uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.routes.CheckYourAnswersPageController.changeAccount
+        uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.routes.CheckYourDetailsPageController.changeAccount
     )
 
   private def accountDetailsRow(bankAccountInfo: BankAccountInfo)(implicit request: Request[_]): SummaryListRow =
@@ -64,7 +64,7 @@ class CheckYourAnswersHelper @Inject() (i18n: I18nSupport) {
       key = Messages("check-details.bank-account-details"),
       value = bankAccountInfoDisplayFormat(bankAccountInfo),
       call =
-        uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.routes.BankAccountDetailsController.getAccountDetails
+        uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.routes.AccountDetailsController.getAccountDetails
     )
 
   private def buildSummaryListRow(key: String, value: String, call: Call)(implicit

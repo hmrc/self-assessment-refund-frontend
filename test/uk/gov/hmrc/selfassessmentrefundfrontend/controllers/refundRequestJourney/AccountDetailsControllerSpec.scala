@@ -29,14 +29,14 @@ import uk.gov.hmrc.http.{SessionId, SessionKeys, UpstreamErrorResponse}
 import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney
 import uk.gov.hmrc.selfassessmentrefundfrontend.model.customer.Nino
 import uk.gov.hmrc.selfassessmentrefundfrontend.model.journey.JourneyId
-import uk.gov.hmrc.selfassessmentrefundfrontend.pages.BankAccountDetailsPageTesting
+import uk.gov.hmrc.selfassessmentrefundfrontend.pages.AccountDetailsPageTesting
 import uk.gov.hmrc.selfassessmentrefundfrontend.testdata.TdAll
 
 import scala.concurrent.Future
 
-class BankAccountDetailsControllerSpec extends ItSpec with BankAccountDetailsPageTesting {
+class AccountDetailsControllerSpec extends ItSpec with AccountDetailsPageTesting {
 
-  val controller: BankAccountDetailsController = fakeApplication().injector.instanceOf[BankAccountDetailsController]
+  val controller: AccountDetailsController = fakeApplication().injector.instanceOf[AccountDetailsController]
 
   trait JourneyFixture {
     val sessionId: SessionId = SessionId(TdAll.sessionId)
@@ -59,7 +59,7 @@ class BankAccountDetailsControllerSpec extends ItSpec with BankAccountDetailsPag
     stubBarsVerifyStatus() // not locked out
 
     val request: FakeRequest[AnyContentAsFormUrlEncoded] =
-      FakeRequest(Helpers.POST, refundRequestJourney.routes.BankAccountDetailsController.postAccountDetails.path())
+      FakeRequest(Helpers.POST, refundRequestJourney.routes.AccountDetailsController.postAccountDetails.path())
         .withSession(SessionKeys.sessionId -> sessionId.value)
         .withFormUrlEncodedBody("accountName" -> "D Jones", "sortCode" -> "12-23-34", "accountNumber" -> "12345678")
 
@@ -70,7 +70,7 @@ class BankAccountDetailsControllerSpec extends ItSpec with BankAccountDetailsPag
     stubBarsVerifyStatus() // not locked out
 
     val request: FakeRequest[AnyContentAsFormUrlEncoded] =
-      FakeRequest(Helpers.POST, refundRequestJourney.routes.BankAccountDetailsController.postAccountDetails.path())
+      FakeRequest(Helpers.POST, refundRequestJourney.routes.AccountDetailsController.postAccountDetails.path())
         .withSession(SessionKeys.sessionId -> sessionId.value)
         .withFormUrlEncodedBody("accountName" -> "D Jones", "sortCode" -> "12-23-34", "accountNumber" -> "12345678")
         .withCookies(Cookie("PLAY_LANG", "cy"))
@@ -141,7 +141,7 @@ class BankAccountDetailsControllerSpec extends ItSpec with BankAccountDetailsPag
       "return the next page if bank details have not changed and are already verified" in new AccountFormFixture {
         // This version of request with account details matches cache stub details
         override val request: FakeRequest[AnyContentAsFormUrlEncoded] =
-          FakeRequest(Helpers.POST, refundRequestJourney.routes.BankAccountDetailsController.postAccountDetails.path())
+          FakeRequest(Helpers.POST, refundRequestJourney.routes.AccountDetailsController.postAccountDetails.path())
             .withSession(SessionKeys.sessionId -> sessionId.value)
             .withFormUrlEncodedBody("accountName" -> "D Jones", "sortCode" -> "122334", "accountNumber" -> "12345678")
 
@@ -290,7 +290,7 @@ class BankAccountDetailsControllerSpec extends ItSpec with BankAccountDetailsPag
 
                 val request: FakeRequest[AnyContentAsFormUrlEncoded] = FakeRequest(
                   Helpers.POST,
-                  refundRequestJourney.routes.BankAccountDetailsController.postAccountDetails.path()
+                  refundRequestJourney.routes.AccountDetailsController.postAccountDetails.path()
                 )
                   .withSession(SessionKeys.sessionId -> sessionId.value)
                   .withFormUrlEncodedBody(
@@ -526,8 +526,8 @@ class BankAccountDetailsControllerSpec extends ItSpec with BankAccountDetailsPag
           BarsStub.ValidateStub.success()
           BarsStub.VerifyBusinessStub.stubForPostWith(VerifyJson.thirdPartyError(accountExists, nameMatches))
 
-          val controllerWithAuditing: BankAccountDetailsController =
-            fakeApplicationWithAuditing().injector.instanceOf[BankAccountDetailsController]
+          val controllerWithAuditing: AccountDetailsController =
+            fakeApplicationWithAuditing().injector.instanceOf[AccountDetailsController]
 
           val action: Action[AnyContent] = controllerWithAuditing.postAccountDetails()
           val response: Future[Result]   = call(action, request, request.body)
@@ -553,7 +553,7 @@ class BankAccountDetailsControllerSpec extends ItSpec with BankAccountDetailsPag
         stubTwoBarsVerifyStatusFailedSecondWithLockout() // So that the first check as part of authenticated journey action is not a lock out, but the second, after the new verify check is a lockout
 
         val request: FakeRequest[AnyContentAsFormUrlEncoded] =
-          FakeRequest(Helpers.POST, refundRequestJourney.routes.BankAccountDetailsController.postAccountDetails.path())
+          FakeRequest(Helpers.POST, refundRequestJourney.routes.AccountDetailsController.postAccountDetails.path())
             .withSession(SessionKeys.sessionId -> sessionId.value)
             .withFormUrlEncodedBody("accountName" -> "D Jones", "sortCode" -> "12-23-34", "accountNumber" -> "12345678")
 
@@ -583,7 +583,7 @@ class BankAccountDetailsControllerSpec extends ItSpec with BankAccountDetailsPag
 
       "stay on page and display validation error if form filled out incorrectly" in new JourneyFixture {
         val request: FakeRequest[AnyContentAsFormUrlEncoded] =
-          FakeRequest(Helpers.POST, refundRequestJourney.routes.BankAccountDetailsController.postAccountDetails.path())
+          FakeRequest(Helpers.POST, refundRequestJourney.routes.AccountDetailsController.postAccountDetails.path())
             .withSession(SessionKeys.sessionId -> sessionId.value)
             .withFormUrlEncodedBody()
 

@@ -17,7 +17,7 @@
 package uk.gov.hmrc.selfassessmentrefundfrontend.testdata
 
 import uk.gov.hmrc.selfassessmentrefundfrontend.bars.model.response.{BarsAssessmentType, BarsErrorResponse, BarsValidateResponse, BarsVerifyResponse}
-import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.BankAccountDetailsController.BankAccount
+import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.AccountDetailsController.BankAccount
 
 import java.time.Instant
 

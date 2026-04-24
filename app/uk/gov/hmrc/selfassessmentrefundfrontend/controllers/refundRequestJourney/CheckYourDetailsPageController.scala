@@ -23,19 +23,19 @@ import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.selfassessmentrefundfrontend.connectors.JourneyConnector
 import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.action.Actions
 import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney
-import uk.gov.hmrc.selfassessmentrefundfrontend.views.html.refundrequestjourney.CheckYourAnswersPage
-import uk.gov.hmrc.selfassessmentrefundfrontend.views.refundrequestjourney.CheckYourAnswersHelper
+import uk.gov.hmrc.selfassessmentrefundfrontend.views.html.refundrequestjourney.CheckYourDetailsPage
+import uk.gov.hmrc.selfassessmentrefundfrontend.views.refundrequestjourney.CheckYourDetailsHelper
 
 import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
-class CheckYourAnswersPageController @Inject() (
+class CheckYourDetailsPageController @Inject() (
   i18n:                   I18nSupport,
   mcc:                    MessagesControllerComponents,
-  checkYourAnswersPage:   CheckYourAnswersPage,
+  checkYourDetailsPage:   CheckYourDetailsPage,
   actions:                Actions,
   journeyConnector:       JourneyConnector,
-  checkYourAnswersHelper: CheckYourAnswersHelper
+  checkYourAnswersHelper: CheckYourDetailsHelper
 )(implicit ec: ExecutionContext)
     extends FrontendController(mcc) {
 
@@ -45,10 +45,10 @@ class CheckYourAnswersPageController @Inject() (
     val journey         = request.journey
     val amount          = journey.amount.getOrElse(sys.error("could not find amount"))
     val bankAccountInfo = journey.bankAccountInfo.getOrElse(sys.error("Could not find bank details"))
-    val html            = checkYourAnswersPage(
+    val html            = checkYourDetailsPage(
       summaryList = checkYourAnswersHelper
         .buildSummaryList(amount, journey.accountType.getOrElse(sys.error("account type not found")), bankAccountInfo),
-      formAction = routes.CheckYourAnswersPageController.confirm,
+      formAction = routes.CheckYourDetailsPageController.confirm,
       isAgent = request.isAgent
     )
 

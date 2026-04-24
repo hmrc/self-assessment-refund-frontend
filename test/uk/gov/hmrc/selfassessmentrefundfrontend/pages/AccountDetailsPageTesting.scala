@@ -22,7 +22,7 @@ import support.PageContentTesting
 
 import scala.jdk.CollectionConverters.IteratorHasAsScala
 
-trait BankAccountDetailsPageTesting extends PageContentTesting {
+trait AccountDetailsPageTesting extends PageContentTesting {
   def checkPageContent(doc: Document): Unit = {
     val fields = doc.select(".govuk-form-group").select(".form-field-group").iterator().asScala.toList
 
@@ -53,7 +53,7 @@ trait BankAccountDetailsPageTesting extends PageContentTesting {
     )
 
     doc.checkHasFormActionAsContinueButton(
-      uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.routes.BankAccountDetailsController.postAccountDetails
+      uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.routes.AccountDetailsController.postAccountDetails
     )
 
   }
@@ -87,7 +87,7 @@ trait BankAccountDetailsPageTesting extends PageContentTesting {
     )
 
     doc.checkHasFormActionAsContinueButton(
-      uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.routes.BankAccountDetailsController.postAccountDetails,
+      uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.routes.AccountDetailsController.postAccountDetails,
       welsh = true
     )
 

@@ -17,7 +17,7 @@
 package uk.gov.hmrc.selfassessmentrefundfrontend.model
 
 import play.api.libs.json.{Json, OFormat}
-import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.BankAccountDetailsController.BankAccount
+import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.AccountDetailsController.BankAccount
 
 final case class BankAccountInfo(
   name:          String,
