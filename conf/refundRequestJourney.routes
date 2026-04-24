@@ -14,10 +14,10 @@ POST        /we-need-your-bank-details               uk.gov.hmrc.selfassessmentr
 GET         /account-type                            uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.AccountTypeController.getAccountType
 POST        /account-type                            uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.AccountTypeController.postAccountType
 
-GET         /check-your-answers                      uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.CheckYourAnswersPageController.start
-POST        /check-your-answers-confirm              uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.CheckYourAnswersPageController.confirm
-GET         /check-your-answers-change-amount        uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.CheckYourAnswersPageController.changeAmount
-GET         /check-your-answers-change-account       uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.CheckYourAnswersPageController.changeAccount
+GET         /check-details                           uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.CheckYourAnswersPageController.start
+POST        /check-details-confirm              uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.CheckYourAnswersPageController.confirm
+GET         /check-details-change-amount        uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.CheckYourAnswersPageController.changeAmount
+GET         /check-details-change-account       uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.CheckYourAnswersPageController.changeAccount
 
 GET         /enter-account-details                   uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.BankAccountDetailsController.getAccountDetails
 POST        /enter-account-details                   uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.BankAccountDetailsController.postAccountDetails

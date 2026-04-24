@@ -41,8 +41,8 @@ trait CheckYourAnswersPageTesting extends PageContentTesting {
       ),
       maybeLinkTextHrefPairs = Some(
         List(
-          ("Change", "/request-a-self-assessment-refund/check-your-answers-change-amount"),
-          ("Change", "/request-a-self-assessment-refund/check-your-answers-change-account"),
+          ("Change", "/request-a-self-assessment-refund/check-details-change-amount"),
+          ("Change", "/request-a-self-assessment-refund/check-details-change-account"),
           ("Change", "/request-a-self-assessment-refund/enter-account-details")
         )
       )
@@ -68,8 +68,8 @@ trait CheckYourAnswersPageTesting extends PageContentTesting {
       ),
       maybeLinkTextHrefPairs = Some(
         List(
-          ("Newid", "/request-a-self-assessment-refund/check-your-answers-change-amount"),
-          ("Newid", "/request-a-self-assessment-refund/check-your-answers-change-account"),
+          ("Newid", "/request-a-self-assessment-refund/check-details-change-amount"),
+          ("Newid", "/request-a-self-assessment-refund/check-details-change-account"),
           ("Newid", "/request-a-self-assessment-refund/enter-account-details")
         )
       )

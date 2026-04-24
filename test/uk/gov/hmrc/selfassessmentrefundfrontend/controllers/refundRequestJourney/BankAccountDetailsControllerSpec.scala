@@ -152,7 +152,7 @@ class BankAccountDetailsControllerSpec extends ItSpec with BankAccountDetailsPag
         val response: Future[Result]   = call(action, request, request.body)
 
         status(response) shouldBe Status.SEE_OTHER
-        redirectLocation(response) shouldBe Some("/request-a-self-assessment-refund/check-your-answers")
+        redirectLocation(response) shouldBe Some("/request-a-self-assessment-refund/check-details")
       }
       "return the next page on successful account validation" when {
         "it is a business account" in new AccountFormFixture {
@@ -164,7 +164,7 @@ class BankAccountDetailsControllerSpec extends ItSpec with BankAccountDetailsPag
           val response: Future[Result]   = call(action, request, request.body)
 
           status(response) shouldBe Status.SEE_OTHER
-          redirectLocation(response) shouldBe Some("/request-a-self-assessment-refund/check-your-answers")
+          redirectLocation(response) shouldBe Some("/request-a-self-assessment-refund/check-details")
         }
         "it is a personal account" in new AccountFormFixture {
           stubBackendPersonalJourney(Some(nino))
@@ -175,7 +175,7 @@ class BankAccountDetailsControllerSpec extends ItSpec with BankAccountDetailsPag
           val response: Future[Result]   = call(action, request, request.body)
 
           status(response) shouldBe Status.SEE_OTHER
-          redirectLocation(response) shouldBe Some("/request-a-self-assessment-refund/check-your-answers")
+          redirectLocation(response) shouldBe Some("/request-a-self-assessment-refund/check-details")
         }
       }
 

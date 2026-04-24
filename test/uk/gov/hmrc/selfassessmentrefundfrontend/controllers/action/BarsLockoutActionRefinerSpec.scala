@@ -40,7 +40,7 @@ class BarsLockoutActionRefinerSpec extends ItSpec {
       BarsVerifyStatusStub.statusUnlocked()
 
       val fakeRequest: FakeRequest[AnyContentAsEmpty.type] =
-        FakeRequest("GET", "/request-a-self-assessment-refund/check-your-answers")
+        FakeRequest("GET", "/request-a-self-assessment-refund/check-details")
           .withAuthToken()
           .withSessionId()
 
@@ -56,7 +56,7 @@ class BarsLockoutActionRefinerSpec extends ItSpec {
       BarsVerifyStatusStub.statusLocked(expiry)
 
       val fakeRequest: FakeRequest[AnyContentAsEmpty.type] =
-        FakeRequest("GET", "/request-a-self-assessment-refund/check-your-answers")
+        FakeRequest("GET", "/request-a-self-assessment-refund/check-details")
           .withAuthToken()
           .withSessionId()
 

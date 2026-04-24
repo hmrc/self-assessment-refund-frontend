@@ -174,7 +174,7 @@ class AccountTypeControllerSpec extends ItSpec with AccountTypePageTesting {
             stubPOSTJourney()
             val response: Future[Result] = call(action, request, request.body)
             status(response) shouldBe Status.SEE_OTHER
-            redirectLocation(response) shouldBe Some("/request-a-self-assessment-refund/check-your-answers")
+            redirectLocation(response) shouldBe Some("/request-a-self-assessment-refund/check-details")
 
             verifyUpdateJourneyCalled(
               journey(

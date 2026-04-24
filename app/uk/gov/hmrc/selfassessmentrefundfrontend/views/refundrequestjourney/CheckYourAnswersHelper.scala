@@ -43,7 +43,7 @@ class CheckYourAnswersHelper @Inject() (i18n: I18nSupport) {
 
   private def amountRow(amount: Amount)(implicit request: Request[_]): SummaryListRow =
     buildSummaryListRow(
-      key = Messages("check-your-answers.amount"),
+      key = Messages("check-details.amount"),
       value = AmountFormatter.formatAmount(amount.repay),
       call =
         uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.routes.CheckYourAnswersPageController.changeAmount
@@ -51,17 +51,17 @@ class CheckYourAnswersHelper @Inject() (i18n: I18nSupport) {
 
   private def accountTypeRow(accountType: AccountType)(implicit request: Request[_]): SummaryListRow =
     buildSummaryListRow(
-      key = Messages("check-your-answers.bank-account-type"),
+      key = Messages("check-details.bank-account-type"),
       value = if (accountType.name === "Personal") {
-        Messages("check-your-answers.personal")
-      } else Messages("check-your-answers.business"),
+        Messages("check-details.personal")
+      } else Messages("check-details.business"),
       call =
         uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.routes.CheckYourAnswersPageController.changeAccount
     )
 
   private def accountDetailsRow(bankAccountInfo: BankAccountInfo)(implicit request: Request[_]): SummaryListRow =
     buildSummaryListRow(
-      key = Messages("check-your-answers.bank-account-details"),
+      key = Messages("check-details.bank-account-details"),
       value = bankAccountInfoDisplayFormat(bankAccountInfo),
       call =
         uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.routes.BankAccountDetailsController.getAccountDetails
@@ -77,7 +77,7 @@ class CheckYourAnswersHelper @Inject() (i18n: I18nSupport) {
         Seq(
           ActionItem(
             href = s"${call.url}",
-            content = Text(Messages("check-your-answers.change")),
+            content = Text(Messages("check-details.change")),
             visuallyHiddenText = Some(key)
           )
         )

@@ -90,7 +90,7 @@ class CheckYourAnswersPageControllerSpec extends ItSpec with CheckYourAnswersPag
           val response: Future[Result] = controller.start(request)
 
           response.checkPageIsDisplayed(
-            expectedHeading = "Check your answers",
+            expectedHeading = "Check your details",
             expectedServiceLink =
               "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
             contentChecks =
@@ -138,7 +138,7 @@ class CheckYourAnswersPageControllerSpec extends ItSpec with CheckYourAnswersPag
           val response: Future[Result] = controller.start(request)
 
           response.checkPageIsDisplayed(
-            expectedHeading = "Check your answers",
+            expectedHeading = "Check your details",
             expectedServiceLink =
               "http://localhost:9081/report-quarterly/income-and-expenses/view/agents/money-in-your-account",
             contentChecks =
@@ -185,7 +185,7 @@ class CheckYourAnswersPageControllerSpec extends ItSpec with CheckYourAnswersPag
           val response: Future[Result] = controller.start(request)
 
           response.checkPageIsDisplayed(
-            expectedHeading = "Gwiriwch eich atebion",
+            expectedHeading = "Gwiriwch eich manylion",
             expectedServiceLink =
               "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
             contentChecks = checkPageContentWelsh(

@@ -49,7 +49,7 @@ accountType.personal = Personal bank account
 accountType.business = Business bank account
 accountType.summaryText = There is a problem
 accountType.submit = Continue
-accountType.error.required = Select a type of account
+accountType.error.required = Select what type of account details you are providing
 
 enter-bank-details.title = Enter your bank or building society account details
 enter-bank-details.error.title = Error: Enter your bank or building society account details
@@ -85,14 +85,14 @@ enter-bank-details.bars.sortcode.does.not.support.direct.credit = You have enter
 enter-bank-details.bars.account.name.no.match = Enter the name on the account as it appears on bank statements
 enter-bank-details.bars.account.roll.number.required = Building society roll number must be entered if you have one. It may also be called a reference code
 
-check-your-answers.title = Check your answers
-check-your-answers.amount = Refund amount
-check-your-answers.bank-account-type = Bank account type
-check-your-answers.personal = Personal
-check-your-answers.business = Business
-check-your-answers.bank-account-details = Bank account details
-check-your-answers.confirm-continue = Confirm and continue
-check-your-answers.change = Change
+check-details.title = Check your details
+check-details.amount = Refund amount
+check-details.bank-account-type = Bank account type
+check-details.personal = Personal
+check-details.business = Business
+check-details.bank-account-details = Bank account details
+check-details.confirm-continue = Confirm and continue
+check-details.change = Change
 
 you-need-to-sign-in-again.title = For your security, you need to sign in again
 you-need-to-sign-in-again.message.1 = You need to sign in again with the same details you used before.

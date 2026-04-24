@@ -49,7 +49,7 @@ accountType.personal = Cyfrif banc personol
 accountType.business = Cyfrif banc busnes
 accountType.summaryText = Mae problem wedi codi
 accountType.submit = Yn eich blaen
-accountType.error.required = Dewiswch y math o gyfrif
+accountType.error.required = Dewiswch pa fath o gyfrif yr ydych yn ei ddarparu
 
 enter-bank-details.title = Nodwch fanylion eich cyfrif banc neu gyfrif cymdeithas adeiladu
 enter-bank-details.error.title = Gwall: Nodwch fanylion eich cyfrif banc neu gyfrif cymdeithas adeiladu
@@ -85,14 +85,14 @@ enter-bank-details.bars.sortcode.does.not.support.direct.credit = Rydych wedi no
 enter-bank-details.bars.account.name.no.match = Nodwch yr enw ar y cyfrif fel y mae’n ymddangos ar gyfriflenni banc
 enter-bank-details.bars.account.roll.number.required = Mae’n rhaid nodi rhif rôl y gymdeithas adeiladu, os oes gennych un. Efallai y cyfeirir at hyn hefyd fel ‘cyfeirnod’
 
-check-your-answers.title = Gwiriwch eich atebion
-check-your-answers.amount = Swm yr ad-daliad
-check-your-answers.bank-account-type = Math o gyfrif banc
-check-your-answers.personal = Personol
-check-your-answers.business = Busnes
-check-your-answers.bank-account-details = Manylion cyfrif banc
-check-your-answers.confirm-continue = Cadarnhau ac yn eich blaen
-check-your-answers.change = Newid
+check-details.title = Gwiriwch eich manylion
+check-details.amount = Swm yr ad-daliad
+check-details.bank-account-type = Math o gyfrif banc
+check-details.personal = Personol
+check-details.business = Busnes
+check-details.bank-account-details = Manylion cyfrif banc
+check-details.confirm-continue = Cadarnhau ac yn eich blaen
+check-details.change = Newid
 
 you-need-to-sign-in-again.title = Er eich diogelwch, mae angen i chi fewngofnodi eto
 you-need-to-sign-in-again.message.1 = Mae angen i chi fewngofnodi eto gan ddefnyddio’r un manylion a ddefnyddiwyd gennych o’r blaen.
