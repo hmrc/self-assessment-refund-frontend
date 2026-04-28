@@ -87,7 +87,7 @@ enter-account-details.bars.account.roll.number.required = Mae’n rhaid nodi rhi
 
 check-details.title = Gwiriwch eich manylion
 check-details.amount = Swm yr ad-daliad
-check-details.bank-account-type = Math o gyfrif banc
+check-details.bank-account-type = Math o gyfrif
 check-details.personal = Personol
 check-details.business = Busnes
 check-details.bank-account-details = Manylion cyfrif banc

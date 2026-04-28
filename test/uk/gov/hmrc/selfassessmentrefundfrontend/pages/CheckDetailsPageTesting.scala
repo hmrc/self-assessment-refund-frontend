@@ -58,7 +58,7 @@ trait CheckDetailsPageTesting extends PageContentTesting {
     doc.checkHasSummaryList(
       keyValuePairs = List(
         ("Swm yr ad-daliad", AmountFormatter.formatAmount(amountToBeRepaid)),
-        ("Math o gyfrif banc", accountType),
+        ("Math o gyfrif", accountType),
         ("Yr enw sydd ar y cyfrif", bankAccountInfo.name),
         ("Cod didoli", bankAccountInfo.sortCode.displayFormat),
         ("Rhif y cyfrif", bankAccountInfo.accountNumber.value)
