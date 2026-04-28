@@ -34,16 +34,14 @@ trait CheckDetailsPageTesting extends PageContentTesting {
       keyValuePairs = List(
         ("Refund amount", AmountFormatter.formatAmount(amountToBeRepaid)),
         ("Bank account type", accountType),
-        (
-          "Bank account details",
-          s"${bankAccountInfo.name} ${bankAccountInfo.sortCode.displayFormat} ${bankAccountInfo.accountNumber.value}"
-        )
+        ("Name on the account", bankAccountInfo.name),
+        ("Sort code", bankAccountInfo.sortCode.displayFormat),
+        ("Account number", bankAccountInfo.accountNumber.value)
       ),
       maybeLinkTextHrefPairs = Some(
         List(
           ("Change", "/request-a-self-assessment-refund/check-details-change-amount"),
-          ("Change", "/request-a-self-assessment-refund/check-details-change-account"),
-          ("Change", "/request-a-self-assessment-refund/enter-account-details")
+          ("Change", "/request-a-self-assessment-refund/check-details-change-account")
         )
       )
     )
@@ -61,16 +59,14 @@ trait CheckDetailsPageTesting extends PageContentTesting {
       keyValuePairs = List(
         ("Swm yr ad-daliad", AmountFormatter.formatAmount(amountToBeRepaid)),
         ("Math o gyfrif banc", accountType),
-        (
-          "Manylion cyfrif banc",
-          s"${bankAccountInfo.name} ${bankAccountInfo.sortCode.displayFormat} ${bankAccountInfo.accountNumber.value}"
-        )
+        ("Yr enw sydd ar y cyfrif", bankAccountInfo.name),
+        ("Cod didoli", bankAccountInfo.sortCode.displayFormat),
+        ("Rhif y cyfrif", bankAccountInfo.accountNumber.value)
       ),
       maybeLinkTextHrefPairs = Some(
         List(
           ("Newid", "/request-a-self-assessment-refund/check-details-change-amount"),
-          ("Newid", "/request-a-self-assessment-refund/check-details-change-account"),
-          ("Newid", "/request-a-self-assessment-refund/enter-account-details")
+          ("Newid", "/request-a-self-assessment-refund/check-details-change-account")
         )
       )
     )

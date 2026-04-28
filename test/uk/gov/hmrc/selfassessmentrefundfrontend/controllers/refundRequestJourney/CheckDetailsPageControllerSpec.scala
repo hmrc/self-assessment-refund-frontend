@@ -105,8 +105,12 @@ class CheckDetailsPageControllerSpec extends ItSpec with CheckDetailsPageTesting
             AccountType.Personal,
             BankAccountInfo("name", SortCode("111111"), AccountNumber("12345678"))
           )
+          val amountList: SummaryList     = cyaViewHelper.amountRow(
+            Amount(Some(123), None, None, Some(123), Some(123))
+          )
           val html: HtmlFormat.Appendable = page(
             summaryList,
+            amountList,
             routes.CheckDetailsPageController.confirm,
             false
           )(request, app.injector.instanceOf[MessagesApi].preferred(request))
@@ -153,8 +157,12 @@ class CheckDetailsPageControllerSpec extends ItSpec with CheckDetailsPageTesting
             AccountType.Personal,
             BankAccountInfo("name", SortCode("111111"), AccountNumber("12345678"))
           )
+          val amountList: SummaryList     = cyaViewHelper.amountRow(
+            Amount(Some(123), None, None, Some(123), Some(123))
+          )
           val html: HtmlFormat.Appendable = page(
             summaryList,
+            amountList,
             routes.CheckDetailsPageController.confirm,
             true
           )(request, app.injector.instanceOf[MessagesApi].preferred(request))
@@ -198,14 +206,19 @@ class CheckDetailsPageControllerSpec extends ItSpec with CheckDetailsPageTesting
             welsh = true
           )
 
-          val page: CheckDetailsPage      = app.injector.instanceOf[CheckDetailsPage]
-          val summaryList: SummaryList    = cyaViewHelper.buildSummaryList(
+          val page: CheckDetailsPage   = app.injector.instanceOf[CheckDetailsPage]
+          val summaryList: SummaryList = cyaViewHelper.buildSummaryList(
             Amount(Some(123), None, None, Some(123), Some(123)),
             AccountType.Personal,
             BankAccountInfo("name", SortCode("111111"), AccountNumber("12345678"))
           )
+          val amountList: SummaryList  = cyaViewHelper.amountRow(
+            Amount(Some(123), None, None, Some(123), Some(123))
+          )
+
           val html: HtmlFormat.Appendable = page(
             summaryList,
+            amountList,
             routes.CheckDetailsPageController.confirm,
             false
           )(request, app.injector.instanceOf[MessagesApi].preferred(request))

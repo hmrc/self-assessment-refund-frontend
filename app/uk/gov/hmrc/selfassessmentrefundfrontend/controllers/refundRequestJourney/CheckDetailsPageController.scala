@@ -16,9 +16,8 @@
 
 package uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney
 
-import javax.inject.{Inject, Singleton}
 import play.api.i18n.I18nSupport
-import play.api.mvc._
+import play.api.mvc.*
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.selfassessmentrefundfrontend.connectors.JourneyConnector
 import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.action.Actions
@@ -26,6 +25,7 @@ import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney
 import uk.gov.hmrc.selfassessmentrefundfrontend.views.html.refundrequestjourney.CheckDetailsPage
 import uk.gov.hmrc.selfassessmentrefundfrontend.views.refundrequestjourney.CheckDetailsHelper
 
+import javax.inject.{Inject, Singleton}
 import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
@@ -39,7 +39,7 @@ class CheckDetailsPageController @Inject() (
 )(implicit ec: ExecutionContext)
     extends FrontendController(mcc) {
 
-  import i18n._
+  import i18n.*
 
   val start: Action[AnyContent] = actions.authenticatedRefundJourneyAction.async { implicit request =>
     val journey         = request.journey
@@ -48,6 +48,7 @@ class CheckDetailsPageController @Inject() (
     val html            = checkDetailsPage(
       summaryList = checkYourAnswersHelper
         .buildSummaryList(amount, journey.accountType.getOrElse(sys.error("account type not found")), bankAccountInfo),
+      amountSummaryList = checkYourAnswersHelper.amountRow(amount),
       formAction = routes.CheckDetailsPageController.confirm,
       isAgent = request.isAgent
     )

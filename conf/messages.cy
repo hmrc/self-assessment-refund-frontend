@@ -93,6 +93,11 @@ check-details.business = Busnes
 check-details.bank-account-details = Manylion cyfrif banc
 check-details.confirm-continue = Cadarnhau ac yn eich blaen
 check-details.change = Newid
+check-details.change.bank.details = Newid y manylion banc
+check-details.account.name = Yr enw sydd ar y cyfrif
+check-details.account.sortCode = Cod didoli
+check-details.account.number = Rhif y cyfrif
+check-details.account.building.society.roll.number = Rhif rôl y gymdeithas adeiladu
 
 you-need-to-sign-in-again.title = Er eich diogelwch, mae angen i chi fewngofnodi eto
 you-need-to-sign-in-again.message.1 = Mae angen i chi fewngofnodi eto gan ddefnyddio’r un manylion a ddefnyddiwyd gennych o’r blaen.

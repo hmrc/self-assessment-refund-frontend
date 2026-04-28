@@ -93,6 +93,12 @@ check-details.business = Business
 check-details.bank-account-details = Bank account details
 check-details.confirm-continue = Confirm and continue
 check-details.change = Change
+check-details.change.bank.details = Change bank details
+check-details.account.name = Name on the account
+check-details.account.sortCode = Sort code
+check-details.account.number = Account number
+check-details.account.building.society.roll.number = Building society roll number
+
 
 you-need-to-sign-in-again.title = For your security, you need to sign in again
 you-need-to-sign-in-again.message.1 = You need to sign in again with the same details you used before.
