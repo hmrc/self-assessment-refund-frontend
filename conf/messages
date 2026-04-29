@@ -87,7 +87,7 @@ enter-account-details.bars.account.roll.number.required = Building society roll 
 
 check-details.title = Check your details
 check-details.amount = Refund amount
-check-details.bank-account-type = Bank account type
+check-details.bank-account-type = Account type
 check-details.personal = Personal
 check-details.business = Business
 check-details.bank-account-details = Bank account details
