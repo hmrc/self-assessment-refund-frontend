@@ -41,9 +41,9 @@ trait AccountTypePageTesting extends PageContentTesting {
   def checkPageWithFormError(doc: Document): Unit = {
     checkPageContent(doc)
 
-    doc.checkHasErrorSummaryWith("Select a type of account", "#accountType")
+    doc.checkHasErrorSummaryWith("Select what type of account details you are providing", "#accountType")
 
-    doc.checkHasErrorMessageAgainst("accountType", "Select a type of account")
+    doc.checkHasErrorMessageAgainst("accountType", "Select what type of account details you are providing")
   }
   def checkPageContentWelsh(doc: Document): Unit  = {
 
@@ -64,9 +64,9 @@ trait AccountTypePageTesting extends PageContentTesting {
   def checkPageWithFormErrorWelsh(doc: Document): Unit = {
     checkPageContentWelsh(doc)
 
-    doc.checkHasErrorSummaryWithWelsh("Dewiswch y math o gyfrif", "#accountType")
+    doc.checkHasErrorSummaryWithWelsh("Dewiswch pa fath o gyfrif yr ydych yn ei ddarparu", "#accountType")
 
-    doc.checkHasErrorMessageAgainst("accountType", "Dewiswch y math o gyfrif", welsh = true)
+    doc.checkHasErrorMessageAgainst("accountType", "Dewiswch pa fath o gyfrif yr ydych yn ei ddarparu", welsh = true)
   }
 
 }

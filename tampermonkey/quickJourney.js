@@ -184,7 +184,7 @@ function setupConditionalControls(panel) {
         }));
     }
 
-    if (currentPageIs('/request-a-self-assessment-refund/type-of-bank-account')) {
+    if (currentPageIs('/request-a-self-assessment-refund/account-type')) {
         overrideQuickSubmitText(panel, 'Personal Account');
 
         panel.appendChild(document.createElement('br'));
@@ -341,7 +341,7 @@ const weNeedToGetYourBankDetails = () => {
 };
 
 const accountDetailsType = () => {
-    if (currentPageIs('/request-a-self-assessment-refund/type-of-bank-account')) {
+    if (currentPageIs('/request-a-self-assessment-refund/account-type')) {
         document.getElementById('accountType-2').checked = true; // Select Personal Account types
         clickContinue();
     }

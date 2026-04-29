@@ -130,14 +130,14 @@ class WeNeedBankDetailsControllerSpec
       .withAuthToken()
 
     "called" should {
-      "redirect to /request-a-self-assessment-refund/type-of-bank-account" in {
+      "redirect to /request-a-self-assessment-refund/account-type" in {
         AuthStub.authorise(AffinityGroup.Individual, ConfidenceLevel.L250)
         stubBackendPersonalJourney()
 
         val result: Future[Result] = bankDetailsController.onSubmit(fakeRequest)
 
         status(result) shouldBe Status.SEE_OTHER
-        redirectLocation(result) shouldBe Some("/request-a-self-assessment-refund/type-of-bank-account")
+        redirectLocation(result) shouldBe Some("/request-a-self-assessment-refund/account-type")
       }
     }
   }

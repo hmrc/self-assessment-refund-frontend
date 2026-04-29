@@ -74,7 +74,7 @@ class AccountTypeControllerSpec extends ItSpec with AccountTypePageTesting {
           val response = controller.getAccountType(TdAll.request)
 
           response.checkPageIsDisplayed(
-            expectedHeading = "What type of bank account are you providing?",
+            expectedHeading = "Which type of bank account are you providing?",
             expectedServiceLink =
               "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
             contentChecks = checkPageContent,
@@ -92,7 +92,7 @@ class AccountTypeControllerSpec extends ItSpec with AccountTypePageTesting {
           val response = controller.getAccountType(TdAll.request)
 
           response.checkPageIsDisplayed(
-            expectedHeading = "What type of bank account are you providing?",
+            expectedHeading = "Which type of bank account are you providing?",
             expectedServiceLink =
               "http://localhost:9081/report-quarterly/income-and-expenses/view/agents/money-in-your-account",
             contentChecks = checkPageContent,
@@ -129,7 +129,7 @@ class AccountTypeControllerSpec extends ItSpec with AccountTypePageTesting {
           val response = controller.getAccountType(TdAll.request)
 
           response.checkPageIsDisplayed(
-            expectedHeading = "What type of bank account are you providing?",
+            expectedHeading = "Which type of bank account are you providing?",
             expectedServiceLink =
               "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
             contentChecks = checkPageContent,
@@ -153,7 +153,7 @@ class AccountTypeControllerSpec extends ItSpec with AccountTypePageTesting {
             stubBackendBusinessJourney()
             val response: Future[Result] = call(action, request, request.body)
             status(response) shouldBe Status.SEE_OTHER
-            redirectLocation(response) shouldBe Some("/request-a-self-assessment-refund/bank-building-society-details")
+            redirectLocation(response) shouldBe Some("/request-a-self-assessment-refund/enter-account-details")
 
             verifyUpdateJourneyCalled(
               journey(
@@ -174,7 +174,7 @@ class AccountTypeControllerSpec extends ItSpec with AccountTypePageTesting {
             stubPOSTJourney()
             val response: Future[Result] = call(action, request, request.body)
             status(response) shouldBe Status.SEE_OTHER
-            redirectLocation(response) shouldBe Some("/request-a-self-assessment-refund/check-your-answers")
+            redirectLocation(response) shouldBe Some("/request-a-self-assessment-refund/check-details")
 
             verifyUpdateJourneyCalled(
               journey(
@@ -195,7 +195,7 @@ class AccountTypeControllerSpec extends ItSpec with AccountTypePageTesting {
             stubPOSTJourney()
             val response: Future[Result] = call(action, request, request.body)
             status(response) shouldBe Status.SEE_OTHER
-            redirectLocation(response) shouldBe Some("/request-a-self-assessment-refund/bank-building-society-details")
+            redirectLocation(response) shouldBe Some("/request-a-self-assessment-refund/enter-account-details")
 
             verifyUpdateJourneyCalled(
               journey(
@@ -217,7 +217,7 @@ class AccountTypeControllerSpec extends ItSpec with AccountTypePageTesting {
             status(response) shouldBe Status.BAD_REQUEST
 
             response.checkPageIsDisplayed(
-              expectedHeading = "What type of bank account are you providing?",
+              expectedHeading = "Which type of bank account are you providing?",
               expectedServiceLink =
                 "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
               contentChecks = checkPageWithFormError,

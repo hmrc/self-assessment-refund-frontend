@@ -83,23 +83,22 @@ class HowYouWillGetYourRefundControllerSpec extends ItSpec with HowYouWillGetYou
       }
     }
     "called on 'onSubmit'" should {
-      "redirect to /type-of-bank-account" in {
+      "redirect to /account-type" in {
         setupStubsForShowRepayment(lastPaymentByCard = true)
         val response = controller.onSubmit(TdAll.request)
         status(response) shouldBe Status.SEE_OTHER
-        redirectLocation(response) shouldBe Some("/request-a-self-assessment-refund/type-of-bank-account")
+        redirectLocation(response) shouldBe Some("/request-a-self-assessment-refund/account-type")
       }
     }
   }
 
   def setupStubsForShowRepayment(lastPaymentByCard: Boolean): StubMapping =
-    lastPaymentByCard match {
-      case true  =>
-        stubBackendLastPaymentMethod(Card)
-        stubBackendBusinessJourney(method = Some(Card))
-      case false =>
-        stubBackendLastPaymentMethod(BACS)
-        stubBackendBusinessJourney()
+    if (lastPaymentByCard) {
+      stubBackendLastPaymentMethod(Card)
+      stubBackendBusinessJourney(method = Some(Card))
+    } else {
+      stubBackendLastPaymentMethod(BACS)
+      stubBackendBusinessJourney()
     }
 
 }

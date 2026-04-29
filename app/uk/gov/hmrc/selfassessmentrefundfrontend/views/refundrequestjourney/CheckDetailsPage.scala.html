@@ -21,18 +21,22 @@
 
 @this(layout: Layout, govukSummaryList: GovukSummaryList, govukButton: GovukButton, formWithCSRF: FormWithCSRF)
 
-@(summaryList: SummaryList, formAction: Call, isAgent: Boolean)(implicit request: Request[_], messages: Messages)
+@(summaryList: SummaryList, amountSummaryList: SummaryList, formAction: Call, isAgent: Boolean)(implicit request: Request[_], messages: Messages)
 
 @layout(
-    pageTitle = Some(PageTitle(messages("check-your-answers.title"), messages("service.name.refund"))),
+    pageTitle = Some(PageTitle(messages("check-details.title"), messages("service.name.refund"))),
     serviceName = Some(messages("service.name.refund")),
     isAgent = isAgent
 ) {
-    <h1 class="govuk-heading-l">@messages("check-your-answers.title")</h1>
+    <h1 class="govuk-heading-l">@messages("check-details.title")</h1>
 
-    @govukSummaryList(summaryList)
+    @govukSummaryList(amountSummaryList)
 
-    @formWithCSRF(action = formAction) {
-        @govukButton(Button(content = Text(messages("check-your-answers.confirm-continue")), attributes = Map("id" -> "continue")))
-    }
+    <section class="govuk-body">
+        @govukSummaryList(summaryList)
+
+        @formWithCSRF(action = formAction) {
+            @govukButton(Button(content = Text(messages("check-details.confirm-continue")), attributes = Map("id" -> "continue")))
+        }
+    </section>
 }

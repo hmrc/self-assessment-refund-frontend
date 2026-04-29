@@ -11,16 +11,16 @@ GET         /we-need-your-bank-details               uk.gov.hmrc.selfassessmentr
 GET         /we-need-your-clients-bank-details       uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.WeNeedBankDetailsController.onPageLoadAgent
 POST        /we-need-your-bank-details               uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.WeNeedBankDetailsController.onSubmit
 
-GET         /type-of-bank-account                    uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.AccountTypeController.getAccountType
-POST        /type-of-bank-account                    uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.AccountTypeController.postAccountType
+GET         /account-type                            uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.AccountTypeController.getAccountType
+POST        /account-type                            uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.AccountTypeController.postAccountType
 
-GET         /check-your-answers                      uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.CheckYourAnswersPageController.start
-POST        /check-your-answers-confirm              uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.CheckYourAnswersPageController.confirm
-GET         /check-your-answers-change-amount        uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.CheckYourAnswersPageController.changeAmount
-GET         /check-your-answers-change-account       uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.CheckYourAnswersPageController.changeAccount
+GET         /check-details                           uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.CheckDetailsPageController.start
+POST        /check-details-confirm                   uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.CheckDetailsPageController.confirm
+GET         /check-details-change-amount             uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.CheckDetailsPageController.changeAmount
+GET         /check-details-change-account            uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.CheckDetailsPageController.changeAccount
 
-GET         /bank-building-society-details           uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.BankAccountDetailsController.getAccountDetails
-POST        /bank-building-society-details           uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.BankAccountDetailsController.postAccountDetails
+GET         /enter-account-details                   uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.AccountDetailsController.getAccountDetails
+POST        /enter-account-details                   uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.AccountDetailsController.postAccountDetails
 
 GET         /sign-in-again                           uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.YouNeedToSignInAgainController.onPageLoad
 POST        /sign-in-again                           uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.YouNeedToSignInAgainController.onSubmit

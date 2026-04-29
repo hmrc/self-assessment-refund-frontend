@@ -16,39 +16,40 @@
 
 package uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney
 
-import javax.inject.{Inject, Singleton}
 import play.api.i18n.I18nSupport
-import play.api.mvc._
+import play.api.mvc.*
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.selfassessmentrefundfrontend.connectors.JourneyConnector
 import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.action.Actions
 import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney
-import uk.gov.hmrc.selfassessmentrefundfrontend.views.html.refundrequestjourney.CheckYourAnswersPage
-import uk.gov.hmrc.selfassessmentrefundfrontend.views.refundrequestjourney.CheckYourAnswersHelper
+import uk.gov.hmrc.selfassessmentrefundfrontend.views.html.refundrequestjourney.CheckDetailsPage
+import uk.gov.hmrc.selfassessmentrefundfrontend.views.refundrequestjourney.CheckDetailsHelper
 
+import javax.inject.{Inject, Singleton}
 import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
-class CheckYourAnswersPageController @Inject() (
+class CheckDetailsPageController @Inject() (
   i18n:                   I18nSupport,
   mcc:                    MessagesControllerComponents,
-  checkYourAnswersPage:   CheckYourAnswersPage,
+  checkDetailsPage:       CheckDetailsPage,
   actions:                Actions,
   journeyConnector:       JourneyConnector,
-  checkYourAnswersHelper: CheckYourAnswersHelper
+  checkYourAnswersHelper: CheckDetailsHelper
 )(implicit ec: ExecutionContext)
     extends FrontendController(mcc) {
 
-  import i18n._
+  import i18n.*
 
   val start: Action[AnyContent] = actions.authenticatedRefundJourneyAction.async { implicit request =>
     val journey         = request.journey
     val amount          = journey.amount.getOrElse(sys.error("could not find amount"))
     val bankAccountInfo = journey.bankAccountInfo.getOrElse(sys.error("Could not find bank details"))
-    val html            = checkYourAnswersPage(
+    val html            = checkDetailsPage(
       summaryList = checkYourAnswersHelper
         .buildSummaryList(amount, journey.accountType.getOrElse(sys.error("account type not found")), bankAccountInfo),
-      formAction = routes.CheckYourAnswersPageController.confirm,
+      amountSummaryList = checkYourAnswersHelper.amountRow(amount),
+      formAction = routes.CheckDetailsPageController.confirm,
       isAgent = request.isAgent
     )
 

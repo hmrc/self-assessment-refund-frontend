@@ -30,22 +30,22 @@ import uk.gov.hmrc.selfassessmentrefundfrontend.controllers
 import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.action.Actions
 import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.action.request.AuthenticatedRequest
 import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney
-import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.BankAccountDetailsController.{AccountPageModel, BankAccount}
+import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.AccountDetailsController.{AccountPageModel, BankAccount}
 import uk.gov.hmrc.selfassessmentrefundfrontend.model._
 import uk.gov.hmrc.selfassessmentrefundfrontend.model.journey.Journey
 import uk.gov.hmrc.selfassessmentrefundfrontend.util.Mapping.ConversionOps
 import uk.gov.hmrc.selfassessmentrefundfrontend.util.{Mapping => CMapping}
-import uk.gov.hmrc.selfassessmentrefundfrontend.views.html.refundrequestjourney.BankAccountDetailsPage
+import uk.gov.hmrc.selfassessmentrefundfrontend.views.html.refundrequestjourney.AccountDetailsPage
 
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
-class BankAccountDetailsController @Inject() (
+class AccountDetailsController @Inject() (
   mcc:              MessagesControllerComponents,
   journeyConnector: JourneyConnector,
   barsService:      ItsaBarsService,
-  accountPage:      BankAccountDetailsPage,
+  accountPage:      AccountDetailsPage,
   actions:          Actions
 )(implicit ec: ExecutionContext)
     extends FrontendController(mcc)
@@ -65,7 +65,7 @@ class BankAccountDetailsController @Inject() (
       val accountType     = getJourneyAccountType(request.journey)
       if (alreadyVerifiedBankDetails(accountType, bankAccountInfo, request.journey)) {
         // if bank details haven't changed don't call BARs and don't update journey
-        Future.successful(Redirect(refundRequestJourney.routes.CheckYourAnswersPageController.start))
+        Future.successful(Redirect(refundRequestJourney.routes.CheckDetailsPageController.start))
       } else {
         barsService
           .verifyBankDetails(bankAccountInfo, accountType)
@@ -99,7 +99,7 @@ class BankAccountDetailsController @Inject() (
       journeyConnector
         .setJourney(request.journey.id, request.journey.copy(bankAccountInfo = Some(bankAccountInfo)))
         .flatMap { _ =>
-          Future.successful(Redirect(refundRequestJourney.routes.CheckYourAnswersPageController.start))
+          Future.successful(Redirect(refundRequestJourney.routes.CheckDetailsPageController.start))
         }
 
     import BankAccountDetailsForm._
@@ -166,7 +166,7 @@ class BankAccountDetailsController @Inject() (
   }
 }
 
-object BankAccountDetailsController {
+object AccountDetailsController {
 
   type ApiResult = EitherT[Future, ApiError, Result]
 
@@ -211,7 +211,7 @@ object BankAccountDetailsController {
     val DirectCreditNotSupportedKey = "bars.error.sortCode.directCreditNotSupported"
 
     def pageTitle(form: Form[BankAccount])(implicit messages: Messages): String =
-      if (form.hasErrors) messages("enter-bank-details.error.title") else messages("enter-bank-details.title")
+      if (form.hasErrors) messages("enter-account-details.error.title") else messages("enter-account-details.title")
 
     def apply(bankDetails: Option[BankAccountInfo], isAgent: Boolean)(implicit messages: Messages): AccountPageModel = {
       val form = bankDetails
@@ -221,7 +221,7 @@ object BankAccountDetailsController {
       new AccountPageModel(
         pageTitle(form),
         form,
-        postAccountDetails = refundRequestJourney.routes.BankAccountDetailsController.postAccountDetails,
+        postAccountDetails = refundRequestJourney.routes.AccountDetailsController.postAccountDetails,
         isAgent = isAgent
       )
     }
@@ -233,7 +233,7 @@ object BankAccountDetailsController {
         pageTitle(form),
         form,
         fieldMessageOverrides = fieldMessageOverrides,
-        postAccountDetails = refundRequestJourney.routes.BankAccountDetailsController.postAccountDetails,
+        postAccountDetails = refundRequestJourney.routes.AccountDetailsController.postAccountDetails,
         isAgent = isAgent
       )
   }

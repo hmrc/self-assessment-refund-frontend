@@ -22,7 +22,7 @@ import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney
 import uk.gov.hmrc.selfassessmentrefundfrontend.model.BankAccountInfo
 import uk.gov.hmrc.selfassessmentrefundfrontend.util.AmountFormatter
 
-trait CheckYourAnswersPageTesting extends PageContentTesting {
+trait CheckDetailsPageTesting extends PageContentTesting {
   def checkPageContent(
     accountType:      String,
     bankAccountInfo:  BankAccountInfo,
@@ -34,21 +34,19 @@ trait CheckYourAnswersPageTesting extends PageContentTesting {
       keyValuePairs = List(
         ("Refund amount", AmountFormatter.formatAmount(amountToBeRepaid)),
         ("Bank account type", accountType),
-        (
-          "Bank account details",
-          s"${bankAccountInfo.name} ${bankAccountInfo.sortCode.displayFormat} ${bankAccountInfo.accountNumber.value}"
-        )
+        ("Name on the account", bankAccountInfo.name),
+        ("Sort code", bankAccountInfo.sortCode.displayFormat),
+        ("Account number", bankAccountInfo.accountNumber.value)
       ),
       maybeLinkTextHrefPairs = Some(
         List(
-          ("Change", "/request-a-self-assessment-refund/check-your-answers-change-amount"),
-          ("Change", "/request-a-self-assessment-refund/check-your-answers-change-account"),
-          ("Change", "/request-a-self-assessment-refund/bank-building-society-details")
+          ("Change", "/request-a-self-assessment-refund/check-details-change-amount"),
+          ("Change", "/request-a-self-assessment-refund/check-details-change-account")
         )
       )
     )
 
-    doc.checkHasFormAction("Confirm and continue", routes.CheckYourAnswersPageController.confirm)
+    doc.checkHasFormAction("Confirm and continue", routes.CheckDetailsPageController.confirm)
   }
   def checkPageContentWelsh(
     accountType:      String,
@@ -60,22 +58,20 @@ trait CheckYourAnswersPageTesting extends PageContentTesting {
     doc.checkHasSummaryList(
       keyValuePairs = List(
         ("Swm yr ad-daliad", AmountFormatter.formatAmount(amountToBeRepaid)),
-        ("Math o gyfrif banc", accountType),
-        (
-          "Manylion cyfrif banc",
-          s"${bankAccountInfo.name} ${bankAccountInfo.sortCode.displayFormat} ${bankAccountInfo.accountNumber.value}"
-        )
+        ("Math o gyfrif", accountType),
+        ("Yr enw sydd ar y cyfrif", bankAccountInfo.name),
+        ("Cod didoli", bankAccountInfo.sortCode.displayFormat),
+        ("Rhif y cyfrif", bankAccountInfo.accountNumber.value)
       ),
       maybeLinkTextHrefPairs = Some(
         List(
-          ("Newid", "/request-a-self-assessment-refund/check-your-answers-change-amount"),
-          ("Newid", "/request-a-self-assessment-refund/check-your-answers-change-account"),
-          ("Newid", "/request-a-self-assessment-refund/bank-building-society-details")
+          ("Newid", "/request-a-self-assessment-refund/check-details-change-amount"),
+          ("Newid", "/request-a-self-assessment-refund/check-details-change-account")
         )
       )
     )
 
-    doc.checkHasFormAction("Cadarnhau ac yn eich blaen", routes.CheckYourAnswersPageController.confirm)
+    doc.checkHasFormAction("Cadarnhau ac yn eich blaen", routes.CheckDetailsPageController.confirm)
   }
 
 }

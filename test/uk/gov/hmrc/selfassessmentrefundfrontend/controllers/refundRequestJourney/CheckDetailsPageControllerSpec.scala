@@ -30,10 +30,10 @@ import uk.gov.hmrc.selfassessmentrefundfrontend.model._
 import uk.gov.hmrc.selfassessmentrefundfrontend.model.customer.Nino
 import uk.gov.hmrc.selfassessmentrefundfrontend.model.journey.{Journey, JourneyId, JourneyTypes}
 import uk.gov.hmrc.selfassessmentrefundfrontend.model.repayment.RequestNumber
-import uk.gov.hmrc.selfassessmentrefundfrontend.pages.CheckYourAnswersPageTesting
+import uk.gov.hmrc.selfassessmentrefundfrontend.pages.CheckDetailsPageTesting
 import uk.gov.hmrc.selfassessmentrefundfrontend.testdata.TdAll
-import uk.gov.hmrc.selfassessmentrefundfrontend.views.html.refundrequestjourney.CheckYourAnswersPage
-import uk.gov.hmrc.selfassessmentrefundfrontend.views.refundrequestjourney.CheckYourAnswersHelper
+import uk.gov.hmrc.selfassessmentrefundfrontend.views.html.refundrequestjourney.CheckDetailsPage
+import uk.gov.hmrc.selfassessmentrefundfrontend.views.refundrequestjourney.CheckDetailsHelper
 import java.time.OffsetDateTime
 
 import support.stubbing.AuthStub
@@ -42,10 +42,10 @@ import uk.gov.hmrc.selfassessmentrefundfrontend.testdata.TdSupport.FakeRequestOp
 
 import scala.concurrent.Future
 
-class CheckYourAnswersPageControllerSpec extends ItSpec with CheckYourAnswersPageTesting {
+class CheckDetailsPageControllerSpec extends ItSpec with CheckDetailsPageTesting {
 
-  val controller: CheckYourAnswersPageController = fakeApplication().injector.instanceOf[CheckYourAnswersPageController]
-  val cyaViewHelper: CheckYourAnswersHelper      = fakeApplication().injector.instanceOf[CheckYourAnswersHelper]
+  val controller: CheckDetailsPageController = fakeApplication().injector.instanceOf[CheckDetailsPageController]
+  val cyaViewHelper: CheckDetailsHelper      = fakeApplication().injector.instanceOf[CheckDetailsHelper]
 
   override def beforeEach(): Unit = {
     super.beforeEach()
@@ -90,7 +90,7 @@ class CheckYourAnswersPageControllerSpec extends ItSpec with CheckYourAnswersPag
           val response: Future[Result] = controller.start(request)
 
           response.checkPageIsDisplayed(
-            expectedHeading = "Check your answers",
+            expectedHeading = "Check your details",
             expectedServiceLink =
               "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
             contentChecks =
@@ -99,15 +99,19 @@ class CheckYourAnswersPageControllerSpec extends ItSpec with CheckYourAnswersPag
             journey = "request"
           )
 
-          val page: CheckYourAnswersPage  = app.injector.instanceOf[CheckYourAnswersPage]
+          val page: CheckDetailsPage      = app.injector.instanceOf[CheckDetailsPage]
           val summaryList: SummaryList    = cyaViewHelper.buildSummaryList(
             Amount(Some(123), None, None, Some(123), Some(123)),
             AccountType.Personal,
             BankAccountInfo("name", SortCode("111111"), AccountNumber("12345678"))
           )
+          val amountList: SummaryList     = cyaViewHelper.amountRow(
+            Amount(Some(123), None, None, Some(123), Some(123))
+          )
           val html: HtmlFormat.Appendable = page(
             summaryList,
-            routes.CheckYourAnswersPageController.confirm,
+            amountList,
+            routes.CheckDetailsPageController.confirm,
             false
           )(request, app.injector.instanceOf[MessagesApi].preferred(request))
 
@@ -138,7 +142,7 @@ class CheckYourAnswersPageControllerSpec extends ItSpec with CheckYourAnswersPag
           val response: Future[Result] = controller.start(request)
 
           response.checkPageIsDisplayed(
-            expectedHeading = "Check your answers",
+            expectedHeading = "Check your details",
             expectedServiceLink =
               "http://localhost:9081/report-quarterly/income-and-expenses/view/agents/money-in-your-account",
             contentChecks =
@@ -147,15 +151,19 @@ class CheckYourAnswersPageControllerSpec extends ItSpec with CheckYourAnswersPag
             journey = "request"
           )
 
-          val page: CheckYourAnswersPage  = app.injector.instanceOf[CheckYourAnswersPage]
+          val page: CheckDetailsPage      = app.injector.instanceOf[CheckDetailsPage]
           val summaryList: SummaryList    = cyaViewHelper.buildSummaryList(
             Amount(Some(123), None, None, Some(123), Some(123)),
             AccountType.Personal,
             BankAccountInfo("name", SortCode("111111"), AccountNumber("12345678"))
           )
+          val amountList: SummaryList     = cyaViewHelper.amountRow(
+            Amount(Some(123), None, None, Some(123), Some(123))
+          )
           val html: HtmlFormat.Appendable = page(
             summaryList,
-            routes.CheckYourAnswersPageController.confirm,
+            amountList,
+            routes.CheckDetailsPageController.confirm,
             true
           )(request, app.injector.instanceOf[MessagesApi].preferred(request))
 
@@ -185,7 +193,7 @@ class CheckYourAnswersPageControllerSpec extends ItSpec with CheckYourAnswersPag
           val response: Future[Result] = controller.start(request)
 
           response.checkPageIsDisplayed(
-            expectedHeading = "Gwiriwch eich atebion",
+            expectedHeading = "Gwiriwch eich manylion",
             expectedServiceLink =
               "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
             contentChecks = checkPageContentWelsh(
@@ -198,15 +206,20 @@ class CheckYourAnswersPageControllerSpec extends ItSpec with CheckYourAnswersPag
             welsh = true
           )
 
-          val page: CheckYourAnswersPage  = app.injector.instanceOf[CheckYourAnswersPage]
-          val summaryList: SummaryList    = cyaViewHelper.buildSummaryList(
+          val page: CheckDetailsPage   = app.injector.instanceOf[CheckDetailsPage]
+          val summaryList: SummaryList = cyaViewHelper.buildSummaryList(
             Amount(Some(123), None, None, Some(123), Some(123)),
             AccountType.Personal,
             BankAccountInfo("name", SortCode("111111"), AccountNumber("12345678"))
           )
+          val amountList: SummaryList  = cyaViewHelper.amountRow(
+            Amount(Some(123), None, None, Some(123), Some(123))
+          )
+
           val html: HtmlFormat.Appendable = page(
             summaryList,
-            routes.CheckYourAnswersPageController.confirm,
+            amountList,
+            routes.CheckDetailsPageController.confirm,
             false
           )(request, app.injector.instanceOf[MessagesApi].preferred(request))
 

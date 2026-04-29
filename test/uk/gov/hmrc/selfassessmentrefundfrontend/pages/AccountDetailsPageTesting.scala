@@ -22,7 +22,7 @@ import support.PageContentTesting
 
 import scala.jdk.CollectionConverters.IteratorHasAsScala
 
-trait BankAccountDetailsPageTesting extends PageContentTesting {
+trait AccountDetailsPageTesting extends PageContentTesting {
   def checkPageContent(doc: Document): Unit = {
     val fields = doc.select(".govuk-form-group").select(".form-field-group").iterator().asScala.toList
 
@@ -39,7 +39,7 @@ trait BankAccountDetailsPageTesting extends PageContentTesting {
       "Building society roll number (if you have one)"
     )
     hints mustBe List(
-      "",
+      "For business accounts, enter the name of the business",
       "Must be 6 digits long",
       "Must be between 6 and 8 digits long",
       "You can find it on your card, statement or passbook"
@@ -53,7 +53,7 @@ trait BankAccountDetailsPageTesting extends PageContentTesting {
     )
 
     doc.checkHasFormActionAsContinueButton(
-      uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.routes.BankAccountDetailsController.postAccountDetails
+      uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.routes.AccountDetailsController.postAccountDetails
     )
 
   }
@@ -73,7 +73,7 @@ trait BankAccountDetailsPageTesting extends PageContentTesting {
       "Rhif rôl y gymdeithas adeiladu (os oes gennych un)"
     )
     hints mustBe List(
-      "",
+      "Ar gyfer cyfrifon busnes, nodwch enw’r busnes",
       "Mae’n rhaid iddo fod yn 6 digid o hyd",
       "Mae’n rhaid iddo fod rhwng 6 ac 8 digid o hyd",
       "Bydd hwn i’w weld ar eich cerdyn, cyfriflen neu baslyfr"
@@ -87,7 +87,7 @@ trait BankAccountDetailsPageTesting extends PageContentTesting {
     )
 
     doc.checkHasFormActionAsContinueButton(
-      uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.routes.BankAccountDetailsController.postAccountDetails,
+      uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.routes.AccountDetailsController.postAccountDetails,
       welsh = true
     )
 
