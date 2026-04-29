@@ -33,7 +33,7 @@ trait CheckDetailsPageTesting extends PageContentTesting {
     doc.checkHasSummaryList(
       keyValuePairs = List(
         ("Refund amount", AmountFormatter.formatAmount(amountToBeRepaid)),
-        ("Bank account type", accountType),
+        ("Account type", accountType),
         ("Name on the account", bankAccountInfo.name),
         ("Sort code", bankAccountInfo.sortCode.displayFormat),
         ("Account number", bankAccountInfo.accountNumber.value)
