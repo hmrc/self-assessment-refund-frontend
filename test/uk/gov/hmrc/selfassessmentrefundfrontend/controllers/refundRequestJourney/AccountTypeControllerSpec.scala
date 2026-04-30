@@ -163,48 +163,64 @@ class AccountTypeControllerSpec extends ItSpec with AccountTypePageTesting {
             )
           }
 
-          "redirect back to the CYA Page if the user didn't change their answer (Business)" in {
-            val request                  = FakeRequest(Helpers.POST, routes.AccountTypeController.postAccountType.path())
-              .withSessionId()
-              .withAuthToken()
-              .withFormUrlEncodedBody("accountType" -> AccountTypeEnum.Business.toString)
-              .withSession("self-assessment-refund.changing-account-from-cya-page" -> "redirectToCYA")
-            val action                   = controller.postAccountType()
-            stubBackendBusinessJourney()
-            stubPOSTJourney()
-            val response: Future[Result] = call(action, request, request.body)
-            status(response) shouldBe Status.SEE_OTHER
-            redirectLocation(response) shouldBe Some("/request-a-self-assessment-refund/check-details")
 
-            verifyUpdateJourneyCalled(
-              journey(
-                accountType = AccountType.Business,
-                bankAccountInfo = Some(TdAll.bankAccountInfo)
+          import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks.*
+
+          AccountType.values.foreach { accountType =>
+            s"redirect back to the /enter-account-details Page if the user didn't change their answer ($accountType) with prepopulated data" in {
+              val request = FakeRequest(Helpers.POST, routes.AccountTypeController.postAccountType.path())
+                .withSessionId()
+                .withAuthToken()
+                .withFormUrlEncodedBody("accountType" -> AccountTypeEnum.Business.toString)
+                .withSession("self-assessment-refund.changing-account-from-cya-page" -> "redirectToCYA")
+              val action = controller.postAccountType()
+              stubBackendBusinessJourney()
+              stubPOSTJourney()
+              val response: Future[Result] = call(action, request, request.body)
+              status(response) shouldBe Status.SEE_OTHER
+
+              redirectLocation(response) shouldBe Some("/request-a-self-assessment-refund/enter-account-details")
+
+              verifyUpdateJourneyCalled(
+                journey(
+                  accountType = AccountType.Business,
+                  bankAccountInfo = Some(TdAll.bankAccountInfo)
+                )
               )
-            )
+            }
           }
 
-          "Don't redirect back to the CYA Page if the user changed their answer (Business -> Personal)" in {
-            val request                  = FakeRequest(Helpers.POST, routes.AccountTypeController.postAccountType.path())
-              .withSessionId()
-              .withAuthToken()
-              .withFormUrlEncodedBody("accountType" -> AccountTypeEnum.Personal.toString)
-              .withSession("self-assessment-refund.changing-account-from-cya-page" -> "redirectToCYA")
-            val action                   = controller.postAccountType()
-            stubBackendBusinessJourney()
-            stubPOSTJourney()
-            val response: Future[Result] = call(action, request, request.body)
-            status(response) shouldBe Status.SEE_OTHER
-            redirectLocation(response) shouldBe Some("/request-a-self-assessment-refund/enter-account-details")
 
-            verifyUpdateJourneyCalled(
-              journey(
-                accountType = AccountType.Personal,
-                bankAccountInfo = None
+          val accountsTable = Table(
+            ("type one", "type two"),
+            (AccountType.Personal, AccountType.Business),
+            (AccountType.Business, AccountType.Personal)
+          )
+
+          forAll(accountsTable) { (typeOne, typeTwo) =>
+            s"redirect back to the /enter-account-details Page if the user changed their answer ($typeOne -> $typeTwo) without prepopulated data" in {
+              val request = FakeRequest(Helpers.POST, routes.AccountTypeController.postAccountType.path())
+                .withSessionId()
+                .withAuthToken()
+                .withFormUrlEncodedBody("accountType" -> AccountTypeEnum.Personal.toString)
+                .withSession("self-assessment-refund.changing-account-from-cya-page" -> "redirectToCYA")
+              val action = controller.postAccountType()
+              stubBackendBusinessJourney()
+              stubPOSTJourney()
+              val response: Future[Result] = call(action, request, request.body)
+              status(response) shouldBe Status.SEE_OTHER
+              redirectLocation(response) shouldBe Some("/request-a-self-assessment-refund/enter-account-details")
+
+              verifyUpdateJourneyCalled(
+                journey(
+                  accountType = AccountType.Personal,
+                  bankAccountInfo = None
+                )
               )
-            )
+            }
           }
         }
+
         "the submitted form has errors" should {
           "remain on the page" in {
             val request                  = FakeRequest(Helpers.POST, routes.AccountTypeController.postAccountType.path())

@@ -19,7 +19,8 @@ object AppDependencies {
     // format: OFF
     "uk.gov.hmrc"                  %% "bootstrap-test-play-30" % bootstrapVersion,
     "org.wiremock"                  % "wiremock-standalone"    % "3.13.2",
-    "org.jsoup"                     % "jsoup"                  % "1.22.2"
+    "org.jsoup"                     % "jsoup"                  % "1.22.2",
+    "org.scalatestplus"            %% "scalacheck-1-19"        % "3.2.20.0"
   // format: ON
   ).map(_ % Test)
 }

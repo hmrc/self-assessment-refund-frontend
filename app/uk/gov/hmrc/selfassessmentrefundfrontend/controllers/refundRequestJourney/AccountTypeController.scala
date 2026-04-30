@@ -58,16 +58,17 @@ class AccountTypeController @Inject() (
   val postAccountType: Action[AnyContent] = actions.authenticatedRefundJourneyAction.async { implicit request =>
     withFormData(request.isAgent) { formAccountTypeEnum =>
 
-      val formAccountType: AccountType = AccountTypeEnum.accountEnum2Type(formAccountTypeEnum)
-      val isResponseTheSame: Boolean   = request.journey.accountType.contains(formAccountType)
-      val isFromCyaPage                =
+      val formAccountType: AccountType  = AccountTypeEnum.accountEnum2Type(formAccountTypeEnum)
+      val isTheSameAccountType: Boolean = request.journey.accountType.contains(formAccountType)
+      val isFromCheckDetailsPage        =
         request.session.get("self-assessment-refund.changing-account-from-cya-page").contains("redirectToCYA")
 
-      val (call: Call, bankAccountInfo: Option[BankAccountInfo]) = if (isResponseTheSame && isFromCyaPage) {
-        (refundRequestJourney.routes.CheckDetailsPageController.start, request.journey.bankAccountInfo)
-      } else {
-        (refundRequestJourney.routes.AccountDetailsController.getAccountDetails, None)
-      }
+      val (call: Call, bankAccountInfo: Option[BankAccountInfo]) =
+        if (isTheSameAccountType && isFromCheckDetailsPage) {
+          (refundRequestJourney.routes.AccountDetailsController.getAccountDetails, request.journey.bankAccountInfo)
+        } else {
+          (refundRequestJourney.routes.AccountDetailsController.getAccountDetails, None)
+        }
 
       journeyConnector
         .setJourney(
