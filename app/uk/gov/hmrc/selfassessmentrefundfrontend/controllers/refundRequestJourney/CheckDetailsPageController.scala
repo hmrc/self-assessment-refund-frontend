@@ -68,7 +68,7 @@ class CheckDetailsPageController @Inject() (
         Redirect(
           uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.routes.SelectRepaymentAmountController.selectAmount
         )
-          .addingToSession("self-assessment-refund.changing-amount-from-cya-page" -> "redirectToCYA")
+          .addingToSession("self-assessment-refund.changing-amount-from-cya-page" -> "redirectToCheckDetails")
       )
   }
 
@@ -78,7 +78,7 @@ class CheckDetailsPageController @Inject() (
         Redirect(
           uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.routes.AccountTypeController.getAccountType
         )
-          .addingToSession("self-assessment-refund.changing-account-from-cya-page" -> "redirectToCYA")
+          .addingToSession("self-assessment-refund.changing-account-from-cya-page" -> "redirectToCheckDetails")
       )
   }
 

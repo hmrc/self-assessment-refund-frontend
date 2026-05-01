@@ -130,8 +130,9 @@ class SelectRepaymentAmountController @Inject() (
   }
 
   val submitAmount: Action[AnyContent] = actions.authenticatedRefundJourneyAction.async { implicit request =>
-    val journey                       = request.journey
-    val redirectToCYA: Option[String] = request.session.get("self-assessment-refund.changing-amount-from-cya-page")
+    val journey                                = request.journey
+    val redirectToCheckDetails: Option[String] =
+      request.session.get("self-assessment-refund.changing-amount-from-cya-page")
 
     journey.amount match {
       case Some(amount) =>
@@ -184,7 +185,7 @@ class SelectRepaymentAmountController @Inject() (
               Future.successful(Ok(selectAmountPage(model)))
             } else {
               storeChosenAmount()
-                .flatMap(_ => handleRedirect(redirectToCYA)(request))
+                .flatMap(_ => handleRedirect(redirectToCheckDetails)(request))
             }
           case _                                                                                   =>
             logAndReturnErrorPage(method = "submitAmount")
@@ -204,12 +205,14 @@ class SelectRepaymentAmountController @Inject() (
       Some(unallocatedCredit)
     }
 
-  private def handleRedirect(redirectToCYA: Option[String])(implicit request: BarsVerifiedRequest[_]): Future[Result] =
-    (request.journey.paymentMethod, redirectToCYA) match {
-      case (_, Some("redirectToCYA")) =>
+  private def handleRedirect(
+    redirectToCheckDetails: Option[String]
+  )(implicit request: BarsVerifiedRequest[_]): Future[Result] =
+    (request.journey.paymentMethod, redirectToCheckDetails) match {
+      case (_, Some("redirectToCheckDetails")) =>
         Future.successful(Redirect(controllers.refundRequestJourney.routes.CheckDetailsPageController.start))
-      case (Some(value), _)           => Future(handlePaymentMethod(value))
-      case (None, _)                  =>
+      case (Some(value), _)                    => Future(handlePaymentMethod(value))
+      case (None, _)                           =>
         journeyConnector.lastPaymentMethod(request.journey.id).map { method =>
           handlePaymentMethod(method)
         } recover { case e =>
