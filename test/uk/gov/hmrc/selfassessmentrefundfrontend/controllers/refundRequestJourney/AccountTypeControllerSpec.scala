@@ -31,6 +31,7 @@ import uk.gov.hmrc.selfassessmentrefundfrontend.model.journey.{Journey, JourneyT
 import uk.gov.hmrc.selfassessmentrefundfrontend.pages.AccountTypePageTesting
 import uk.gov.hmrc.selfassessmentrefundfrontend.testdata.TdAll
 import uk.gov.hmrc.selfassessmentrefundfrontend.testdata.TdSupport.FakeRequestOps
+import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks.*
 
 import scala.concurrent.Future
 
@@ -162,8 +163,6 @@ class AccountTypeControllerSpec extends ItSpec with AccountTypePageTesting {
               )
             )
           }
-
-          import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks.*
 
           AccountType.values.foreach { accountType =>
             s"redirect back to the /enter-account-details Page if the user didn't change their answer ($accountType) with prepopulated data" in {

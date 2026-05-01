@@ -132,7 +132,7 @@ class SelectRepaymentAmountController @Inject() (
   val submitAmount: Action[AnyContent] = actions.authenticatedRefundJourneyAction.async { implicit request =>
     val journey                                = request.journey
     val redirectToCheckDetails: Option[String] =
-      request.session.get("self-assessment-refund.changing-amount-from-cya-page")
+      request.session.get("self-assessment-refund.changing-amount-from-cd-page")
 
     journey.amount match {
       case Some(amount) =>

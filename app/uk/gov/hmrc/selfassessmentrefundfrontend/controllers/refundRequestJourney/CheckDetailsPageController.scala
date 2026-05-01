@@ -54,7 +54,7 @@ class CheckDetailsPageController @Inject() (
     )
 
     journeyConnector.setJourney(journey.id, journey.copy(nrsWebpage = Some(html.toString()))).map { _ =>
-      Ok(html).removingFromSession("self-assessment-refund.changing-amount-from-cya-page")
+      Ok(html).removingFromSession("self-assessment-refund.changing-amount-from-cd-page")
     }
   }
 
@@ -68,7 +68,7 @@ class CheckDetailsPageController @Inject() (
         Redirect(
           uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.routes.SelectRepaymentAmountController.selectAmount
         )
-          .addingToSession("self-assessment-refund.changing-amount-from-cya-page" -> "redirectToCheckDetails")
+          .addingToSession("self-assessment-refund.changing-amount-from-cd-page" -> "redirectToCheckDetails")
       )
   }
 
