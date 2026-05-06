@@ -78,7 +78,7 @@ class CheckDetailsPageController @Inject() (
         Redirect(
           uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.routes.AccountTypeController.getAccountType
         )
-          .addingToSession("self-assessment-refund.changing-account-from-cd-page" -> "redirectToCheckDetails")
+          .addingToSession("self-assessment-refund.changing-account" -> "redirectToCheckDetails")
       )
   }
 
