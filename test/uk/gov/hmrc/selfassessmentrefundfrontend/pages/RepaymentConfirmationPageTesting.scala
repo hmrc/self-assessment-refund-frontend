@@ -107,7 +107,7 @@ trait RepaymentConfirmationPageTesting extends PageContentTesting {
     doc.checkHasHyperlink("What did you think of this service?", "/request-a-self-assessment-refund/feedback")
     doc.checkHasHyperlink(
       "Is this page not working properly? (opens in new tab)",
-      "/contact/report-technical-problem?service=self-assessment-repayment"
+      "/contact/report-technical-problem?service=self-assessment-repayment&useServiceNavigation"
     )
   }
 
@@ -206,7 +206,7 @@ trait RepaymentConfirmationPageTesting extends PageContentTesting {
     )
     doc.checkHasHyperlink(
       "A yw’r dudalen hon yn gweithio’n iawn? (yn agor tab newydd)",
-      "/contact/report-technical-problem?service=self-assessment-repayment"
+      "/contact/report-technical-problem?service=self-assessment-repayment&useServiceNavigation"
     )
   }
 }

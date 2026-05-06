@@ -209,14 +209,14 @@ class RefundRejectedControllerSpec extends ItSpec with PageContentTesting {
       doc.checkHasHyperlink("roi cynnig arall ar wneud cais am ad-daliad", tryAgainLink)
       doc.checkHasHyperlink(
         "A yw’r dudalen hon yn gweithio’n iawn? (yn agor tab newydd)",
-        "/contact/report-technical-problem?service=self-assessment-repayment"
+        "/contact/report-technical-problem?service=self-assessment-repayment&useServiceNavigation"
       )
     } else {
       doc.checkHasParagraphs(rejectedParagraphs)
       doc.checkHasHyperlink("try again to request a refund", tryAgainLink)
       doc.checkHasHyperlink(
         "Is this page not working properly? (opens in new tab)",
-        "/contact/report-technical-problem?service=self-assessment-repayment"
+        "/contact/report-technical-problem?service=self-assessment-repayment&useServiceNavigation"
       )
     }
 

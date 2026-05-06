@@ -233,13 +233,13 @@ class RefundApprovedControllerSpec extends ItSpec with PageContentTesting {
       doc.checkHasParagraphs(approvedParagraphsWelsh(method))
       doc.checkHasHyperlink(
         "A yw’r dudalen hon yn gweithio’n iawn? (yn agor tab newydd)",
-        "/contact/report-technical-problem?service=self-assessment-repayment"
+        "/contact/report-technical-problem?service=self-assessment-repayment&useServiceNavigation"
       )
     } else {
       doc.checkHasParagraphs(approvedParagraphs(method))
       doc.checkHasHyperlink(
         "Is this page not working properly? (opens in new tab)",
-        "/contact/report-technical-problem?service=self-assessment-repayment"
+        "/contact/report-technical-problem?service=self-assessment-repayment&useServiceNavigation"
       )
     }
     doc.checkHasBackLinkWithUrl("#")
