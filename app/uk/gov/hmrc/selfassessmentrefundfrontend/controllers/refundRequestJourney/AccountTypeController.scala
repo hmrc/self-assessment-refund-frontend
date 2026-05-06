@@ -61,7 +61,7 @@ class AccountTypeController @Inject() (
       val formAccountType: AccountType  = AccountTypeEnum.accountEnum2Type(formAccountTypeEnum)
       val isTheSameAccountType: Boolean = request.journey.accountType.contains(formAccountType)
       val isFromCheckDetailsPage        =
-        request.session.get("self-assessment-refund.changing-account").contains("redirectToCheckDetails")
+        request.session.get(changingAccount).contains(redirectToCheckDetails)
 
       val (call: Call, bankAccountInfo: Option[BankAccountInfo]) =
         if (isTheSameAccountType && isFromCheckDetailsPage) {
@@ -76,7 +76,7 @@ class AccountTypeController @Inject() (
           request.journey.copy(accountType = Some(formAccountType), bankAccountInfo = bankAccountInfo)
         )
         .map { _ =>
-          Redirect(call).removingFromSession("self-assessment-refund.changing-account")
+          Redirect(call).removingFromSession(changingAccount)
         }
 
     }

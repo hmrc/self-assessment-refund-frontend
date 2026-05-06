@@ -132,7 +132,7 @@ class SelectRepaymentAmountController @Inject() (
   val submitAmount: Action[AnyContent] = actions.authenticatedRefundJourneyAction.async { implicit request =>
     val journey                                = request.journey
     val redirectToCheckDetails: Option[String] =
-      request.session.get("self-assessment-refund.changing-amount-from-cd-page")
+      request.session.get(changingAmount)
 
     journey.amount match {
       case Some(amount) =>
@@ -209,10 +209,10 @@ class SelectRepaymentAmountController @Inject() (
     redirectToCheckDetails: Option[String]
   )(implicit request: BarsVerifiedRequest[_]): Future[Result] =
     (request.journey.paymentMethod, redirectToCheckDetails) match {
-      case (_, Some("redirectToCheckDetails")) =>
+      case (_, Some(redirectToCheckDetails)) =>
         Future.successful(Redirect(controllers.refundRequestJourney.routes.CheckDetailsPageController.start))
-      case (Some(value), _)                    => Future(handlePaymentMethod(value))
-      case (None, _)                           =>
+      case (Some(value), _)                  => Future(handlePaymentMethod(value))
+      case (None, _)                         =>
         journeyConnector.lastPaymentMethod(request.journey.id).map { method =>
           handlePaymentMethod(method)
         } recover { case e =>
