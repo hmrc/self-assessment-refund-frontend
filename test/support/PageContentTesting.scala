@@ -20,13 +20,14 @@ import org.jsoup.Jsoup
 import org.jsoup.helper.Validate.fail
 import org.jsoup.nodes.Document
 import org.scalatest.AppendedClues.convertToClueful
+import org.scalatest.Assertions
 import org.scalatest.matchers.must.Matchers.{endWith, include}
 import org.scalatest.matchers.should.Matchers.{should, shouldBe}
 import play.api.mvc.{Call, Result}
-import play.api.test.Helpers._
+import play.api.test.Helpers.*
 
 import scala.concurrent.Future
-import scala.jdk.CollectionConverters._
+import scala.jdk.CollectionConverters.*
 
 trait PageContentTesting {
 
@@ -175,11 +176,14 @@ trait PageContentTesting {
       ()
     }
 
-    def checkHasHyperlink(text: String, link: String): Unit = {
-      val links = doc.select(".govuk-link").iterator().asScala.toList
-      links.find(_.text() == text).exists(_.attr("href") == link) shouldBe true
-      ()
-    }
+    def checkHasHyperlink(text: String, link: String): Unit =
+      Assertions.withClue(s"Expected to find link with text [$text] and href [$link]") {
+        val links = doc.select(".govuk-link").iterator().asScala.toList
+        links.find(_.text() == text).fold(fail("Could not find link with expected text")) { l =>
+          l.attr("href") shouldBe link
+          ()
+        }
+      }
 
     def checkHasRadioButtonOptionsWith(expectedLabelHintPairs: List[(String, Option[String])]): Unit = {
       val radios = doc.select(".govuk-radios__item").iterator().asScala.toList
