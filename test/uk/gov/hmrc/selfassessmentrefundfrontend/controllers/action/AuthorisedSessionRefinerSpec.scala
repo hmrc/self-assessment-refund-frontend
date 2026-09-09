@@ -284,19 +284,39 @@ class AuthorisedSessionRefinerSpec extends ItSpec {
     }
 
     "redirect users to login" when {
-      "no sessionId is found" in {
-        stubBackendJourneyNoSessionId()
+      Seq(
+        AffinityGroup.Individual,
+        AffinityGroup.Agent,
+        AffinityGroup.Organisation
+      ).foreach { affinityGroup =>
+        s"$affinityGroup has no sessionId" in {
+          stubBackendJourneyNoSessionId()
+          AuthStub.authorise(affinityGroup, ConfidenceLevel.L50)
 
-        val result = doTestNoSessionId(fakeRequest.withAuthToken())
+          val result = doTestNoSessionId(fakeRequest.withAuthToken())
 
-        status(result) shouldBe SEE_OTHER
-        redirectLocation(result) shouldBe Some(
-          "http://localhost:9949/auth-login-stub/gg-sign-in?continue=http://localhost:9171/self-assessment-refund/self-assessment-refund/test-only"
-        )
+          status(result) shouldBe SEE_OTHER
+          redirectLocation(result) shouldBe Some(
+            "http://localhost:9949/auth-login-stub/gg-sign-in?continue=http://localhost:9171/self-assessment-refund/self-assessment-refund/test-only"
+          )
+        }
+
+        s"$affinityGroup has no bearer token" in {
+          stubBackendBusinessJourney()
+          AuthStub.authorise(affinityGroup, ConfidenceLevel.L50)
+
+          val result = doTest(fakeRequest.withSession(), SessionId("session-deadbeef"))
+
+          status(result) shouldBe SEE_OTHER
+          redirectLocation(result) shouldBe Some(
+            "http://localhost:9949/auth-login-stub/gg-sign-in?continue=http://localhost:9171/self-assessment-refund/self-assessment-refund/test-only"
+          )
+        }
       }
 
-      "no bearer token is found" in {
+      "user is not authorised" in {
         stubBackendBusinessJourney()
+        AuthStub.notAuthorized()
 
         val result = doTest(fakeRequest.withSession(), SessionId("session-deadbeef"))
 

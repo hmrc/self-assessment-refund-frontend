@@ -46,12 +46,6 @@ class AppConfig @Inject() (config: Configuration, servicesConfig: ServicesConfig
   val reauthenticationUrl: String               =
     servicesConfig.getConfString("reauthentication.path", throwConfigNotFoundError("reauthentication.path"))
 
-  private val authLoginStubPath: String = servicesConfig.getConfString("auth-login-stub.path", "")
-  val authLoginStubUrl: String          = servicesConfig.baseUrl("auth-login-stub") +
-    authLoginStubPath + "?continue=" +
-    exampleExternalUrl + "/self-assessment-refund" +
-    uk.gov.hmrc.selfassessmentrefundfrontend.testonly.controllers.routes.StartJourneyController.redirectToStartJourneyPage.url
-
   val authTimeoutSeconds: Int          = config.get[FiniteDuration]("timeout.inactivity-timeout").toSeconds.toInt
   val authTimeoutCountdownSeconds: Int =
     config.get[FiniteDuration]("timeout.inactivity-countdown").toSeconds.toInt
@@ -64,6 +58,9 @@ class AppConfig @Inject() (config: Configuration, servicesConfig: ServicesConfig
   val confidenceLevel: String          =
     servicesConfig.getConfString("iv-uplift.confidenceLevel", throwConfigNotFoundError("iv-uplift.confidenceLevel"))
   val loginUrl: String                 = servicesConfig.getString("urls.login")
+
+  val loginUrlContinue: String = loginUrl + "?continue=" +
+    exampleExternalUrl + "/self-assessment-refund" + uk.gov.hmrc.selfassessmentrefundfrontend.testonly.controllers.routes.StartJourneyController.redirectToStartJourneyPage.url
 
   val logoutUrl: String =
     servicesConfig.getString("urls.logout") +
