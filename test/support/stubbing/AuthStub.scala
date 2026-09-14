@@ -45,6 +45,15 @@ object AuthStub {
     )
   }
 
+  def notAuthorized(): StubMapping =
+    stubFor(
+      post(urlPathEqualTo("/auth/authorise"))
+        .willReturn(
+          aResponse()
+            .withStatus(401)
+        )
+    )
+
   def allEnrolments(affinityGroup: AffinityGroup, confidenceLevel: ConfidenceLevel): JsValue =
     affinityGroup match {
       case AffinityGroup.Agent =>

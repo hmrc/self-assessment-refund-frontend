@@ -19,47 +19,65 @@ package uk.gov.hmrc.selfassessmentrefundfrontend.controllers.action
 import play.api.Logging
 import play.api.mvc.Results.Redirect
 import play.api.mvc.{ActionRefiner, Request, Result}
+import uk.gov.hmrc.auth.core._
 import uk.gov.hmrc.selfassessmentrefundfrontend.config.AppConfig
 import uk.gov.hmrc.selfassessmentrefundfrontend.connectors.JourneyConnector
 import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.action.RequestSupport.hc
 import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.action.request.PreAuthRequest
+import uk.gov.hmrc.http.SessionId
 
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
 class PreAuthSessionRefiner @Inject() (
-  appConfig:        AppConfig,
-  journeyConnector: JourneyConnector
+  val authConnector: AuthConnector,
+  appConfig:         AppConfig,
+  journeyConnector:  JourneyConnector
 )(implicit ec: ExecutionContext)
     extends ActionRefiner[Request, PreAuthRequest]
+    with AuthorisedFunctions
     with Logging {
+
+  final case class MissingJourneySessionId(message: String) extends RuntimeException(message)
 
   override protected def refine[A](request: Request[A]): Future[Either[Result, PreAuthRequest[A]]] = {
     implicit val r: Request[A] = request
 
-    hc(request).sessionId match {
-      case Some(sessionId) =>
-        journeyConnector
-          .findLatestBySessionId()
-          .map { journey =>
-            Right(
-              new PreAuthRequest(
-                request = request,
-                journey = journey,
-                sessionId = sessionId
+    authorised() {
+      hc(request).sessionId match {
+        case Some(sessionId) =>
+          journeyConnector
+            .findLatestBySessionId()
+            .map { journey =>
+              Right(
+                new PreAuthRequest(
+                  request = request,
+                  journey = journey,
+                  sessionId = sessionId
+                )
               )
-            )
-          }
-          .recover { case err =>
-            logger.warn(s"PreAuthSessionRefiner: Exception: ${err.getMessage}")
-            throw err
-          }
-      case None            =>
-        // TODO fix "appConfig.authLoginStubUrl" ?
-        logger.warn(s"PreAuthSessionRefiner: Expected SessionId for logged in user")
-        Future.successful(Left(Redirect(appConfig.authLoginStubUrl)))
+            }
+            .recover { case err =>
+              logger.warn(s"PreAuthSessionRefiner: findLatestBySessionId Exception: ${err.getMessage}")
+              throw err
+            }
+        case None            =>
+          logger.warn(s"PreAuthSessionRefiner: HeaderCarrier: Expected SessionId for logged in user")
+          throw new MissingJourneySessionId("Journey SessionID not found")
+      }
+    }.recover {
+      case _: MissingJourneySessionId =>
+        logger.warn(s"PreAuthSessionRefiner: MissingJourneySessionId: Expected SessionId for logged in user")
+        Left(Redirect(appConfig.loginUrlContinue))
+      case _: NoActiveSession         =>
+        logger.warn(s"PreAuthSessionRefiner: NoActiveSession: Expected user to be logged in")
+        Left(Redirect(appConfig.loginUrlContinue))
+      case e: AuthorisationException  =>
+        logger.warn(s"Unauthorised because of ${e.reason}")
+        Left(Redirect(appConfig.loginUrlContinue))
     }
+
   }
 
   override protected def executionContext: ExecutionContext = ec

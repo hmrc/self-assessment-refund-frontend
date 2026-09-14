@@ -22,6 +22,8 @@ import play.api.mvc._
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import support.ItSpec
+import support.stubbing.AuthStub
+import uk.gov.hmrc.auth.core.{AffinityGroup, AuthConnector, ConfidenceLevel}
 import uk.gov.hmrc.http.SessionId
 import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.action.request.PreAuthRequest
 import uk.gov.hmrc.selfassessmentrefundfrontend.testdata.TdSupport.FakeRequestOps
@@ -40,6 +42,8 @@ class PreAuthSessionRefinerSpec extends ItSpec {
     defaultActionBuilder
       .andThen[PreAuthRequest](preAuthSessionRefiner)
 
+  override def fakeAuthConnector: Option[AuthConnector] = None
+
   def doTest(request: Request[_], expectedSessionId: SessionId): Future[Result] = preAuthJourneyAction { request =>
     request.sessionId shouldBe expectedSessionId
     Ok
@@ -53,24 +57,63 @@ class PreAuthSessionRefinerSpec extends ItSpec {
     FakeRequest("GET", "/self-assessment-refund-frontend/auth/authorise")
 
   "PreAuthSessionRefiner" should {
-    "allow users to proceed" when {
-      "they have a valid session" in {
-        stubBackendBusinessJourney()
+    "allow logged in user to proceed" when {
 
-        val result = doTest(fakeRequest.withSessionId().withAuthToken(), SessionId("session-deadbeef"))
-        status(result) shouldBe OK
+      Seq(
+        AffinityGroup.Individual,
+        AffinityGroup.Organisation,
+        AffinityGroup.Agent
+      ).foreach { affinityGroup =>
+        s"$affinityGroup has a valid session" in {
+          stubBackendBusinessJourney()
+          AuthStub.authorise(affinityGroup, ConfidenceLevel.L50)
+
+          val result = doTest(fakeRequest.withSessionId().withAuthToken(), SessionId("session-deadbeef"))
+          status(result) shouldBe OK
+        }
       }
     }
 
-    "redirect users to login" when {
-      "no sessionId is found" in {
+    "redirect to log in page" when {
+      Seq(
+        AffinityGroup.Individual,
+        AffinityGroup.Organisation,
+        AffinityGroup.Agent
+      ).foreach { affinityGroup =>
+        s"$affinityGroup has no sessionId is found" in {
+          stubBackendJourneyNoSessionId()
+          AuthStub.authorise(affinityGroup, ConfidenceLevel.L50)
+
+          val result = doTestNoSessionId(fakeRequest.withAuthToken())
+
+          status(result) shouldBe SEE_OTHER
+          redirectLocation(result) shouldBe Some(
+            "http://localhost:9949/auth-login-stub/gg-sign-in?continue=http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account"
+          )
+        }
+      }
+
+      "user is not authenticated" in {
+        stubBackendBusinessJourney()
+        AuthStub.notAuthorized()
+
+        val result = doTest(fakeRequest.withSessionId().withAuthToken(), SessionId("session-deadbeef"))
+
+        status(result) shouldBe SEE_OTHER
+        redirectLocation(result) shouldBe Some(
+          "http://localhost:9949/auth-login-stub/gg-sign-in?continue=http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account"
+        )
+      }
+
+      "user is not authenticated and has no session" in {
         stubBackendJourneyNoSessionId()
+        AuthStub.notAuthorized()
 
         val result = doTestNoSessionId(fakeRequest.withAuthToken())
 
         status(result) shouldBe SEE_OTHER
         redirectLocation(result) shouldBe Some(
-          "http://localhost:9949/auth-login-stub/gg-sign-in?continue=http://localhost:9171/self-assessment-refund/self-assessment-refund/test-only"
+          "http://localhost:9949/auth-login-stub/gg-sign-in?continue=http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account"
         )
       }
     }

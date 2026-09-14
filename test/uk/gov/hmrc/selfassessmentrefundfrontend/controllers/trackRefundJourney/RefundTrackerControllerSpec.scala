@@ -316,7 +316,7 @@ class RefundTrackerControllerSpec extends ItSpec with TdRepayments with RefundTr
           val result = refundTrackerController.refundTracker()(fakeRequest)
           status(result) shouldBe SEE_OTHER
           redirectLocation(result) shouldBe Some(
-            "http://localhost:9949/auth-login-stub/gg-sign-in?continue=http://localhost:9171/self-assessment-refund/self-assessment-refund/test-only"
+            "http://localhost:9949/auth-login-stub/gg-sign-in?continue=http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account"
           )
         }
       }
