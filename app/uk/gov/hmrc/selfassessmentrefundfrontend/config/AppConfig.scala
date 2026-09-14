@@ -59,7 +59,8 @@ class AppConfig @Inject() (config: Configuration, servicesConfig: ServicesConfig
     servicesConfig.getConfString("iv-uplift.confidenceLevel", throwConfigNotFoundError("iv-uplift.confidenceLevel"))
   val loginUrl: String                 = servicesConfig.getString("urls.login")
 
-  val loginUrlContinue: String = s"$loginUrl?continue=${servicesConfig.getString("urls.loginContinue")}"
+  val loginUrlContinue: String =
+    s"$loginUrl?continue=$itsaUrl${servicesConfig.getString("navigation.paths.creditAndRefunds")}"
 
   val logoutUrl: String =
     servicesConfig.getString("urls.logout") +
