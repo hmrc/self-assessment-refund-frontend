@@ -37,7 +37,7 @@ class YourRefundRequestNotSubmittedControllerSpec extends ItSpec with YourRefund
 
         result.checkPageIsDisplayed(
           expectedHeading = "Your refund request has not been submitted",
-          expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+          expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
           contentChecks = checkPageContent(isAgent = false),
           expectedStatus = Status.OK,
           withBackButton = false,
@@ -51,7 +51,7 @@ class YourRefundRequestNotSubmittedControllerSpec extends ItSpec with YourRefund
 
         result.checkPageIsDisplayed(
           expectedHeading = "Nid yw’ch cais am ad-daliad wedi’i gyflwyno",
-          expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+          expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
           contentChecks = checkPageContentWelsh(isAgent = false),
           expectedStatus = Status.OK,
           withBackButton = false,
@@ -67,7 +67,7 @@ class YourRefundRequestNotSubmittedControllerSpec extends ItSpec with YourRefund
 
         result.checkPageIsDisplayed(
           expectedHeading = "Your refund request has not been submitted",
-          expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+          expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
           contentChecks = checkPageContent(isAgent = false),
           expectedStatus = Status.OK,
           withBackButton = false,
@@ -82,8 +82,7 @@ class YourRefundRequestNotSubmittedControllerSpec extends ItSpec with YourRefund
 
         result.checkPageIsDisplayed(
           expectedHeading = "Your refund request has not been submitted",
-          expectedServiceLink =
-            "http://localhost:9081/report-quarterly/income-and-expenses/view/agents/money-in-your-account",
+          expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/agents/money-in-your-account",
           contentChecks = checkPageContent(isAgent = true),
           expectedStatus = Status.OK,
           withBackButton = false,

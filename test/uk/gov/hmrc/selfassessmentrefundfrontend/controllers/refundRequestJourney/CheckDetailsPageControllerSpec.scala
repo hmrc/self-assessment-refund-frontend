@@ -91,8 +91,7 @@ class CheckDetailsPageControllerSpec extends ItSpec with CheckDetailsPageTesting
 
           response.checkPageIsDisplayed(
             expectedHeading = "Check your details",
-            expectedServiceLink =
-              "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+            expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
             contentChecks =
               checkPageContent("Personal", BankAccountInfo("name", SortCode("111111"), AccountNumber("12345678")), 123),
             expectedStatus = OK,
@@ -144,7 +143,7 @@ class CheckDetailsPageControllerSpec extends ItSpec with CheckDetailsPageTesting
           response.checkPageIsDisplayed(
             expectedHeading = "Check your details",
             expectedServiceLink =
-              "http://localhost:9081/report-quarterly/income-and-expenses/view/agents/money-in-your-account",
+              "http://localhost:9081/manage-self-assessment/financials/agents/money-in-your-account",
             contentChecks =
               checkPageContent("Personal", BankAccountInfo("name", SortCode("111111"), AccountNumber("12345678")), 123),
             expectedStatus = OK,
@@ -194,8 +193,7 @@ class CheckDetailsPageControllerSpec extends ItSpec with CheckDetailsPageTesting
 
           response.checkPageIsDisplayed(
             expectedHeading = "Gwiriwch eich manylion",
-            expectedServiceLink =
-              "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+            expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
             contentChecks = checkPageContentWelsh(
               "Personol",
               BankAccountInfo("name", SortCode("111111"), AccountNumber("12345678")),

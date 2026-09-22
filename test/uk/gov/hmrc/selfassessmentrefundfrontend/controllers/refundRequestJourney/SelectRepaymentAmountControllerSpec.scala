@@ -74,8 +74,7 @@ class SelectRepaymentAmountControllerSpec
 
           result.checkPageIsDisplayed(
             expectedHeading = selectAmountPageHeading,
-            expectedServiceLink =
-              "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+            expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
             contentChecks = checkPageContent(testAmount),
             expectedStatus = Status.OK,
             journey = "request"
@@ -90,8 +89,7 @@ class SelectRepaymentAmountControllerSpec
 
           result.checkPageIsDisplayed(
             expectedHeading = selectAmountPageHeadingWelsh,
-            expectedServiceLink =
-              "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+            expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
             contentChecks = checkPageContentWelsh(testAmount),
             expectedStatus = Status.OK,
             journey = "request",
@@ -115,8 +113,7 @@ class SelectRepaymentAmountControllerSpec
 
           result.checkPageIsDisplayed(
             expectedHeading = selectAmountPageHeading,
-            expectedServiceLink =
-              "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+            expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
             contentChecks = checkPageContent(amount, withoutSuggestedAmount = true),
             expectedStatus = Status.OK,
             journey = "request"
@@ -139,8 +136,7 @@ class SelectRepaymentAmountControllerSpec
 
           result.checkPageIsDisplayed(
             expectedHeading = selectAmountPageHeading,
-            expectedServiceLink =
-              "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+            expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
             contentChecks = checkPageContent(amount, withoutSuggestedAmount = true),
             expectedStatus = Status.OK,
             journey = "request"
@@ -163,8 +159,7 @@ class SelectRepaymentAmountControllerSpec
 
           result.checkPageIsDisplayed(
             expectedHeading = selectAmountPageHeading,
-            expectedServiceLink =
-              "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+            expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
             contentChecks = checkPageContent(amount, withoutSuggestedAmount = true),
             expectedStatus = Status.OK,
             journey = "request"
@@ -187,8 +182,7 @@ class SelectRepaymentAmountControllerSpec
 
           result.checkPageIsDisplayed(
             expectedHeading = selectAmountPageHeading,
-            expectedServiceLink =
-              "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+            expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
             contentChecks = checkPageContent(amount, withoutSuggestedAmount = true),
             expectedStatus = Status.OK,
             journey = "request"
@@ -211,8 +205,7 @@ class SelectRepaymentAmountControllerSpec
 
           result.checkPageIsDisplayed(
             expectedHeading = "Sorry, there is a problem with the service",
-            expectedServiceLink =
-              "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+            expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
             journey = "request",
             expectedStatus = Status.INTERNAL_SERVER_ERROR,
             withBackButton = false
@@ -227,8 +220,7 @@ class SelectRepaymentAmountControllerSpec
 
           result.checkPageIsDisplayed(
             expectedHeading = "Sorry, there is a problem with the service",
-            expectedServiceLink =
-              "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+            expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
             journey = "request",
             expectedStatus = Status.INTERNAL_SERVER_ERROR,
             withBackButton = false
@@ -246,8 +238,7 @@ class SelectRepaymentAmountControllerSpec
 
           result.checkPageIsDisplayed(
             expectedHeading = "Sorry, there is a problem with the service",
-            expectedServiceLink =
-              "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+            expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
             journey = "request",
             expectedStatus = Status.INTERNAL_SERVER_ERROR,
             withBackButton = false
@@ -262,8 +253,7 @@ class SelectRepaymentAmountControllerSpec
 
           result.checkPageIsDisplayed(
             expectedHeading = "Sorry, there is a problem with the service",
-            expectedServiceLink =
-              "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+            expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
             journey = "request",
             expectedStatus = Status.INTERNAL_SERVER_ERROR,
             withBackButton = false
@@ -281,8 +271,7 @@ class SelectRepaymentAmountControllerSpec
 
           result.checkPageIsDisplayed(
             expectedHeading = "Sorry, there is a problem with the service",
-            expectedServiceLink =
-              "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+            expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
             journey = "request",
             expectedStatus = Status.INTERNAL_SERVER_ERROR,
             withBackButton = false
@@ -300,8 +289,7 @@ class SelectRepaymentAmountControllerSpec
 
           result.checkPageIsDisplayed(
             expectedHeading = "Sorry, there is a problem with the service",
-            expectedServiceLink =
-              "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+            expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
             journey = "request",
             expectedStatus = Status.INTERNAL_SERVER_ERROR,
             withBackButton = false
@@ -329,7 +317,7 @@ class SelectRepaymentAmountControllerSpec
 
         result.checkPageIsDisplayed(
           expectedHeading = selectAmountPageHeading,
-          expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+          expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
           contentChecks =
             checkPageWithFormError(testAmount, "Select how much you want to be refunded", "#choice-suggested"),
           expectedStatus = Status.OK,
@@ -347,7 +335,7 @@ class SelectRepaymentAmountControllerSpec
 
         result.checkPageIsDisplayed(
           expectedHeading = selectAmountPageHeadingWelsh,
-          expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+          expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
           contentChecks = checkPageWithFormErrorWelsh(
             testAmount,
             "Dewiswch faint o ad-daliad yr hoffech ei gael",
@@ -382,7 +370,7 @@ class SelectRepaymentAmountControllerSpec
 
         result.checkPageIsDisplayed(
           expectedHeading = selectAmountPageHeading,
-          expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+          expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
           contentChecks = checkPageWithFormError(
             amount,
             "Select how much you want to be refunded",
@@ -412,7 +400,7 @@ class SelectRepaymentAmountControllerSpec
 
         result.checkPageIsDisplayed(
           expectedHeading = selectAmountPageHeadingWelsh,
-          expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+          expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
           contentChecks = checkPageWithFormErrorWelsh(
             amount,
             "Dewiswch faint o ad-daliad yr hoffech ei gael",
@@ -440,7 +428,7 @@ class SelectRepaymentAmountControllerSpec
 
         result.checkPageIsDisplayed(
           expectedHeading = selectAmountPageHeading,
-          expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+          expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
           contentChecks = checkPageWithFormError(testAmount, "Enter a refund amount", "#different-amount"),
           expectedStatus = Status.OK,
           withError = true,
@@ -457,7 +445,7 @@ class SelectRepaymentAmountControllerSpec
 
         result.checkPageIsDisplayed(
           expectedHeading = selectAmountPageHeadingWelsh,
-          expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+          expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
           contentChecks =
             checkPageWithFormErrorWelsh(testAmount, "Nodwch swm ar gyfer yr ad-daliad", "#different-amount"),
           expectedStatus = Status.OK,
@@ -726,7 +714,7 @@ class SelectRepaymentAmountControllerSpec
 
       result.checkPageIsDisplayed(
         expectedHeading = "Sorry, there is a problem with the service",
-        expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+        expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
         journey = "request",
         expectedStatus = Status.INTERNAL_SERVER_ERROR,
         withBackButton = false
@@ -745,7 +733,7 @@ class SelectRepaymentAmountControllerSpec
 
       result.checkPageIsDisplayed(
         expectedHeading = "Sorry, there is a problem with the service",
-        expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+        expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
         journey = "request",
         expectedStatus = Status.INTERNAL_SERVER_ERROR,
         withBackButton = false
@@ -764,7 +752,7 @@ class SelectRepaymentAmountControllerSpec
 
       result.checkPageIsDisplayed(
         expectedHeading = "Sorry, there is a problem with the service",
-        expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+        expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
         journey = "request",
         expectedStatus = Status.INTERNAL_SERVER_ERROR,
         withBackButton = false
