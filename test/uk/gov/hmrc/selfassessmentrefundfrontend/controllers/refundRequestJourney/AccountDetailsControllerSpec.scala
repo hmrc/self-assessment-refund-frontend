@@ -91,7 +91,7 @@ class AccountDetailsControllerSpec extends ItSpec with AccountDetailsPageTesting
 
             response.checkPageIsDisplayed(
               expectedHeading = "Enter your bank or building society account details",
-              expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
+              expectedServiceLink = "http://localhost:9092/manage-self-assessment/financials/money-in-your-account",
               contentChecks = checkPageContent,
               expectedStatus = Status.OK,
               journey = "request"
@@ -106,7 +106,7 @@ class AccountDetailsControllerSpec extends ItSpec with AccountDetailsPageTesting
 
             response.checkPageIsDisplayed(
               expectedHeading = "Nodwch fanylion eich cyfrif banc neu gyfrif cymdeithas adeiladu",
-              expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
+              expectedServiceLink = "http://localhost:9092/manage-self-assessment/financials/money-in-your-account",
               contentChecks = checkPageContentWelsh,
               expectedStatus = Status.OK,
               journey = "request",
@@ -126,7 +126,7 @@ class AccountDetailsControllerSpec extends ItSpec with AccountDetailsPageTesting
               expectedHeading = "Enter your bank or building society account details",
               contentChecks = checkPageContent,
               expectedStatus = Status.OK,
-              expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
+              expectedServiceLink = "http://localhost:9092/manage-self-assessment/financials/money-in-your-account",
               journey = "request"
             )
           }
@@ -302,7 +302,7 @@ class AccountDetailsControllerSpec extends ItSpec with AccountDetailsPageTesting
 
                 response.checkPageIsDisplayed(
                   expectedHeading = "Enter your bank or building society account details",
-                  expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
+                  expectedServiceLink = "http://localhost:9092/manage-self-assessment/financials/money-in-your-account",
                   contentChecks = checkPageWithFormError(errorMessage, errorFieldSpan, s"#$errorFieldSpan"),
                   expectedStatus = Status.BAD_REQUEST,
                   withError = true,
@@ -358,7 +358,7 @@ class AccountDetailsControllerSpec extends ItSpec with AccountDetailsPageTesting
 
                 response.checkPageIsDisplayed(
                   expectedHeading = "Enter your bank or building society account details",
-                  expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
+                  expectedServiceLink = "http://localhost:9092/manage-self-assessment/financials/money-in-your-account",
                   contentChecks = checkPageWithFormError(errorMessage, errorFieldSpan, "#sortCode"),
                   expectedStatus = Status.BAD_REQUEST,
                   withError = true,
@@ -415,7 +415,7 @@ class AccountDetailsControllerSpec extends ItSpec with AccountDetailsPageTesting
 
                 response.checkPageIsDisplayed(
                   expectedHeading = "Nodwch fanylion eich cyfrif banc neu gyfrif cymdeithas adeiladu",
-                  expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
+                  expectedServiceLink = "http://localhost:9092/manage-self-assessment/financials/money-in-your-account",
                   contentChecks = checkPageWithFormErrorWelsh(errorMessage, errorFieldSpan, "#sortCode"),
                   expectedStatus = Status.BAD_REQUEST,
                   withError = true,
@@ -495,7 +495,7 @@ class AccountDetailsControllerSpec extends ItSpec with AccountDetailsPageTesting
 
               response.checkPageIsDisplayed(
                 expectedHeading = "Enter your bank or building society account details",
-                expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
+                expectedServiceLink = "http://localhost:9092/manage-self-assessment/financials/money-in-your-account",
                 contentChecks = checkPageWithFormError(errorMessage, errorFieldSpan, errorLink),
                 expectedStatus = Status.BAD_REQUEST,
                 withError = true,
@@ -586,7 +586,7 @@ class AccountDetailsControllerSpec extends ItSpec with AccountDetailsPageTesting
 
         response.checkPageIsDisplayed(
           expectedHeading = "Enter your bank or building society account details",
-          expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
+          expectedServiceLink = "http://localhost:9092/manage-self-assessment/financials/money-in-your-account",
           contentChecks = checkPageWithFormError(
             Map(
               "accountName"   -> "This field is required",

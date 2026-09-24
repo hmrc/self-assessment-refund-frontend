@@ -36,7 +36,7 @@ class HowYouWillGetYourRefundControllerSpec extends ItSpec with HowYouWillGetYou
         val response = controller.onPageLoad(TdAll.request)
         response.checkPageIsDisplayed(
           expectedHeading = "How you will get the refund",
-          expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
+          expectedServiceLink = "http://localhost:9092/manage-self-assessment/financials/money-in-your-account",
           contentChecks = checkPageContent(isAgent = false),
           expectedStatus = Status.OK,
           journey = "request"
@@ -47,7 +47,7 @@ class HowYouWillGetYourRefundControllerSpec extends ItSpec with HowYouWillGetYou
         val response = controller.onPageLoad(TdAll.welshRequest)
         response.checkPageIsDisplayed(
           expectedHeading = "Sut y byddwch yn cael yr ad-daliad",
-          expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
+          expectedServiceLink = "http://localhost:9092/manage-self-assessment/financials/money-in-your-account",
           contentChecks = checkPageContentWelsh(isAgent = false),
           expectedStatus = Status.OK,
           journey = "request",
@@ -61,7 +61,7 @@ class HowYouWillGetYourRefundControllerSpec extends ItSpec with HowYouWillGetYou
         val response = controller.onPageLoadAgent(TdAll.request)
         response.checkPageIsDisplayed(
           expectedHeading = "How your client will get the refund",
-          expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/agents/money-in-your-account",
+          expectedServiceLink = "http://localhost:9092/manage-self-assessment/financials/agents/money-in-your-account",
           contentChecks = checkPageContent(isAgent = true),
           expectedStatus = Status.OK,
           journey = "request"
@@ -72,7 +72,7 @@ class HowYouWillGetYourRefundControllerSpec extends ItSpec with HowYouWillGetYou
         val response = controller.onPageLoadAgent(TdAll.welshRequest)
         response.checkPageIsDisplayed(
           expectedHeading = "Sut y bydd eich cleient yn cael yr ad-daliad",
-          expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/agents/money-in-your-account",
+          expectedServiceLink = "http://localhost:9092/manage-self-assessment/financials/agents/money-in-your-account",
           contentChecks = checkPageContentWelsh(isAgent = true),
           expectedStatus = Status.OK,
           journey = "request",

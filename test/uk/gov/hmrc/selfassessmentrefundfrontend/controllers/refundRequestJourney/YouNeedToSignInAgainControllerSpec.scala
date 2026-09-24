@@ -94,7 +94,7 @@ class YouNeedToSignInAgainControllerSpec
 
         result.checkPageIsDisplayed(
           expectedHeading = PageHeading,
-          expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
+          expectedServiceLink = "http://localhost:9092/manage-self-assessment/financials/money-in-your-account",
           contentChecks = checkPageContent,
           expectedStatus = Status.OK,
           journey = "request"
@@ -109,7 +109,7 @@ class YouNeedToSignInAgainControllerSpec
 
         result.checkPageIsDisplayed(
           expectedHeading = PageHeading,
-          expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/agents/money-in-your-account",
+          expectedServiceLink = "http://localhost:9092/manage-self-assessment/financials/agents/money-in-your-account",
           contentChecks = checkPageContent,
           expectedStatus = Status.OK,
           journey = "request"
@@ -124,7 +124,7 @@ class YouNeedToSignInAgainControllerSpec
 
         result.checkPageIsDisplayed(
           expectedHeading = PageHeadingWelsh,
-          expectedServiceLink = "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
+          expectedServiceLink = "http://localhost:9092/manage-self-assessment/financials/money-in-your-account",
           contentChecks = checkPageContentWelsh,
           expectedStatus = Status.OK,
           journey = "request",

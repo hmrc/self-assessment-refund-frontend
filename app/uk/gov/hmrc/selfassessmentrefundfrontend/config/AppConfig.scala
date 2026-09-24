@@ -41,6 +41,7 @@ class AppConfig @Inject() (config: Configuration, servicesConfig: ServicesConfig
 
   val exampleExternalUrl: String                = servicesConfig.baseUrl("bank-account-verification-callback.external")
   val itsaUrl: String                           = servicesConfig.baseUrl("itsa-viewer")
+  val itsaFinancialsUrl: String                 = servicesConfig.baseUrl("itsa-viewer-financials")
   val selfAssessmentRepaymentBackendUrl: String = servicesConfig.baseUrl("self-assessment-refund-backend")
   val selfAssessmentRefundStubsUrl: String      = servicesConfig.baseUrl("self-assessment-refund-stubs")
   val reauthenticationUrl: String               =
@@ -60,18 +61,19 @@ class AppConfig @Inject() (config: Configuration, servicesConfig: ServicesConfig
   val loginUrl: String                 = servicesConfig.getString("urls.login")
 
   val loginUrlContinue: String =
-    s"$loginUrl?continue=$itsaUrl${servicesConfig.getString("navigation.paths.creditAndRefunds")}"
+    s"$loginUrl?continue=$itsaFinancialsUrl${servicesConfig.getString("navigation.paths.creditAndRefunds")}"
 
   val logoutUrl: String =
     servicesConfig.getString("urls.logout") +
       "?continue=" +
       servicesConfig.getString("urls.logoutContinue")
 
-  val creditAndRefundsUrl: String                         = itsaUrl + servicesConfig.getString("navigation.paths.creditAndRefunds")
-  val creditAndRefundsAgentsUrl: String                   = itsaUrl + servicesConfig.getString("navigation.paths.creditAndRefundsAgents")
-  val refundIssuedAgentUrl: String                        = itsaUrl + servicesConfig.getString("navigation.paths.refundIssuedAgent")
+  val creditAndRefundsUrl: String                         = itsaFinancialsUrl + servicesConfig.getString("navigation.paths.creditAndRefunds")
+  val creditAndRefundsAgentsUrl: String                   =
+    itsaFinancialsUrl + servicesConfig.getString("navigation.paths.creditAndRefundsAgents")
+  val refundIssuedAgentUrl: String                        = itsaFinancialsUrl + servicesConfig.getString("navigation.paths.refundIssuedAgent")
   val refundIssuedIndividualOrOrganisationUrl: String     =
-    itsaUrl + servicesConfig.getString("navigation.paths.refundIssuedIndividualOrOrganisation")
+    itsaFinancialsUrl + servicesConfig.getString("navigation.paths.refundIssuedIndividualOrOrganisation")
   val viewAndChangeHubIndividualOrOrganisationUrl: String =
     itsaUrl + servicesConfig.getString("navigation.paths.viewAndChangeHubIndividualOrOrganisation")
   val viewAndChangeHubAgentUrl: String                    = itsaUrl + servicesConfig.getString("navigation.paths.viewAndChangeHubAgent")

@@ -63,12 +63,12 @@ trait RepaymentStatusPageTesting extends PageContentTesting {
   implicit class RepaymentStatusPageDocTestingSyntax(doc: Document) {
     def checkHasBackToTaxAccountButton(): Unit      =
       doc.checkHasActionAsButton(
-        "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
+        "http://localhost:9092/manage-self-assessment/financials/money-in-your-account",
         "Back to tax account"
       )
     def checkHasBackToTaxAccountButtonWelsh(): Unit =
       doc.checkHasActionAsButton(
-        "http://localhost:9081/manage-self-assessment/financials/money-in-your-account",
+        "http://localhost:9092/manage-self-assessment/financials/money-in-your-account",
         "Yn ôl i’r cyfrif treth"
       )
 

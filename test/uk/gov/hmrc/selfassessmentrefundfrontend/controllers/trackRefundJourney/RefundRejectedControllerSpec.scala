@@ -201,8 +201,8 @@ class RefundRejectedControllerSpec extends ItSpec with PageContentTesting {
 
   private def checkRejectedPageContent(welsh: Boolean, agent: Boolean)(doc: Document): Unit = {
     val tryAgainLink =
-      if (agent) "http://localhost:9081/manage-self-assessment/financials/agents/money-in-your-account"
-      else "http://localhost:9081/manage-self-assessment/financials/money-in-your-account"
+      if (agent) "http://localhost:9092/manage-self-assessment/financials/agents/money-in-your-account"
+      else "http://localhost:9092/manage-self-assessment/financials/money-in-your-account"
 
     if (welsh) {
       doc.checkHasParagraphs(rejectedParagraphsWelsh)

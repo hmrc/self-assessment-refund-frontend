@@ -72,7 +72,7 @@ class RefundApprovedControllerSpec extends ItSpec with PageContentTesting {
 
         doc.checkHasHyperlink(
           hyperlink,
-          "http://localhost:9081/manage-self-assessment/financials/refund-to-taxpayer/1"
+          "http://localhost:9092/manage-self-assessment/financials/refund-to-taxpayer/1"
         )
 
         result.checkPageIsDisplayed(
@@ -108,7 +108,7 @@ class RefundApprovedControllerSpec extends ItSpec with PageContentTesting {
 
       doc.checkHasHyperlink(
         "More details about this refund",
-        "http://localhost:9081/manage-self-assessment/financials/agents/refund-to-taxpayer/1"
+        "http://localhost:9092/manage-self-assessment/financials/agents/refund-to-taxpayer/1"
       )
 
       result.checkPageIsDisplayed(
@@ -142,7 +142,7 @@ class RefundApprovedControllerSpec extends ItSpec with PageContentTesting {
 
       doc.checkHasHyperlink(
         "Rhagor o fanylion am yr ad-daliad hwn",
-        "http://localhost:9081/manage-self-assessment/financials/agents/refund-to-taxpayer/1"
+        "http://localhost:9092/manage-self-assessment/financials/agents/refund-to-taxpayer/1"
       )
 
       result.checkPageIsDisplayed(
