@@ -88,7 +88,7 @@ class PreAuthSessionRefinerSpec extends ItSpec {
 
           status(result) shouldBe SEE_OTHER
           redirectLocation(result) shouldBe Some(
-            "http://localhost:9949/auth-login-stub/gg-sign-in?continue=http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account"
+            "http://localhost:9949/auth-login-stub/gg-sign-in?continue=http://localhost:9092/manage-self-assessment/financials/money-in-your-account"
           )
         }
       }
@@ -101,7 +101,7 @@ class PreAuthSessionRefinerSpec extends ItSpec {
 
         status(result) shouldBe SEE_OTHER
         redirectLocation(result) shouldBe Some(
-          "http://localhost:9949/auth-login-stub/gg-sign-in?continue=http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account"
+          "http://localhost:9949/auth-login-stub/gg-sign-in?continue=http://localhost:9092/manage-self-assessment/financials/money-in-your-account"
         )
       }
 
@@ -113,7 +113,7 @@ class PreAuthSessionRefinerSpec extends ItSpec {
 
         status(result) shouldBe SEE_OTHER
         redirectLocation(result) shouldBe Some(
-          "http://localhost:9949/auth-login-stub/gg-sign-in?continue=http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account"
+          "http://localhost:9949/auth-login-stub/gg-sign-in?continue=http://localhost:9092/manage-self-assessment/financials/money-in-your-account"
         )
       }
     }

@@ -28,7 +28,7 @@ trait WeCannotConfirmYourIdentityPageTesting extends PageContentTesting {
       "You have entered information that does not match our records too many times. For security reasons, you must wait 24 hours and then try again."
     )
 
-    doc.checkHasActionAsButton("http://localhost:9081/report-quarterly/income-and-expenses/view", "Go to tax account")
+    doc.checkHasActionAsButton("http://localhost:9081/manage-self-assessment/income-tax", "Go to tax account")
   }
   def checkPageContentWelsh(doc: Document): Unit = {
 
@@ -39,7 +39,7 @@ trait WeCannotConfirmYourIdentityPageTesting extends PageContentTesting {
     )
 
     doc.checkHasActionAsButton(
-      "http://localhost:9081/report-quarterly/income-and-expenses/view",
+      "http://localhost:9081/manage-self-assessment/income-tax",
       "Ewch i’r cyfrif treth"
     )
   }

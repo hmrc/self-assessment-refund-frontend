@@ -76,8 +76,7 @@ class AccountTypeControllerSpec extends ItSpec with AccountTypePageTesting {
 
           response.checkPageIsDisplayed(
             expectedHeading = "Which type of bank account are you providing?",
-            expectedServiceLink =
-              "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+            expectedServiceLink = "http://localhost:9092/manage-self-assessment/financials/money-in-your-account",
             contentChecks = checkPageContent,
             expectedStatus = Status.OK,
             journey = "request"
@@ -95,7 +94,7 @@ class AccountTypeControllerSpec extends ItSpec with AccountTypePageTesting {
           response.checkPageIsDisplayed(
             expectedHeading = "Which type of bank account are you providing?",
             expectedServiceLink =
-              "http://localhost:9081/report-quarterly/income-and-expenses/view/agents/money-in-your-account",
+              "http://localhost:9092/manage-self-assessment/financials/agents/money-in-your-account",
             contentChecks = checkPageContent,
             expectedStatus = Status.OK,
             journey = "request"
@@ -111,8 +110,7 @@ class AccountTypeControllerSpec extends ItSpec with AccountTypePageTesting {
 
           response.checkPageIsDisplayed(
             expectedHeading = "Pa fath o gyfrif banc ydych chi’n ei roi?",
-            expectedServiceLink =
-              "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+            expectedServiceLink = "http://localhost:9092/manage-self-assessment/financials/money-in-your-account",
             contentChecks = checkPageContentWelsh,
             expectedStatus = Status.OK,
             journey = "request",
@@ -131,8 +129,7 @@ class AccountTypeControllerSpec extends ItSpec with AccountTypePageTesting {
 
           response.checkPageIsDisplayed(
             expectedHeading = "Which type of bank account are you providing?",
-            expectedServiceLink =
-              "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+            expectedServiceLink = "http://localhost:9092/manage-self-assessment/financials/money-in-your-account",
             contentChecks = checkPageContent,
             expectedStatus = Status.OK,
             journey = "request"
@@ -231,8 +228,7 @@ class AccountTypeControllerSpec extends ItSpec with AccountTypePageTesting {
 
             response.checkPageIsDisplayed(
               expectedHeading = "Which type of bank account are you providing?",
-              expectedServiceLink =
-                "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+              expectedServiceLink = "http://localhost:9092/manage-self-assessment/financials/money-in-your-account",
               contentChecks = checkPageWithFormError,
               expectedStatus = Status.BAD_REQUEST,
               withError = true,
@@ -252,8 +248,7 @@ class AccountTypeControllerSpec extends ItSpec with AccountTypePageTesting {
 
             response.checkPageIsDisplayed(
               expectedHeading = "Pa fath o gyfrif banc ydych chi’n ei roi?",
-              expectedServiceLink =
-                "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+              expectedServiceLink = "http://localhost:9092/manage-self-assessment/financials/money-in-your-account",
               contentChecks = checkPageWithFormErrorWelsh,
               expectedStatus = Status.BAD_REQUEST,
               withError = true,

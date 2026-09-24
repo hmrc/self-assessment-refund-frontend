@@ -58,7 +58,7 @@ class WeNeedBankDetailsControllerSpec
 
         result.checkPageIsDisplayed(
           expectedHeading = bankDetailsPageHeading,
-          expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+          expectedServiceLink = "http://localhost:9092/manage-self-assessment/financials/money-in-your-account",
           contentChecks = checkPageContent(isAgent = false),
           expectedStatus = Status.OK,
           journey = "request"
@@ -73,7 +73,7 @@ class WeNeedBankDetailsControllerSpec
 
         result.checkPageIsDisplayed(
           expectedHeading = bankDetailsPageHeadingWelsh,
-          expectedServiceLink = "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+          expectedServiceLink = "http://localhost:9092/manage-self-assessment/financials/money-in-your-account",
           contentChecks = checkPageContentWelsh(isAgent = false),
           expectedStatus = Status.OK,
           journey = "request",
@@ -97,8 +97,7 @@ class WeNeedBankDetailsControllerSpec
 
         result.checkPageIsDisplayed(
           expectedHeading = bankDetailsPageHeadingAgent,
-          expectedServiceLink =
-            "http://localhost:9081/report-quarterly/income-and-expenses/view/agents/money-in-your-account",
+          expectedServiceLink = "http://localhost:9092/manage-self-assessment/financials/agents/money-in-your-account",
           contentChecks = checkPageContent(isAgent = true),
           expectedStatus = Status.OK,
           journey = "request"
@@ -113,8 +112,7 @@ class WeNeedBankDetailsControllerSpec
 
         result.checkPageIsDisplayed(
           expectedHeading = bankDetailsPageHeadingAgentWelsh,
-          expectedServiceLink =
-            "http://localhost:9081/report-quarterly/income-and-expenses/view/agents/money-in-your-account",
+          expectedServiceLink = "http://localhost:9092/manage-self-assessment/financials/agents/money-in-your-account",
           contentChecks = checkPageContentWelsh(isAgent = true),
           expectedStatus = Status.OK,
           journey = "request",

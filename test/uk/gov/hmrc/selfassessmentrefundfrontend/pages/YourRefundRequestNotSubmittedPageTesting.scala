@@ -31,8 +31,8 @@ trait YourRefundRequestNotSubmittedPageTesting extends PageContentTesting {
     )
 
     doc.checkHasActionAsButton(
-      if (isAgent) "http://localhost:9081/report-quarterly/income-and-expenses/view/agents/money-in-your-account"
-      else "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+      if (isAgent) "http://localhost:9092/manage-self-assessment/financials/agents/money-in-your-account"
+      else "http://localhost:9092/manage-self-assessment/financials/money-in-your-account",
       "Start again"
     )
   }
@@ -46,8 +46,8 @@ trait YourRefundRequestNotSubmittedPageTesting extends PageContentTesting {
     )
 
     doc.checkHasActionAsButton(
-      if (isAgent) "http://localhost:9081/report-quarterly/income-and-expenses/view/agents/money-in-your-account"
-      else "http://localhost:9081/report-quarterly/income-and-expenses/view/money-in-your-account",
+      if (isAgent) "http://localhost:9092/manage-self-assessment/financials/agents/money-in-your-account"
+      else "http://localhost:9092/manage-self-assessment/financials/money-in-your-account",
       "Dechrau eto"
     )
   }
