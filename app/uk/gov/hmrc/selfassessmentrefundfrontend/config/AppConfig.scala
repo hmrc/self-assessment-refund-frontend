@@ -39,6 +39,8 @@ class AppConfig @Inject() (config: Configuration, servicesConfig: ServicesConfig
   val welshLanguageSupportEnabled: Boolean =
     config.getOptional[Boolean]("features.welsh-language-support").getOrElse(false)
 
+  val aisEnabled: Boolean = config.get[Boolean]("features.ais")
+
   val exampleExternalUrl: String                = servicesConfig.baseUrl("bank-account-verification-callback.external")
   val itsaUrl: String                           = servicesConfig.baseUrl("itsa-viewer")
   val itsaFinancialsUrl: String                 = servicesConfig.baseUrl("itsa-viewer-financials")
