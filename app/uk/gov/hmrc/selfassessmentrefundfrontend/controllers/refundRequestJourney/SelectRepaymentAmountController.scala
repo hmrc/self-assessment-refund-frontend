@@ -23,14 +23,14 @@ import uk.gov.hmrc.auth.core.AffinityGroup
 import uk.gov.hmrc.auth.core.AffinityGroup.{Agent, Individual, Organisation}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.selfassessmentrefundfrontend.audit.AuditService
-import uk.gov.hmrc.selfassessmentrefundfrontend.config.ErrorHandler
+import uk.gov.hmrc.selfassessmentrefundfrontend.config.{AppConfig, ErrorHandler}
 import uk.gov.hmrc.selfassessmentrefundfrontend.connectors.JourneyConnector
 import uk.gov.hmrc.selfassessmentrefundfrontend.controllers
 import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.action.Actions
 import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.action.request.BarsVerifiedRequest
 import uk.gov.hmrc.selfassessmentrefundfrontend.model.PaymentMethod.{BACS, Card, PaymentOrder}
 import uk.gov.hmrc.selfassessmentrefundfrontend.model.SelectAmountChoice.{Full, Partial, Suggested}
-import uk.gov.hmrc.selfassessmentrefundfrontend.model._
+import uk.gov.hmrc.selfassessmentrefundfrontend.model.*
 import uk.gov.hmrc.selfassessmentrefundfrontend.model.page.SelectAmountPageModel
 import uk.gov.hmrc.selfassessmentrefundfrontend.util.AmountFormatter
 import uk.gov.hmrc.selfassessmentrefundfrontend.views.html.refundrequestjourney.SelectAmountPage
@@ -47,7 +47,8 @@ class SelectRepaymentAmountController @Inject() (
   journeyConnector: JourneyConnector,
   mcc:              MessagesControllerComponents,
   selectAmountPage: SelectAmountPage,
-  auditService:     AuditService
+  auditService:     AuditService,
+  config:           AppConfig
 )(implicit ec: ExecutionContext)
     extends FrontendController(mcc)
     with Logging {
@@ -241,11 +242,16 @@ class SelectRepaymentAmountController @Inject() (
 
   @SuppressWarnings(Array("org.wartremover.wartremover.Null"))
   private def individualAndOrgRedirects(paymentMethod: PaymentMethod): Result =
-    paymentMethod match {
-      case Card                => Redirect(controllers.refundRequestJourney.routes.HowYouWillGetYourRefundController.onPageLoad)
-      case BACS | PaymentOrder =>
-        Redirect(controllers.refundRequestJourney.routes.WeNeedBankDetailsController.onPageLoad)
-      case null                => sys.error("[SelectRepaymentAmountController][individualAndOrgRedirects] Unsupported payment method.")
+    if (config.aisEnabled) {
+      Redirect(routes.HMRCUsesEcospendController.onPageLoad)
+    } else {
+      paymentMethod match {
+        case Card                => Redirect(controllers.refundRequestJourney.routes.HowYouWillGetYourRefundController.onPageLoad)
+        case BACS | PaymentOrder =>
+          Redirect(controllers.refundRequestJourney.routes.WeNeedBankDetailsController.onPageLoad)
+        case null                =>
+          sys.error("[SelectRepaymentAmountController][individualAndOrgRedirects] Unsupported payment method.")
+      }
     }
 
   private def logAndReturnErrorPage(method: String, message: String = "Not enough data in mongo to proceed.")(implicit

@@ -38,3 +38,7 @@ GET         /cannot-confirm-identity                 uk.gov.hmrc.selfassessmentr
 GET         /feedback                                uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.FeedbackController.feedbackShow
 
 GET         /bank-details-tried-too-many-times       uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.BarsLockoutController.barsLockout
+
+GET         /hmrc-uses-ecospend                      uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.HMRCUsesEcospendController.onPageLoad
+
+GET         /how-receive-refund                      uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.HowYouWantToReceiveRefundController.onPageLoad

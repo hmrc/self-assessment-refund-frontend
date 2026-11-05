@@ -215,3 +215,10 @@ errorTemplate.para1 = Try again later.
 errorTemplate.para2a = Contact HMRC
 errorTemplate.para2a.link = https://www.gov.uk/government/organisations/hm-revenue-customs/contact/self-assessment
 errorTemplate.para2b = if you need to speak to someone about your Self Assessment refund.
+
+
+hmrc-uses-ecospend.title = HMRC uses Ecospend to help keep your refund secure
+hmrc-uses-ecospend.p1 = Ecospend checks bank account data for security purposes to ensure that the account belongs to the customer.
+hmrc-uses-ecospend.p2 = Ecospend is an authorised open banking service provider and is regulated by the Financial Conduct Authority (FCA). Ecospend or HMRC staff never see your data, and it is not stored or shared.
+hmrc-uses-ecospend.p3 = Signing in through your own bank confirms the account is yours, which keeps your refund safe.
+hmrc-uses-ecospend.p4 = You can also get your refund by entering your account details. This option does not use Ecospend.
