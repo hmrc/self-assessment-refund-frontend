@@ -50,7 +50,7 @@
 
     @if(model.form.hasErrors) {
         @errorSummary(ErrorSummary(
-            title = HtmlContent(s"""<span id="error-summary-title">${messages("enter-account-details.error.summaryText")}</span>"""),
+            title = HtmlContent(s"""<span id="error-summary-title">${messages("service.there-is-a-problem")}</span>"""),
             errorList = model.form.errors.map { error =>
                 ErrorLink(href = Some(s"#${error.key}"),
                     content = HtmlContent(messages(error.message)),

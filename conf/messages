@@ -2,7 +2,7 @@ service.name.refund = Request a Self Assessment refund
 service.name.track = Track a Self Assessment refund
 service.continue = Continue
 service.go-to-tax-account = Go to tax account
-
+service.there-is-a-problem = There is a problem
 service.visuallyHiddenText = Error
 
 service.title.error-prefix = Error:
@@ -13,8 +13,6 @@ govukErrorMessage.visuallyHiddenText = Error
 hmrcTimeoutDialog.title = You’re about to be signed out
 
 selectamount.title = How much do you want to be refunded?
-
-selectamount.error-summary.title = There is a problem
 
 selectamount.choice.suggested.hint = This will leave enough in your tax account to cover your next bill
 selectamount.choice.different = A different amount
@@ -47,7 +45,6 @@ accountType.heading = Which type of bank account are you providing?
 accountType.text = The bank details you provide must be for a UK bank account
 accountType.personal = Personal bank account
 accountType.business = Business bank account
-accountType.summaryText = There is a problem
 accountType.submit = Continue
 accountType.error.required = Select what type of account details you are providing
 
@@ -64,7 +61,6 @@ enter-account-details.rollNumber.hint = You can find it on your card, statement 
 enter-account-details.submitButton.label = Continue
 enter-account-details.view-bank-details-hidden = Bank details
 
-enter-account-details.error.summaryText = There is a problem
 enter-account-details.error.accountName.required = Enter an account name
 enter-account-details.error.accountName.maxLength = Name on the account must be 60 characters or less
 enter-account-details.error.accountName.format = Check your account name is correct
@@ -222,3 +218,12 @@ hmrc-uses-ecospend.p1 = Ecospend checks bank account data for security purposes 
 hmrc-uses-ecospend.p2 = Ecospend is an authorised open banking service provider and is regulated by the Financial Conduct Authority (FCA). Ecospend or HMRC staff never see your data, and it is not stored or shared.
 hmrc-uses-ecospend.p3 = Signing in through your own bank confirms the account is yours, which keeps your refund safe.
 hmrc-uses-ecospend.p4 = You can also get your refund by entering your account details. This option does not use Ecospend.
+
+how-would-like-refund.title = How would you like to receive your refund?
+how-would-like-refund.hint = You can get your refund paid into a UK bank account.
+how-would-like-refund.option-1 = Sign in to your bank to approve the refund (recommended)
+how-would-like-refund.option-1-hint = You’ll be transferred to your bank to sign in and choose the account you want to use. You won’t need to enter your account details, and it’s more secure.
+how-would-like-refund.option-2 = Enter your bank account details
+how-would-like-refund.option-2-hint = You’ll need to type in your account number and sort code.
+how-would-like-refund.error.invalid = Select how you want to receive your refund
+how-would-like-refund.error.required = Select how you want to receive your refund

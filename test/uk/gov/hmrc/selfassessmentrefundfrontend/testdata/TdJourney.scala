@@ -28,5 +28,4 @@ trait TdJourney {
     SortCode("111111"),
     AccountNumber("12345678")
   )
-
 }

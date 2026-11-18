@@ -59,7 +59,8 @@ class AccountTypeControllerSpec extends ItSpec with AccountTypePageTesting {
     nrsWebpage = None,
     hasStartedReauth = Some(true),
     repaymentConfirmation = Some(testRepaymentResponse),
-    returnUrl = None
+    returnUrl = None,
+    bankDetailsMethod = None
   )
 
   override def fakeAuthConnector: Option[AuthConnector] = None

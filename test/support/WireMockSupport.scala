@@ -18,7 +18,7 @@ package support
 
 import com.github.tomakehurst.wiremock.WireMockServer
 import com.github.tomakehurst.wiremock.client.WireMock
-import com.github.tomakehurst.wiremock.client.WireMock._
+import com.github.tomakehurst.wiremock.client.WireMock.*
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration
 import com.github.tomakehurst.wiremock.stubbing.StubMapping
 import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach, Suite}
@@ -30,11 +30,11 @@ import uk.gov.hmrc.crypto.{Encrypter, PlainText}
 import uk.gov.hmrc.http.SessionKeys
 import uk.gov.hmrc.selfassessmentrefundfrontend.audit.model.AuditFlags
 import uk.gov.hmrc.selfassessmentrefundfrontend.connectors.barsLockout.model.{BarsVerifyStatusResponse, NumberOfBarsVerifyAttempts}
-import uk.gov.hmrc.selfassessmentrefundfrontend.model._
+import uk.gov.hmrc.selfassessmentrefundfrontend.model.*
 import uk.gov.hmrc.selfassessmentrefundfrontend.model.customer.Nino
-import uk.gov.hmrc.selfassessmentrefundfrontend.model.journey.{Journey, JourneyType, JourneyTypes}
+import uk.gov.hmrc.selfassessmentrefundfrontend.model.journey.{Journey, JourneyId, JourneyType, JourneyTypes}
 import uk.gov.hmrc.selfassessmentrefundfrontend.model.repayment.{RepaymentCreatedResponse, RequestNumber}
-import uk.gov.hmrc.selfassessmentrefundfrontend.testdata.TdAll._
+import uk.gov.hmrc.selfassessmentrefundfrontend.testdata.TdAll.*
 import uk.gov.hmrc.selfassessmentrefundfrontend.testdata.TdBars
 
 import java.net.{URI, URL}
@@ -69,34 +69,13 @@ trait WireMockSupport extends BeforeAndAfterAll with BeforeAndAfterEach {
   val testRepaymentResponse: RepaymentResponse =
     RepaymentResponse(OffsetDateTime.parse("2023-12-01T17:35:30+01:00"), RequestNumber("1234567890"))
 
-  def stubBackendJourneyId(): StubMapping =
+  def stubBackendJourneyId(journey: Journey = refundJourney): StubMapping =
     stubFor(
       get(urlEqualTo("/self-assessment-refund-backend/journey/find-latest-by-session-id"))
         .willReturn(
           aResponse()
             .withStatus(OK)
-            .withBody(
-              Json
-                .toJson(
-                  Journey(
-                    Some(sessionId),
-                    journeyId,
-                    AuditFlags(),
-                    JourneyTypes.RefundJourney,
-                    None,
-                    None,
-                    None,
-                    None,
-                    None,
-                    None,
-                    None,
-                    None,
-                    None,
-                    None
-                  )
-                )
-                .toString
-            )
+            .withBody(Json.toJson(journey).toString)
         )
     )
 
@@ -160,7 +139,8 @@ trait WireMockSupport extends BeforeAndAfterAll with BeforeAndAfterEach {
                     None,
                     hasStartedReauth,
                     repaymentResponse,
-                    if (backReturnUrl) Some(ReturnUrl("/returnUrl")) else None
+                    if (backReturnUrl) Some(ReturnUrl("/returnUrl")) else None,
+                    None
                   )
                 )
                 .toString
@@ -203,6 +183,7 @@ trait WireMockSupport extends BeforeAndAfterAll with BeforeAndAfterEach {
                     Some(
                       RepaymentResponse(OffsetDateTime.parse("2023-12-01T17:35:30+01:00"), RequestNumber("1234567890"))
                     ),
+                    None,
                     None
                   )
                 )
@@ -300,6 +281,7 @@ trait WireMockSupport extends BeforeAndAfterAll with BeforeAndAfterEach {
                     None,
                     None,
                     None,
+                    None,
                     None
                   )
                 )
@@ -346,6 +328,7 @@ trait WireMockSupport extends BeforeAndAfterAll with BeforeAndAfterEach {
                     None,
                     Some(AccountType("Business")),
                     Some(BankAccountInfo(name, SortCode("111111"), AccountNumber("12345678"))),
+                    None,
                     None,
                     None,
                     None,
@@ -434,6 +417,22 @@ trait WireMockSupport extends BeforeAndAfterAll with BeforeAndAfterEach {
         urlEqualTo(s"/self-assessment-refund-backend/journey/${journey.id.value}")
       )
         .withRequestBody(equalToJson(Json.toJson(journey).toString()))
+    )
+
+  def verifyUpdateJourneyNotCalled(journeyId: JourneyId) =
+    verify(
+      0,
+      postRequestedFor(
+        urlEqualTo(s"/self-assessment-refund-backend/journey/${journeyId.value}")
+      )
+    )
+
+  def verifyGetPaymentMethodNotCalled() =
+    verify(
+      0,
+      getRequestedFor(
+        urlPathMatching("/self-assessment-refund-backend/last-payment/.*")
+      )
     )
 
   // FROM: https://github.com/hmrc/bank-account-coc-frontend/blob/9fabd5ee7b08fca059f77f56286cbf1fd0522b34/it/testsupport/AuthResponses.scala

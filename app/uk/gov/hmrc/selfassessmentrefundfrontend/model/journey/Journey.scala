@@ -18,7 +18,7 @@ package uk.gov.hmrc.selfassessmentrefundfrontend.model.journey
 
 import play.api.libs.json.{Format, Json}
 import uk.gov.hmrc.selfassessmentrefundfrontend.audit.model.AuditFlags
-import uk.gov.hmrc.selfassessmentrefundfrontend.model._
+import uk.gov.hmrc.selfassessmentrefundfrontend.model.*
 import uk.gov.hmrc.selfassessmentrefundfrontend.model.customer.Nino
 
 final case class Journey(
@@ -35,7 +35,8 @@ final case class Journey(
   nrsWebpage:            Option[String],
   hasStartedReauth:      Option[Boolean],
   repaymentConfirmation: Option[RepaymentResponse],
-  returnUrl:             Option[ReturnUrl]
+  returnUrl:             Option[ReturnUrl],
+  bankDetailsMethod:     Option[BankDetailsMethod]
 ) {
   def toLogMessage: String =
     s"""
@@ -48,5 +49,5 @@ final case class Journey(
 
 object Journey {
   @SuppressWarnings(Array("org.wartremover.warts.Any"))
-  implicit def format: Format[Journey] = Json.format[Journey]
+  given Format[Journey] = Json.format[Journey]
 }

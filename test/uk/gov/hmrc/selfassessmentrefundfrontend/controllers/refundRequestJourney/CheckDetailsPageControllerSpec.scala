@@ -128,6 +128,7 @@ class CheckDetailsPageControllerSpec extends ItSpec with CheckDetailsPageTesting
             Some(html.toString()),
             None,
             Some(RepaymentResponse(OffsetDateTime.parse("2023-12-01T17:35:30+01:00"), RequestNumber("1234567890"))),
+            None,
             None
           )
 
@@ -180,6 +181,7 @@ class CheckDetailsPageControllerSpec extends ItSpec with CheckDetailsPageTesting
             Some(html.toString()),
             None,
             Some(RepaymentResponse(OffsetDateTime.parse("2023-12-01T17:35:30+01:00"), RequestNumber("1234567890"))),
+            None,
             None
           )
 
@@ -235,6 +237,7 @@ class CheckDetailsPageControllerSpec extends ItSpec with CheckDetailsPageTesting
             Some(html.toString()),
             None,
             Some(RepaymentResponse(OffsetDateTime.parse("2023-12-01T17:35:30+01:00"), RequestNumber("1234567890"))),
+            None,
             None
           )
 
