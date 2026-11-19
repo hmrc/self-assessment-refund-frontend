@@ -2,6 +2,7 @@ service.name.refund = Gwneud cais am ad-daliad Hunanasesiad
 service.name.track = Olrhain ad-daliad Hunanasesiad
 service.continue = Yn eich blaen
 service.go-to-tax-account = Ewch i’r cyfrif treth
+service.there-is-a-problem = Mae problem wedi codi
 
 service.visuallyHiddenText = Gwall
 
@@ -14,7 +15,7 @@ hmrcTimeoutDialog.title=Rydych ar fin cael eich allgofnodi
 
 selectamount.title = Faint o ad-daliad yr hoffech ei gael?
 
-selectamount.error-summary.title = Mae problem wedi codi
+
 
 selectamount.choice.suggested.hint = Bydd hyn yn gadael digon yn eich cyfrif treth i dalu’ch bil nesaf
 selectamount.choice.different = Swm gwahanol
@@ -47,7 +48,6 @@ accountType.heading = Pa fath o gyfrif banc ydych chi’n ei roi?
 accountType.text = Mae’n rhaid i’r manylion banc rydych yn eu darparu fod ar gyfer cyfrif banc yn y DU
 accountType.personal = Cyfrif banc personol
 accountType.business = Cyfrif banc busnes
-accountType.summaryText = Mae problem wedi codi
 accountType.submit = Yn eich blaen
 accountType.error.required = Dewiswch pa fath o gyfrif yr ydych yn ei ddarparu
 
@@ -64,7 +64,6 @@ enter-account-details.rollNumber.hint = Bydd hwn i’w weld ar eich cerdyn, cyfr
 enter-account-details.submitButton.label = Yn eich blaen
 enter-account-details.view-bank-details-hidden = Fanylion banc
 
-enter-account-details.error.summaryText = Mae problem wedi codi
 enter-account-details.error.accountName.required = Nodwch enw cyfrif
 enter-account-details.error.accountName.maxLength = Mae’n rhaid i’r enw sydd ar y cyfrif fod yn 60 o gymeriadau neu lai
 enter-account-details.error.accountName.format = Gwiriwch fod enw eich cyfrif yn gywir

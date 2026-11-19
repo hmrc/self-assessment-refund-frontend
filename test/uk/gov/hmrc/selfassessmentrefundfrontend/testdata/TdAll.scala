@@ -20,6 +20,8 @@ import play.api.mvc.{AnyContentAsEmpty, Cookie}
 import play.api.test.FakeRequest
 import uk.gov.hmrc.http.{HeaderNames, SessionKeys}
 import uk.gov.hmrc.selfassessmentrefundfrontend.TdRepayments
+import uk.gov.hmrc.selfassessmentrefundfrontend.audit.model.AuditFlags
+import uk.gov.hmrc.selfassessmentrefundfrontend.model.journey.{Journey, JourneyTypes}
 import uk.gov.hmrc.selfassessmentrefundfrontend.testdata.TdSupport.FakeRequestOps
 
 object TdAll extends TdJourney with TdRepayments {
@@ -38,6 +40,25 @@ object TdAll extends TdJourney with TdRepayments {
     .withRequestId()
     .withSessionId()
     .withCookies(Cookie("PLAY_LANG", "cy"))
+
+  val refundJourney =
+    Journey(
+      Some(sessionId),
+      journeyId,
+      AuditFlags(),
+      JourneyTypes.RefundJourney,
+      None,
+      None,
+      None,
+      None,
+      None,
+      None,
+      None,
+      None,
+      None,
+      None,
+      None
+    )
 
 }
 

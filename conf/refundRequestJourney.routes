@@ -5,10 +5,12 @@ POST        /refund-amount                           uk.gov.hmrc.selfassessmentr
 
 GET         /how-you-will-get-the-refund             uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.HowYouWillGetYourRefundController.onPageLoad
 GET         /how-your-client-will-get-the-refund     uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.HowYouWillGetYourRefundController.onPageLoadAgent
+GET         /how-you-will-get-the-refund-sign-into-your-bank   uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.HowYouWillGetYourRefundController.onPageLoadAis
 POST        /how-you-will-get-the-refund             uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.HowYouWillGetYourRefundController.onSubmit
 
 GET         /we-need-your-bank-details               uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.WeNeedBankDetailsController.onPageLoad
 GET         /we-need-your-clients-bank-details       uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.WeNeedBankDetailsController.onPageLoadAgent
+GET         /choose-bank-account-for-refund          uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.WeNeedBankDetailsController.onPageLoadAis
 POST        /we-need-your-bank-details               uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.WeNeedBankDetailsController.onSubmit
 
 GET         /account-type                            uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.AccountTypeController.getAccountType
@@ -41,4 +43,6 @@ GET         /bank-details-tried-too-many-times       uk.gov.hmrc.selfassessmentr
 
 GET         /hmrc-uses-ecospend                      uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.HMRCUsesEcospendController.onPageLoad
 
-GET         /how-receive-refund                      uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.HowYouWantToReceiveRefundController.onPageLoad
+GET         /how-you-will-receive-the-refund         uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.HowYouWantToReceiveRefundController.onPageLoad
+POST        /how-you-will-receive-the-refund         uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney.HowYouWantToReceiveRefundController.onSubmit
+

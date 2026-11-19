@@ -544,6 +544,7 @@ class SelectRepaymentAmountControllerSpec
           None,
           Some(true),
           Some(RepaymentResponse(OffsetDateTime.parse("2023-12-01T17:35:30+01:00"), RequestNumber("1234567890"))),
+          None,
           None
         )
 
@@ -812,6 +813,7 @@ class SelectRepaymentAmountControllerAISDisabledSpec
           None,
           Some(true),
           Some(RepaymentResponse(OffsetDateTime.parse("2023-12-01T17:35:30+01:00"), RequestNumber("1234567890"))),
+          None,
           None
         )
 

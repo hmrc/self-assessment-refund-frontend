@@ -20,12 +20,12 @@ import play.api.i18n.I18nSupport
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.auth.core.{AuthConnector, AuthorisedFunctions}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
+import uk.gov.hmrc.selfassessmentrefundfrontend.config.AppConfig
 import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.action.Actions
 import uk.gov.hmrc.selfassessmentrefundfrontend.views.html.refundrequestjourney.WeNeedBankDetailsPage
 import uk.gov.hmrc.selfassessmentrefundfrontend.controllers.refundRequestJourney
 
 import javax.inject.{Inject, Singleton}
-import scala.concurrent.Future
 
 @Singleton
 class WeNeedBankDetailsController @Inject() (
@@ -33,21 +33,31 @@ class WeNeedBankDetailsController @Inject() (
   weNeedBankDetailsPage: WeNeedBankDetailsPage,
   val authConnector:     AuthConnector,
   actions:               Actions,
-  mcc:                   MessagesControllerComponents
+  mcc:                   MessagesControllerComponents,
+  appConfig:             AppConfig
 ) extends FrontendController(mcc)
     with AuthorisedFunctions {
 
   import i18n._
 
-  val onPageLoad: Action[AnyContent] = actions.authenticatedRefundJourneyAction.async { implicit request =>
-    Future.successful(Ok(weNeedBankDetailsPage(isAgent = false)))
+  val onPageLoad: Action[AnyContent] = actions.authenticatedRefundJourneyAction { implicit request =>
+    Ok(weNeedBankDetailsPage(isAgent = false))
   }
 
-  val onPageLoadAgent: Action[AnyContent] = actions.authenticatedRefundJourneyAction.async { implicit request =>
-    Future.successful(Ok(weNeedBankDetailsPage(isAgent = true)))
+  val onPageLoadAgent: Action[AnyContent] = actions.authenticatedRefundJourneyAction { implicit request =>
+    Ok(weNeedBankDetailsPage(isAgent = true))
   }
 
   val onSubmit: Action[AnyContent] = actions.authenticatedRefundJourneyAction {
     Redirect(refundRequestJourney.routes.AccountTypeController.getAccountType)
   }
+
+  val onPageLoadAis: Action[AnyContent] = actions.authenticatedRefundJourneyAction { implicit request =>
+    if (appConfig.aisEnabled) {
+      Ok("choose-bank-account-for-refund")
+    } else {
+      NotImplemented
+    }
+  }
+
 }

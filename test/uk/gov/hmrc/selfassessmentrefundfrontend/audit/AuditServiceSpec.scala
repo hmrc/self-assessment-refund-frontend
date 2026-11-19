@@ -362,7 +362,8 @@ class AuditServiceSpec extends ItSpec with ApplicationLogging {
                 None,
                 None,
                 None,
-                testReturnUrl
+                testReturnUrl,
+                None
               )
               auditService.auditRefundRequestEvent(journey, None, Some(affinityGroup.toString), optArn)(hc)
 
@@ -419,7 +420,8 @@ class AuditServiceSpec extends ItSpec with ApplicationLogging {
                 None,
                 None,
                 Some(dummyRepaymentResponse),
-                testReturnUrl
+                testReturnUrl,
+                None
               )
 
               auditService.auditRefundRequestEvent(

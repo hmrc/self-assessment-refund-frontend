@@ -78,8 +78,7 @@ final case class SelectAmountPageModel(
     Option(
       ErrorSummary(
         errorList = errorLinks,
-        title =
-          HtmlContent(s"""<span id="error-summary-title">${messages("selectamount.error-summary.title")}</span>""")
+        title = HtmlContent(s"""<span id="error-summary-title">${messages("service.there-is-a-problem")}</span>""")
       )
     )
   } else Option.empty
